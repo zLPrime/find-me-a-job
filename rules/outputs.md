@@ -61,3 +61,18 @@ Every output should be reviewable by the candidate without needing to
 inspect the process that created it: the artifact itself should carry
 enough context (source references, reasoning, open questions) to be
 judged on its own.
+
+## Linking
+
+Render references to other artifacts and to external resources as
+markdown links at the point of writing, not as plain text to be
+cleaned up later:
+
+- Internal cross-references (to another employer, vacancy, tailored CV,
+  cover letter, candidate profile, or decision-log entry) use a
+  relative link, e.g. `[t-bank.md](employers/t-bank.md)`.
+- External resources (job posting URLs, source documents) use a full
+  link, e.g. `[hh.ru/vacancy/134381864](https://hh.ru/vacancy/134381864)`.
+
+This keeps every artifact navigable on its own without a separate
+cleanup pass.

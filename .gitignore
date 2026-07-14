@@ -1,0 +1,5 @@
+# Candidate work product and source inputs are tracked in their own
+# independent git repos (work/.git, input/.git), not in the playbook
+# repo. See journal/improvements.md for the rationale.
+/work/
+/input/

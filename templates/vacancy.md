@@ -6,11 +6,11 @@
 ```markdown
 # Vacancy — <role title> at <employer name>
 
-Status: candidate | matched | rejected | applied
-Last updated: <date>
+Status: candidate | matched | rejected | applied | expired
+Last updated: <date and time>
 Source: <where this vacancy was found>
 Date posted (if known):
-Date discovered:
+Date discovered (date and time):
 
 ## Role Summary
 
@@ -45,4 +45,11 @@ Date discovered:
 
 - <reference to the match decision produced by the matching-agent, once
   available>
+
+## Availability Checks
+
+- <date and time> — <live | expired | removed>, <how checked, e.g.
+  "re-fetched source URL, deadline shown as 21.07.2026">
+- <append a new line each time this vacancy is re-checked; see
+  rules/general.md's "Source liveness" section>
 ```

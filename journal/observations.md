@@ -21,7 +21,286 @@ Suggested follow-up: <optional — a concrete idea, or "needs discussion">
 
 ## Entries
 
-> No entries yet. This log starts empty and grows as the playbook is
-> used. The first entry should be added the first time an agent notices
-> something worth recording — a rough edge in an instruction, a missing
-> template field, a candidate correction that revealed an ambiguity, etc.
+## 2026-07-14 — Full JS-rendered re-check of 10 "unconfirmed" vacancies: 9 confirmed live, 1 blocked by a rotted secondary-source URL
+
+Observed by: orchestrator
+Context: With the Claude in Chrome extension now connected (see the
+entry below), the candidate asked to re-check all remaining
+"unconfirmed" vacancies (10 total: Xebia had already been done).
+Ran the same JS-rendered check against Finom, Factory World Wide, MTS
+Bank, IGT, Upvanta, Zelena firma, Luxoft, Megapolis IT, OTP banka, and
+attempted Onwelo.
+Observation: 9 of 10 came back genuinely live, each with a distinct
+platform-specific "live" signal (live-computed countdown on
+justjoin.it, viewer-count + no archived banner on hh.ru, a working
+Apply-For-This-Job button with no deadline field on Lever, a fully
+functional multi-field application form on Luxoft's ATS). The Upvanta
+re-check also produced a clean corroboration of the earlier
+stale-cache theory: the old non-JS fetch had shown "25 day left (until
+30.07.2026)," but 25 days doesn't match the calendar distance from
+2026-07-14 to 2026-07-30 (16 days) — direct proof the earlier fetch
+returned a cached snapshot, not a live computation. Onwelo could not be
+re-checked at all: its saved careers-page URL (onwelo.com/career/) now
+404s. This is a different failure mode than a listing expiring — it
+was sourced from a secondary aggregator (JobLeads), not the employer's
+own site, so the URL going dead says nothing about the vacancy's actual
+status. It was recorded as "re-check inconclusive," not "expired."
+Possible cause: rules/general.md's "Source liveness" section didn't yet
+distinguish "URL rot on a secondary source" from "listing confirmed
+expired," and didn't document what a genuinely confirmed-live result
+looks like per platform.
+Suggested follow-up: Done — see
+[journal/improvements.md](improvements.md), 2026-07-14, which added
+both the URL-rot distinction and a per-platform catalog of confirmed-
+live signals to rules/general.md's Source liveness section.
+
+## 2026-07-14 — The non-JS-fetch liveness problem is general, not justjoin.it-specific, and the browser fallback wasn't available
+
+Observed by: orchestrator
+Context: Immediately after correcting the Spyrosoft false-positive
+(see the entry below) and re-labeling justjoin.it listings as
+unconfirmed, the candidate reported that Paysend — a different job
+board entirely (Teamtailor), marked "live" the same session — was also
+no longer active.
+Observation: The Paysend "live" conclusion wasn't even based on a
+countdown; it was based on the raw fetched HTML still containing the
+original posting text and an "Apply now" button. This confirms the
+underlying problem is broader than one site's caching behavior: any
+job board that applies its "closed" state via client-side JavaScript
+after page load will look identically "live" to a non-JS fetch,
+whether or not it displays a countdown at all. Every "live" conclusion
+recorded in the 2026-07-14 17:49 CEST liveness pass (10 vacancies) was
+therefore downgraded to "unconfirmed," not just the justjoin.it ones —
+see the updated pipeline-overview.md and each affected vacancy's
+Availability Checks section. Separately, an attempt to independently
+verify via the Claude in Chrome browser tool (which does render
+JavaScript and would settle this definitively) failed both times it
+was tried this session — the extension reported "not connected." This
+is a client-side setup issue (the candidate needs to install the
+extension and sign in with the same account), not something fixable
+from this process's side; the candidate was given the install link and
+steps directly in chat.
+Possible cause: rules/general.md's "Source liveness" section (tightened
+earlier this session after the Spyrosoft finding) still framed the
+problem as justjoin.it-specific rather than general to modern job
+boards.
+Suggested follow-up: Done — see
+[journal/improvements.md](improvements.md), 2026-07-14, which
+generalized the rule to cover any job board, not just justjoin.it, and
+made clear that "page loads normally" / "has an Apply button" is not
+evidence of liveness either, not just a countdown. Separately worth
+tracking as an open item (not a playbook change): confirm with the
+candidate whether the Claude in Chrome extension gets connected later
+in this session, since several "unconfirmed" vacancies could then be
+resolved definitively rather than left as "last known live at
+discovery."
+
+**Resolved (2026-07-14, later same day):** the candidate installed the
+Claude in Chrome extension and signed in; the browser tool connected
+successfully on the next attempt. Used it to re-check Xebia
+(justjoin.it) via a JS-rendered page load — genuinely confirmed live
+("7 day left (until 21.07.2026)," working Apply button). This is the
+first liveness conclusion in this search backed by an actual rendered
+page. Nine more "unconfirmed" vacancies remain candidates for the same
+re-check: Finom, Factory World Wide, MTS Bank, Onwelo, IGT, Upvanta,
+Zelena firma, Luxoft, Megapolis IT, OTP banka.
+
+## 2026-07-14 — A "live" liveness check was wrong: non-JS page fetches can't be trusted on justjoin.it
+
+Observed by: orchestrator
+Context: After re-checking all vacancy sources and marking most "live"
+based on a page fetch showing a future "days left" countdown, the
+candidate reported that the Spyrosoft listing — ranked #1, marked
+"re-verified live" that same session — actually displays "Offer
+expired" when viewed in a real browser.
+Observation: The fetch tool used for these checks does not execute
+JavaScript; it returned a page snapshot containing a static "28 day
+left (until 21.07.2026)" countdown. This was treated as proof of
+current liveness, but it is not — justjoin.it appears to serve a
+cached snapshot to non-JS fetchers, with the countdown reflecting
+whatever was true at cache time, not the real current status. An
+attempt to independently re-verify via the Claude in Chrome browser
+tool (which does render JavaScript) failed because the extension
+wasn't connected in this session, so the candidate's own direct
+observation was the only trustworthy signal available. Xebia and
+Upvanta (also justjoin.it, checked the same way, both showing future
+countdowns) were downgraded from "live" to "unconfirmed" as a
+precaution, since the same failure mode could apply. Note that the
+four vacancies independently confirmed *expired* this same session
+(EPAM, Cognizant, Nexio, ITLT) are not affected by this problem — a
+past date in a stale countdown is still proof of expiry regardless of
+when the snapshot was cached; only "live" conclusions from a future
+countdown are unreliable.
+Possible cause: rules/general.md's "Source liveness" section (added
+earlier this same session) required a timestamped check but didn't
+distinguish a JS-rendered check from a raw page fetch, so a fetch's
+static countdown text was treated as equivalent evidence to an actual
+live check.
+Suggested follow-up: Done — see
+[journal/improvements.md](improvements.md), 2026-07-14, which updated
+rules/general.md to require JS-rendered confirmation (or candidate
+confirmation) for a "live" conclusion specifically, while allowing a
+raw fetch's past-date math to still count as valid evidence of expiry.
+
+## 2026-07-14 — Candidate found two live vacancies via a job board's own "similar offers" recommendations
+
+Observed by: orchestrator
+Context: Candidate manually re-checked the Spyrosoft listing (to verify
+it wasn't expired, per their own feedback about stale listings) and,
+while there, noticed justjoin.it's "Check similar offers" carousel
+surfaced two vacancies this process's own discovery pass had never
+found: Xebia (Senior .NET Developer with Blazor) and Upvanta (Senior
+.NET Developer) — the latter found by clicking through from the former,
+one carousel link at a time.
+Observation: vacancy-discovery-agent's searches were queried directly
+(e.g., "Senior .NET Developer Poland remote" style searches per
+employer artifacts' Sources fields) but never followed a job board's
+own "similar/related offers" recommendations from an already-found
+listing. Both new vacancies turned out to be live and one (Xebia) was
+arguably the single strongest specific-skill match found in the entire
+search (Blazor is a required and *confirmed* candidate skill, unlike
+several Angular requirements elsewhere), plus a work-authorization fit
+via the candidate's Polish citizenship — a combination the agent-driven
+discovery pass never surfaced despite running many searches on this
+same job board.
+Possible cause: skills/vacancy-discovery methodology (not directly
+read this session, but inferable from the Sources fields on existing
+vacancy artifacts) appears to rely on direct search queries only, not
+on following a job board's own recommendation/carousel links from
+already-found listings.
+Suggested follow-up: Add "follow a job board's own similar-offers/
+recommended-listings links from each confirmed vacancy" as an explicit
+step in the vacancy-discovery methodology, at least for job boards that
+expose this feature (confirmed present on justjoin.it; unknown for
+helloworld.rs and hh.ru). This is a low-effort, high-signal channel —
+both listings found this way turned out to be live and relevant.
+
+## 2026-07-14 — Internal/external references were plain text, not links, by default
+
+Observed by: orchestrator
+Context: Candidate asked to make all links to internal artifacts
+(employer/vacancy/CV/cover-letter/decision-log files) and external
+resources (job posting URLs, source documents) clickable, after
+already asking for this once for pipeline-overview.md specifically.
+Observation: Every agent in this process had been writing
+cross-references as plain text (e.g., "work/jakub-charabet/employers/
+t-bank.md" or a bare "hh.ru/vacancy/134381864") rather than markdown
+links, across candidate-profile.md, decision-log.md, and all
+employer/vacancy/tailored-cv/cover-letter artifacts — roughly 60 files
+needed conversion. No rule currently instructs agents to produce
+clickable links by default.
+Possible cause: rules/outputs.md doesn't address link formatting at
+all; each agent that introduced a cross-reference (company-discovery,
+vacancy-discovery, employer-evaluation, matching, tailoring,
+application-writing) apparently wrote plain-text paths independently.
+Suggested follow-up: Add a short "Linking" guideline to
+rules/outputs.md instructing agents to render internal artifact
+references and external URLs as markdown links
+(`[display text](relative/path.md)` or `[url](https://url)`) at the
+point of writing, rather than relying on a later cleanup pass.
+
+## 2026-07-14 — decision-log.md and 15 vacancy artifacts were silently truncated a second time
+
+Observed by: orchestrator
+Context: While converting internal references to clickable links,
+checking decision-log.md for its "Linked Artifacts" sections.
+Observation: decision-log.md had been silently cut to 86 lines,
+containing only the original "Russia location scope note" entry — all
+15 "Match:"/"Rejection:" decision entries added earlier in this same
+session (one per vacancy, following templates/decision-log.md) were
+gone. This directly explains a second symptom found at the same time:
+all 15 vacancy artifacts' "## Match Status" sections ended mid-sentence
+(e.g., "Strong match (conservative track). See work/"), and one
+employer artifact (employers/epam-systems.md, created later in the
+session) was cut off mid-field ("Growth/reputation indicators: One of
+the "). This is the same class of bug as the earlier truncation
+observation above, but this time it hit files edited later in the
+session, and was missed by the earlier repair pass because that pass
+only checked employer files and the candidate profile, not
+decision-log.md or the vacancy artifacts. All 15 decision-log entries
+were reconstructed from pipeline-overview.md, each employer's Fit
+Signals section, and each vacancy's Requirements/Notes sections, then
+verified by direct Read.
+Possible cause — now confirmed as the likely root cause: this
+session's bash shell tool has an unreliable/stale view of some files
+under this project folder (confirmed by reading employers/cognizant.md
+through both the Read tool and a bash `python3` script in the same
+turn — the Read tool showed current, complete content, while the
+bash-mounted copy was missing entire sections that had existed for
+many turns). The most likely explanation for both truncations: an
+earlier bash-based operation in this session read decision-log.md (and
+the vacancy artifacts) through this stale mount — catching them
+mid-edit, before the 15 match entries / closing Match Status sentences
+had been written from the direct-file-tools' point of view — then
+wrote that stale, incomplete snapshot back, silently reverting the
+newer content. This is a read-modify-write race between two
+filesystem views that don't stay in sync, not a token/length limit on
+a single write.
+Suggested follow-up: (1) Add the self-check step already suggested in
+the earlier truncation observation, extended to cover every artifact
+type. Done — see [journal/improvements.md](improvements.md),
+2026-07-14. (2) Stop using bash for read-modify-write operations on
+this project's files; use the direct file tools instead. Done — see
+the same improvements.md entry.
+
+## 2026-07-14 — Candidate requested a cross-artifact ranked index
+
+Observed by: orchestrator
+Context: Candidate asked for all tailored CVs "in order of previously
+calculated score," with links to each vacancy, employer, and CV.
+Observation: The playbook records match strength/confidence per
+vacancy (in decision-log.md) but has no artifact that indexes all
+vacancies together in ranked order with cross-links — each artifact
+type lives in its own file. Produced work/jakub-charabet/pipeline-overview.md
+as an ad hoc reference document rather than force-fitting an existing
+template.
+Possible cause: templates/ gap — no templates/pipeline-overview.md or
+equivalent ranked-index template exists.
+Suggested follow-up: If candidates commonly want this view, consider
+adding a templates/pipeline-overview.md template (and a
+reporting-agent responsibility to keep it in sync) rather than
+producing one ad hoc each time.
+
+## 2026-07-14 — No dedicated tailored-CV template exists
+
+Observed by: tailoring-agent
+Context: Producing the first tailored CVs (stage 7) for Jakub
+Charabet's positively-matched vacancies (Paysend, Finom, Spyrosoft,
+Factory World Wide).
+Observation: [templates/](../templates) has templates for
+candidate-profile, employer, vacancy, decision-log, application, and
+report, but none specifically for a tailored CV. skills/cv-tailoring.md
+describes required content (draft label, rationale note) but not a
+structural format. Improvised a structure (header with status/source/
+target-vacancy/match-decision links, CV body sections mirroring
+candidate-profile.md, then a "Tailoring Rationale" section) rather than
+inventing something unstructured, per rules/outputs.md's "every output
+is an artifact" principle.
+Possible cause: templates/ directory gap — tailored CV was likely
+assumed to be covered by templates/application.md (stage 8), but that
+template is for the full application package (cover letter, answers,
+submission notes), not the CV itself.
+Suggested follow-up: Add a templates/tailored-cv.md template
+formalizing the structure used here, so future tailoring passes don't
+need to reinvent it each time.
+
+## 2026-07-14 — Earlier session write-truncation affected 9 employer artifacts and the candidate profile
+
+Observed by: employer-evaluation-agent
+Context: Beginning stage 5 (employer evaluation), reading each employer
+artifact before adding an Evaluation section.
+Observation: 9 of the original 13 employer files, plus the candidate
+profile itself, had been silently cut off mid-sentence in an earlier
+session (missing entire sections in the profile's case — Open
+Questions/Gaps and Assumptions were absent altogether). This was not
+visible from the conversation summary alone; it only surfaced when
+reading the actual files. All content was reconstructed from research
+already on record and verified complete via direct re-read.
+Possible cause: Likely an interrupted write (e.g., context/token limit
+hit mid-tool-call) during a prior long session; not traced to a
+specific agent/skill defect.
+Suggested follow-up: Consider adding a lightweight self-check step
+(e.g., confirm a written artifact's last line matches the intended
+closing section) to general.md's artifact-discipline guidance, so a
+truncated write is caught immediately rather than discovered stages
+later.
