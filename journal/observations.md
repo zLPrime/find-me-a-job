@@ -21,6 +21,157 @@ Suggested follow-up: <optional — a concrete idea, or "needs discussion">
 
 ## Entries
 
+## 2026-07-15 — No playbook step existed for recording an actual submission
+
+Observed by: orchestrator
+Context: The candidate applied to the Xebia Blazor vacancy directly
+(outside this process, as usual per rules/general.md — no agent
+submits on the candidate's behalf) and reported back the actual
+financial expectations stated (5,500 EUR/month gross), the final cover
+letter text sent (one small edit from the draft: "GitHub Copilot" →
+"Claude/Copilot"), and the actual CV file used (a PDF export, uploaded
+directly), asking that these be filed appropriately.
+Observation: No application package existed for this vacancy — it had
+only a standalone tailored CV and cover letter (common per
+skills/application-writing.md when no application-specific questions
+were captured). More importantly, nothing in
+[docs/workflow.md](../docs/workflow.md), rules/general.md,
+[agents/application-agent.md](../agents/application-agent.md), or
+[templates/application.md](../templates/application.md) described what
+should happen *after* an actual submission: workflow.md's stage 8
+description ended at "routes it for candidate approval before anything
+is considered ready to send," and templates/application.md had no
+field for the actual file sent, actual answers given, or noting
+differences between the last draft and what was really submitted. The
+vacancy template's Status enum already included `applied`, and
+templates/application.md's own Status enum already included
+`submitted` — so the design anticipated this state but no rule or
+agent responsibility ever drove an agent to actually reach it.
+Possible cause: the playbook was written stage-by-stage up through
+"prepare application guidance" (stage 8) without a corresponding
+"record what happened after the candidate acted on that guidance"
+step — a natural gap, since submission itself happens outside this
+process by design.
+Suggested follow-up: Done — see
+[journal/improvements.md](improvements.md), 2026-07-15, which added a
+"Recording actual submissions" section to rules/general.md, extended
+docs/workflow.md's stage 8 and agents/application-agent.md's
+responsibilities to cover it, and added fields to
+templates/application.md for the actual file sent, actual question
+answers, and noted differences from the drafting version. Applied
+immediately to the Xebia Blazor case: created
+work/jakub-charabet/applications/xebia-blazor-application.md (status
+submitted), stored the submitted CV PDF alongside it, and updated the
+vacancy status to `applied`.
+
+## 2026-07-15 — Candidate review of the first tailored CV/cover letter surfaced five house-style gaps
+
+Observed by: orchestrator
+Context: Candidate reviewed the Xebia tailored CV and cover letter (the
+first package in the one-by-one submission pass) and gave five pieces
+of feedback: (1) the contact line used decorative middot separators
+instead of plain markdown; (2) Claude should be listed alongside GitHub
+Copilot as an AI-assisted development tool; (3) language order should
+reflect the target market (Polish before Russian for a Poland-based
+role), not source-document order; (4) the Summary read as "just another
+dev" — it dropped the candidate's genuine differentiator (end-to-end
+feature ownership, no dedicated QA role, direct stakeholder work) in
+favor of generic full-stack framing; (5) the cover letter repeated full
+contact details already on the CV, and opened with the generic "Dear
+Hiring Manager" rather than something company-specific.
+Observation: None of skills/cv-tailoring.md or
+skills/application-writing.md addressed any of these five points before
+this session — each was a silent default (whatever felt natural to
+write) rather than a documented convention, so nothing prevented the
+same gaps from recurring in the other 13 tailored CVs and 13 cover
+letters already produced in this batch.
+Possible cause: skills/cv-tailoring.md and skills/application-writing.md
+had no "Style Conventions" section; house style was implicit rather than
+written down.
+Suggested follow-up: Done for the immediate gap — added a "Style
+Conventions" section to both skill files (contact formatting, language
+ordering by market, the ownership-narrative balance, AI-tools currency;
+no-contact-in-letter, default company-specific salutation) and applied
+all five fixes to the Xebia CV and cover letter as the first
+application. Not yet done: the same five fixes have not been applied to
+the other 13 tailored CVs / 13 cover letters already produced — the
+candidate has not yet said whether to batch-apply the mechanical ones
+(contact format, AI tools, cover-letter contact removal, greeting) now
+or handle each as it comes up in the one-by-one review. Language
+reordering and Summary-narrative rebalancing are more vacancy-specific
+and likely need a per-file pass rather than a script.
+
+## 2026-07-15 — Candidate started a one-by-one submission review pass; wants links included by default and a running record of requests/outcomes
+
+Observed by: orchestrator
+Context: Candidate asked to go through the ranked pipeline
+(pipeline-overview.md) one vacancy at a time to decide on submission,
+starting with #1 (Xebia). The first presentation of Xebia included the
+vacancy/CV/cover-letter summary but not the posting URL or the
+employer/vacancy artifact links; the candidate then asked for those
+links, and separately said to "do it always" and to keep track of
+requests and outcomes across this pass, with an explicit note that
+this should become a formal procedure later rather than being
+formalized right now.
+Observation: No existing template covers a submission-review session:
+templates/application.md covers one finished application package, and
+pipeline-overview.md (itself an ad hoc reference doc, see the
+2026-07-14 entry below) is a ranking index, not a decision-tracking log
+for a live review pass. There's currently no standing instruction for
+which links must accompany a vacancy presentation (job posting URL,
+vacancy artifact, employer artifact) during this kind of review.
+Possible cause: templates/ and rules/outputs.md gap — submission
+review/approval tracking as a distinct activity (separate from
+producing the CV/cover letter artifacts themselves) isn't covered by
+any current template or rule.
+Suggested follow-up: candidate intends to formalize this into an
+explicit procedure later (likely a new templates/submission-review.md
+or an addition to rules/outputs.md's Linking section requiring posting
++ artifact links whenever a vacancy is presented for a decision, plus a
+lightweight per-candidate tracking artifact for requests/outcomes
+during a review pass). Not actioned as a playbook change yet per the
+candidate's own instruction — noted here so it isn't lost.
+
+**Resolved (2026-07-15, later same day):** the candidate asked to batch-
+patch the mechanical fixes across the remaining 13 tailored CVs and 13
+cover letters (the ones not yet touched by the earlier five-point
+feedback round on Xebia). Applied: contact block reformatted from a
+single middot-separated line to a plain bullet list, LinkedIn added
+(new this round — see the LinkedIn entry below), and — where a CV
+already named GitHub Copilot explicitly (Spyrosoft, EPAM) — Claude
+added alongside it. Cover letters: greeting changed from "Dear Hiring
+Manager," to "Dear <Employer> Recruiting Team,", contact details
+removed from the signature. Each file got a dated patch note at the
+end recording exactly what changed. Deliberately **not** batch-applied:
+language reordering by target market and Summary-narrative rebalancing
+(the ownership/differentiator framing) — both require per-vacancy
+judgment about each employer's location and requirements, and remain
+open for the one-by-one review pass.
+
+## 2026-07-15 — Candidate provided a LinkedIn profile; added to input and propagated
+
+Observed by: orchestrator
+Context: Reviewing the Xebia Blazor CV, the candidate noted LinkedIn
+was missing entirely — not in any source document, not in
+input/links.md, not in the candidate profile.
+Observation: None of the six original source documents include a
+LinkedIn URL, and no agent had asked for one directly; the candidate
+profile's Contact Information section (itself only added 2026-07-15)
+had no LinkedIn field. This is the same "input folder as the entry
+point for candidate-supplied facts" pattern already established for
+the GitHub link and AI-tools note — a live candidate statement in
+chat, not a source document.
+Possible cause: input/links.md was created 2026-07-15 for GitHub/
+contact info without prompting for other common profile links
+(LinkedIn) at the same time — worth asking for a complete link set
+next time this kind of file is created for a new candidate, rather
+than adding them one at a time as gaps surface.
+Suggested follow-up: recorded in input/links.md and
+candidate-profile.md's Contact Information section, then propagated to
+the two current-format tailored CVs (Xebia Blazor, Xebia Azure)
+directly, and to the remaining 13 via the same batch patch described
+above.
+
 ## 2026-07-14 — Full JS-rendered re-check of 10 "unconfirmed" vacancies: 9 confirmed live, 1 blocked by a rotted secondary-source URL
 
 Observed by: orchestrator

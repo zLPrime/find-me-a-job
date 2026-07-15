@@ -36,6 +36,34 @@ profile.
   underlying facts support.
 - The draft is clearly labeled as requiring candidate approval before use.
 
+## Style Conventions
+
+- **Contact line**: render as a plain markdown bullet list (e.g., email,
+  phone(s), and any relevant profile or portfolio link), not a single
+  line joined with decorative
+  separators (·, |, etc.) — those read as machine-generated rather than
+  something a person wrote.
+- **Language order**: order by relevance to the target role's country/
+  market, not by document origin or a fixed default. E.g., for a role
+  based in a given country, that country's primary language should
+  outrank others even if the source documents happen to list them in a
+  different order.
+- **Core differentiator**: check the candidate profile for what the
+  candidate has explicitly identified as their strongest seniority/
+  differentiation evidence (not just what's listed under Work
+  Experience or Projects), and make sure the tailored CV's Summary
+  surfaces it explicitly — even when the vacancy's own requirements
+  don't name it — rather than defaulting to a generic, role-agnostic
+  framing that undersells it. Balance rather than override
+  the vacancy's most specific technical match: lead with whatever
+  requirement is the strongest, most checkable fit, then add the
+  differentiator as a second, clearly stated dimension rather than
+  letting either crowd out the other.
+- Keep any skills list on the CV (e.g., a tools or skills section)
+  in sync with what's currently documented in the candidate profile —
+  don't let a tailored CV drift out of date after the profile is
+  updated.
+
 ## Limitations
 
 - This skill cannot compensate for a genuine gap between the candidate's

@@ -17,6 +17,13 @@ considered ready to send.
   package to the candidate.
 - Track approval status on the package; never submit or send anything
   without explicit candidate approval.
+- When the candidate reports an actual submission (through this
+  package or a standalone tailored CV/cover letter), create or update
+  the application package artifact to `submitted`, recording the
+  materials actually sent (which may differ from the last draft) and
+  updating the linked vacancy's status to `applied`. See
+  [rules/general.md](../rules/general.md)'s "Recording actual
+  submissions."
 
 ## Inputs
 

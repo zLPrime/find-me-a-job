@@ -87,7 +87,12 @@ full [application package](../templates/application.md) (cover letter,
 answers to application questions, submission notes) using the
 [application-writing](../skills/application-writing.md) skill, and
 routes it for candidate approval before anything is considered ready to
-send.
+send. Once the candidate reports they've actually submitted — whether
+through this package or by applying directly with a standalone tailored
+CV and cover letter — the application package is created (if it doesn't
+exist yet) or updated to `submitted` status, recording the materials
+actually sent and the vacancy's status updated to `applied`. See
+rules/general.md's "Recording actual submissions."
 
 ### 9. Generate reports
 

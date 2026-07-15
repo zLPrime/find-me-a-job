@@ -70,9 +70,9 @@ cleaned up later:
 
 - Internal cross-references (to another employer, vacancy, tailored CV,
   cover letter, candidate profile, or decision-log entry) use a
-  relative link, e.g. `[t-bank.md](employers/t-bank.md)`.
+  relative link, e.g. `[acme-corp.md](employers/acme-corp.md)`.
 - External resources (job posting URLs, source documents) use a full
-  link, e.g. `[hh.ru/vacancy/134381864](https://hh.ru/vacancy/134381864)`.
+  link, e.g. `[example.com/jobs/12345](https://example.com/jobs/12345)`.
 
 This keeps every artifact navigable on its own without a separate
 cleanup pass.

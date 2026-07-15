@@ -20,6 +20,83 @@ Expected effect: <what should be different going forward>
 
 ## Entries
 
+## 2026-07-15 — Genericized candidate- and profession-specific examples out of the reusable playbook
+
+Triggered by: a direct maintainer request (not a prior observation) to
+double-check that the playbook — the reusable process, as distinct from
+the journal's historical record — contains nothing candidate- or
+profession-specific. This also enforces the existing rule in
+[docs/operating-principles.md](../docs/operating-principles.md) that the
+playbook should not name specific implementation technologies, frameworks,
+languages, or (by extension) employers, job boards, or candidates.
+Change made:
+- [rules/general.md](../rules/general.md): in "Version control and
+  history," replaced the `work/jakub-charabet/.git` example with the
+  generic `work/<candidate>/` pattern. In "Source liveness," removed named
+  job boards and companies (justjoin.it, Teamtailor, hh.ru with Cyrillic
+  UI strings, Lever, Luxoft/SuccessFactors, JobLeads, Onwelo) and
+  restated the two non-JS-fetch failure modes and the confirmed-live
+  signal catalog as platform-agnostic descriptions, pointing to
+  [journal/observations.md](observations.md) for the concrete instances.
+- [rules/outputs.md](../rules/outputs.md): replaced the `t-bank.md` and
+  `hh.ru/vacancy/...` example links with neutral placeholders
+  (`acme-corp.md`, `example.com/jobs/...`).
+- [skills/cv-tailoring.md](../skills/cv-tailoring.md): generalized the
+  contact-line example (dropped GitHub), the language-order example
+  (dropped Poland/Polish/Russian), the "solid full-stack developer"
+  framing (now "role-agnostic"), and the skills-list example (dropped
+  AI-assisted development tools).
+Reasoning: Concrete names had accumulated as illustrative examples during
+this candidate's IT/region-specific search. They made the rules clearer in
+the moment but coupled the reusable playbook to one candidate, one
+profession, and one region — the opposite of what the playbook is for, and
+a direct violation of operating-principles.md. The underlying lessons were
+preserved; only the specifics were removed, with the historical instances
+still available in the journal.
+Expected effect: The playbook reads as reusable for any candidate,
+profession, and region, while the journal retains the specific incidents
+that motivated each rule.
+
+## 2026-07-15 — Added a "Recording actual submissions" step, closing the gap after stage 8
+
+Triggered by: [journal/observations.md](observations.md) — "No playbook
+step existed for recording an actual submission" (2026-07-15) — the
+candidate applied to the Xebia Blazor vacancy directly and reported
+back the actual financial expectations stated, the final cover-letter
+text (one small edit from the draft), and the actual CV file used, with
+nowhere defined in the playbook to file them.
+Change made:
+- [rules/general.md](../rules/general.md): added a "Recording actual
+  submissions" section (after "Source liveness") describing what to do
+  when the candidate reports an actual submission — create/update the
+  application package to `submitted`, capture the materials actually
+  sent (noting any differences from the last draft), record actual
+  answers to application questions, and update the vacancy's status to
+  `applied`.
+- [docs/workflow.md](../docs/workflow.md): extended stage 8's
+  description to cover this.
+- [agents/application-agent.md](../agents/application-agent.md): added
+  a matching responsibility.
+- [templates/application.md](../templates/application.md): added
+  fields for the actual file submitted, differences from the drafting
+  version, actual (not just draft) question answers, and a "date
+  submitted" / "attachments actually sent" pair under Submission Notes;
+  noted in the template's header comment that it also covers the
+  post-submission state, not just pre-submission drafting.
+Reasoning: The vacancy template's Status enum already included
+`applied` and the application-package template's Status enum already
+included `submitted`, so the design anticipated this state — but no
+rule or agent responsibility ever drove anything to actually reach it,
+since submission itself intentionally happens outside this process
+(no agent submits on the candidate's behalf). Without an explicit step,
+each real submission would otherwise need this same ad hoc handling
+worked out from scratch.
+Expected effect: Future reported submissions get filed consistently —
+application package created or updated to `submitted`, actual sent
+materials preserved distinctly from the drafting history, and the
+vacancy status kept in sync — without needing to re-derive where things
+belong each time.
+
 ## 2026-07-15 — Added a "Version control and history" rule separating execution commits from playbook commits
 
 Triggered by: a direct design decision in a development session (not a

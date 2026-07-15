@@ -39,6 +39,18 @@ review.
 - The package is clearly marked as requiring candidate approval before
   anything is sent, per [rules/general.md](../rules/general.md).
 
+## Style Conventions
+
+- Do not repeat full contact details (email, phone numbers) in the
+  cover letter — that information belongs on the CV, which the
+  application already includes. Sign with name only.
+- Default salutation when no named contact is available: "Dear
+  <Employer> Recruiting Team," rather than the generic "Dear Hiring
+  Manager," — company-specific without inventing an individual's name.
+  ("Dear Hiring Manager" is a standard English-language convention and
+  not wrong, but the candidate prefers the more personalized default;
+  revisit if the candidate indicates otherwise.)
+
 ## Limitations
 
 - This skill produces drafts only. It never submits an application or

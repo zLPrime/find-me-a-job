@@ -94,8 +94,8 @@ materials do not live in the playbook repo: they are excluded from it
 git repos, so each candidate's history is preserved without mixing
 personal data into the shared playbook. The layout is:
 
-- One repo **per candidate** under `work/<candidate>/` (e.g.
-  `work/jakub-charabet/.git`).
+- One repo **per candidate** under `work/<candidate>/`, each with its
+  own `.git`.
 - One repo for the candidate's source materials at `input/`.
 
 Two kinds of session touch this repository, and they commit to different
@@ -157,15 +157,14 @@ before relying on it:
   work on the same artifact.
 - A non-JavaScript-rendered page fetch is **never sufficient evidence
   of current liveness**, on any job board. Two independent failure
-  modes have been directly observed in the same session: (1) a job
-  board (justjoin.it) serving a cached HTML snapshot with a static
-  "X days left" countdown baked in at cache time rather than computed
-  live; (2) a job board (Teamtailor) whose underlying HTML still
+  modes have been directly observed: (1) a board serving a cached HTML
+  snapshot with a static "X days left" countdown baked in at cache time
+  rather than computed live; (2) a board whose underlying HTML still
   contains the original posting text and an "Apply now" button for a
   position that a real, JS-rendered browser shows as no longer
   available — the closed state is applied by client-side JavaScript
-  after page load, which a non-JS fetch never executes. Both platforms
-  looked "live" to a raw fetch while a real browser showed otherwise.
+  after page load, which a non-JS fetch never executes. In both cases
+  the raw fetch looked "live" while a real browser showed otherwise.
   Treat this as a general property of modern job boards, not a
   quirk of one site.
   - A *past* date found in a fetched page is still trustworthy evidence
@@ -179,27 +178,61 @@ before relying on it:
     "reported [live/loading normally] per non-JS fetch, not
     independently confirmed" — never simply "live."
 - A dead URL on a vacancy sourced from a **secondary** job board or
-  aggregator (JobLeads, a Google search result, etc.) is not the same
+  aggregator (a job aggregator, a search-engine result, etc.) is not the same
   finding as a listing being expired. If the saved URL 404s, that may
   just mean the employer restructured their site or the aggregator's
   link rotted — it says nothing about whether the underlying vacancy
   is still open elsewhere. Record this outcome as "re-check
   inconclusive: source URL no longer resolves" and, where possible,
   search for the vacancy's current URL rather than marking it
-  `expired` on URL-rot evidence alone. (Observed on the Onwelo vacancy,
-  2026-07-14 — see [journal/observations.md](../journal/observations.md).)
+  `expired` on URL-rot evidence alone. (A concrete instance is recorded
+  in [journal/observations.md](../journal/observations.md), 2026-07-14.)
 - Once a JS-rendering check is available, a confirmed-live result
-  looks different per platform — useful to recognize rather than
-  expect one universal signal: justjoin.it shows a live-computed "X
-  day left (until DATE)" countdown; hh.ru shows a working
-  "Откликнуться" button plus a current viewer count and lacks the "В
-  архиве" (archived) banner it shows on closed vacancies; Lever boards
-  simply keep serving the posting with an "Apply for this job" button
-  (they tend to 404 or redirect once genuinely closed, rather than
-  showing a stale-but-present page); ATS application forms (e.g.
-  Luxoft/SuccessFactors-style) that fully render and accept input are
-  themselves strong evidence, since a closed requisition typically
-  can't be applied to at all.
+  looks different from board to board — useful to recognize rather
+  than expecting one universal signal. Positive signals seen across
+  boards include: a live-computed "X days left (until DATE)" countdown;
+  a working apply/respond button alongside a current viewer or
+  applicant count; the absence of an "archived" or "closed" banner that
+  the same board shows on dead listings; and an application form that
+  fully renders and accepts input (a closed requisition typically can't
+  be applied to at all). Some boards instead stop serving a closed
+  posting entirely — 404-ing or redirecting — rather than showing a
+  stale-but-present page. (Board-specific examples from past checks are
+  recorded in [journal/observations.md](../journal/observations.md).)
+
+## Recording actual submissions
+
+This process routes drafts for candidate approval but does not itself
+submit applications (see "Human review before anything external"). When
+the candidate reports they've actually applied — whether through a full
+[application package](../templates/application.md) this process
+assembled, or by applying directly with only a tailored CV and cover
+letter as standalone drafts — the actual submission is still recorded,
+retroactively if needed:
+
+- Create the application package artifact if one doesn't exist yet (a
+  standalone tailored CV + cover letter pair is common for vacancies
+  where no application-specific questions were captured — see
+  [skills/cv-tailoring.md](../skills/cv-tailoring.md) and
+  [skills/application-writing.md](../skills/application-writing.md)),
+  or update the existing one.
+- Set its status to `submitted` and record the date.
+- Capture the *actual* materials sent, not just the last draft — the
+  candidate may edit the text before sending. If a final file (e.g. an
+  exported PDF) exists, store it alongside the application package
+  artifact and reference it; note any differences from the drafting
+  version rather than silently overwriting the draft's history.
+- Record the actual answers given to any application-specific
+  questions (e.g. stated financial expectations), not just draft
+  answers.
+- Update the corresponding [vacancy artifact](../templates/vacancy.md)'s
+  status to `applied`.
+
+This keeps the historical record accurate: what was actually sent can
+differ from the last artifact the candidate reviewed here, and losing
+that distinction would make the on-file materials misleading if
+revisited later (e.g. at an interview, or when tailoring a follow-up
+application to the same employer).
 
 ## Escalation
 
