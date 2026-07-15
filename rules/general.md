@@ -85,6 +85,45 @@ uncertainty should affect judgments and confidence levels.
   single write — this reduces how much content is lost if a single
   write is cut short.
 
+## Version control and history
+
+This repository is a **playbook** — the reusable process (agents, skills,
+rules, templates, docs, journal). Candidate work product and source
+materials do not live in the playbook repo: they are excluded from it
+(see [.gitignore](../.gitignore)) and tracked in their **own** independent
+git repos, so each candidate's history is preserved without mixing
+personal data into the shared playbook. The layout is:
+
+- One repo **per candidate** under `work/<candidate>/` (e.g.
+  `work/jakub-charabet/.git`).
+- One repo for the candidate's source materials at `input/`.
+
+Two kinds of session touch this repository, and they commit to different
+places:
+
+- **Execution sessions** run the process for a candidate. An agent that
+  creates or updates artifacts under `work/<candidate>/` or `input/`
+  commits those changes to *that directory's own repo* — never the
+  playbook repo — so the evolution of the candidate's work product is
+  preserved. Commit at natural checkpoints (the end of a run, or after a
+  coherent unit of work), with a message describing what changed and why.
+  This complements Artifact discipline above: superseded artifacts are
+  kept in place *and* their history is captured in commits.
+- **Development sessions** change the playbook itself (agents, skills,
+  rules, templates, docs, or journal entries). Those changes are
+  committed to the **playbook repo**, and — when they respond to an
+  observation — carry a matching
+  [journal/improvements.md](../journal/improvements.md) entry.
+
+An execution agent must not commit to the playbook repo, and a playbook
+change must not be committed into a candidate's repo. If a single session
+genuinely needs both (e.g., a process gap surfaced mid-run prompts a
+playbook fix), keep them as separate commits in their respective repos and
+surface the playbook change for human review rather than folding it
+silently into the run. If it is unclear which kind of session is underway,
+ask the candidate rather than guessing — committing to the wrong repo
+mixes exactly the histories this structure exists to keep separate.
+
 ## Tooling note: bash vs. direct file tools
 
 If an agent has access to both a sandboxed shell and direct file

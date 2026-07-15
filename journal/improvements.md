@@ -20,6 +20,33 @@ Expected effect: <what should be different going forward>
 
 ## Entries
 
+## 2026-07-15 — Added a "Version control and history" rule separating execution commits from playbook commits
+
+Triggered by: a direct design decision in a development session (not a
+prior observation) — the maintainer wants agents running the process to
+commit their changes under `work/<candidate>/` and `input/` so each
+candidate's history is preserved, while changes to the playbook itself are
+committed only in development sessions.
+Change made: [rules/general.md](../rules/general.md) gained a "Version
+control and history" section (placed after "Artifact discipline"). It
+names the nested-repo layout (playbook repo excludes `work/` and `input/`;
+one repo per candidate at `work/<candidate>/`; one repo at `input/`),
+defines execution vs. development sessions, and states which repo each
+commits to — execution agents commit candidate artifacts to that
+directory's own repo and never to the playbook repo; playbook changes go
+to the playbook repo with a matching improvements entry. It also covers
+the mixed-session case (keep separate commits per repo, surface playbook
+changes for review) and the ambiguous case (ask rather than guess).
+Reasoning: The infrastructure already existed (`input/.git` and
+`work/jakub-charabet/.git` were initialized and committed, and `.gitignore`
+excludes both directories), but no rule instructed executing agents to
+commit their outputs or warned them off committing the playbook — so the
+intended history-keeping behavior would not actually happen. Agents act on
+written rules, not on intent recorded only in a conversation.
+Expected effect: Execution runs leave a per-candidate commit history of
+work product without polluting the shared playbook repo, and playbook
+edits stay confined to development sessions.
+
 ## 2026-07-14 — Added URL-rot distinction and per-platform confirmed-live signal catalog to the "Source liveness" rule
 
 Triggered by: [journal/observations.md](observations.md) — "Full
