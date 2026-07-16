@@ -21,6 +21,33 @@ Suggested follow-up: <optional — a concrete idea, or "needs discussion">
 
 ## Entries
 
+## 2026-07-15 — A new candidate fact was about to be patched directly into the profile, bypassing /input
+
+Observed by: orchestrator
+Context: While reviewing the Xebia Azure tailored CV, the candidate
+volunteered a new technical achievement (a streamed FHIR-validation
+pipeline on the Medical Information System project) that wasn't in any
+source document. The natural next step in the moment was to add it
+straight to work/jakub-charabet/candidate-profile.md from the
+conversation.
+Observation: The candidate stopped this and pointed out that /input is
+supposed to be the sole entry point for candidate facts (per
+input/README.md and rules/factual-accuracy.md's Traceability
+principle), and that patching the profile directly from a mid-session
+statement — even with a "candidate direct statement" source note —
+bypasses that, leaving no durable record independent of this one
+conversation.
+Possible cause: rules/factual-accuracy.md described /input as the
+source of all candidate facts but didn't explicitly address the
+mid-session case — a candidate fact surfacing outside a dedicated
+profile-building step — so nothing in the rules stopped a direct
+profile edit from a conversational statement.
+Suggested follow-up: Done — see
+[journal/improvements.md](improvements.md), 2026-07-15, which added a
+"New facts surfaced mid-session" section to
+[rules/factual-accuracy.md](../rules/factual-accuracy.md) requiring the
+statement to land in /input first, in all cases.
+
 ## 2026-07-15 — No playbook step existed for recording an actual submission
 
 Observed by: orchestrator

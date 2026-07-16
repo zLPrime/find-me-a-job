@@ -40,6 +40,31 @@ This applies even when:
 4. If the candidate provides an answer, add it as a normal fact with its
    source noted; if they don't, the gap remains a gap.
 
+## New facts surfaced mid-session
+
+A candidate will sometimes volunteer a new fact — a project detail, an
+achievement, a correction — in the middle of unrelated work (e.g.
+reviewing a tailored CV), not as a formal profile-building step. Even
+then, [/input](../input) remains the only entry point: an agent may
+not patch the candidate profile directly from a conversational
+statement.
+
+1. Record the statement in `/input` first (typically
+   [input/notes.md](../input/notes.md)), in the candidate's own
+   substance, with a dated source note (see
+   [input/README.md](../input/README.md)).
+2. Only then update the candidate profile from that input entry,
+   citing it as the source — the same as any other input material.
+3. If the current session isn't the right place to also do the profile
+   update (e.g. time pressure, unrelated task), it's acceptable to
+   record the input and leave the profile update as an explicit open
+   item — but the input-side record must not be skipped or deferred.
+
+This keeps a single, durable record of what the candidate actually said
+(in `/input`) independent of any one conversation, and keeps the
+profile itself always traceable to a source file rather than to "the
+candidate said so in session X."
+
 ## Interpretation vs. fabrication
 
 Reasonable interpretation of stated facts is allowed and expected — for

@@ -20,6 +20,26 @@ Expected effect: <what should be different going forward>
 
 ## Entries
 
+## 2026-07-15 — Made /input the mandatory first stop for facts surfaced mid-session
+
+Triggered by: [journal/observations.md](observations.md), 2026-07-15 —
+"A new candidate fact was about to be patched directly into the
+profile, bypassing /input."
+Change made: [rules/factual-accuracy.md](../rules/factual-accuracy.md)
+— added a "New facts surfaced mid-session" section requiring any
+candidate statement, however it arises, to be recorded in /input
+(typically input/notes.md) before the candidate profile is updated
+from it, with the profile update citing the input entry as its source.
+Reasoning: The existing rule already named /input as the sole entry
+point for candidate facts, but only described the dedicated
+profile-building flow — it didn't say what to do when a fact surfaces
+organically during unrelated work (tailoring, application review,
+etc.), which is exactly when the shortcut of editing the profile
+directly is most tempting.
+Expected effect: Every candidate fact has a durable record in /input,
+independent of the conversation that produced it, regardless of which
+task was underway when the candidate mentioned it.
+
 ## 2026-07-15 — Genericized candidate- and profession-specific examples out of the reusable playbook
 
 Triggered by: a direct maintainer request (not a prior observation) to
