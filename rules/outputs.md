@@ -76,3 +76,13 @@ cleaned up later:
 
 This keeps every artifact navigable on its own without a separate
 cleanup pass.
+
+### Presenting artifacts for candidate review
+
+Whenever a tailored CV, cover letter, application package, or any other
+artifact is presented to the candidate for review or a submission
+decision, always include a link to that vacancy's artifact alongside
+it — and, where available, the employer artifact and the original job
+posting URL too. Do this by default, not only when asked; the
+candidate should never have to ask "what vacancy is this for?" or go
+looking for the posting separately.

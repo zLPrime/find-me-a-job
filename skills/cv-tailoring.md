@@ -42,12 +42,25 @@ profile.
   phone(s), and any relevant profile or portfolio link), not a single
   line joined with decorative
   separators (·, |, etc.) — those read as machine-generated rather than
-  something a person wrote.
+  something a person wrote. Render GitHub/LinkedIn/portfolio URLs as
+  clickable markdown links (e.g.
+  `[github.com/zLPrime](https://github.com/zLPrime)`), not bare text —
+  same principle as rules/outputs.md's Linking section, applied to the
+  CV's own contact block specifically. (Standing default since
+  2026-07-17 — first raised 2026-07-15 but never actually folded into
+  this file until it recurred on the Upvanta CV.)
 - **Language order**: order by relevance to the target role's country/
   market, not by document origin or a fixed default. E.g., for a role
   based in a given country, that country's primary language should
   outrank others even if the source documents happen to list them in a
-  different order.
+  different order. Below the target-market language, rank the
+  candidate's actual professional working language (English — the
+  confirmed daily working language across all three DataArt projects)
+  above other native languages that aren't tied to the target market,
+  since professional usage is a stronger signal for a work-facing
+  document than native status alone. (Refined 2026-07-17, candidate
+  direct instruction on the Upvanta CV: English above Russian, since
+  Russian isn't tied to a Poland-based role the way Polish is.)
 - **Core differentiator**: check the candidate profile for what the
   candidate has explicitly identified as their strongest seniority/
   differentiation evidence (not just what's listed under Work
@@ -63,6 +76,33 @@ profile.
   in sync with what's currently documented in the candidate profile —
   don't let a tailored CV drift out of date after the profile is
   updated.
+- **Vacancy language**: draft the tailored CV in the same language as
+  the vacancy posting itself, not English by default. If the posting
+  is bilingual or the target language is unclear, ask the candidate
+  rather than guessing. (Applied first for the Megapolis IT vacancy,
+  2026-07-17, per explicit candidate instruction — now the standing
+  default.)
+- **Technical achievements/typical tasks and scale**: for every project
+  entry, include its documented technical achievement(s) or typical
+  task(s) (candidate-profile.md marks each as one or the other — don't
+  relabel) and its scale/load figures, by default — not only when the
+  candidate asks for a fuller Work Experience section. Omit only if the
+  candidate says otherwise for a specific vacancy (e.g., to keep a CV
+  shorter). Pull the exact wording/framing from candidate-profile.md's
+  Projects section rather than re-summarizing from memory. (Standing
+  default since 2026-07-17 — previously only added on request, e.g.
+  for Megapolis IT.)
+- **State the outcome, not just the task**: whenever a technical
+  achievement or typical task is included, its outcome/impact must be
+  stated alongside it, not the task description alone — check
+  candidate-profile.md for a recorded outcome before writing the
+  bullet. Some outcomes have more than one recorded framing (e.g. a
+  literal, client-specific figure vs. a general framing usable when
+  the vacancy has no reason to know client-specific details) — pick
+  whichever framing fits the vacancy rather than defaulting to the
+  first one found. (Standing default since 2026-07-17, prompted by a
+  case where an outcome had been given by the candidate but never
+  actually made it into candidate-profile.md.)
 
 ## Limitations
 

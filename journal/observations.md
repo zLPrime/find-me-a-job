@@ -21,6 +21,52 @@ Suggested follow-up: <optional — a concrete idea, or "needs discussion">
 
 ## Entries
 
+## 2026-07-17 — "Safe-commit" git-plumbing workaround silently desynced the working tree from git HEAD
+
+Observed by: orchestrator (execution session)
+Context: While recording an Onwelo application submission, re-reading
+vacancies/onwelo-senior-net-backend-engineer.md returned a much
+shorter/older version (78 lines) than git HEAD actually contained (143
+lines, from a commit made earlier in the same session). Checking
+further, the same mismatch was found in
+work/jakub-charabet/Jakub_Charabet_Full_Resume.docx, decision-log.md,
+pipeline-overview.md, and tailored-cvs/megapolis-it-tailored-cv-ru.md.
+Observation: All affected files had been edited earlier in the session
+using a manual git-plumbing "safe commit" pattern (`git show
+HEAD:<path> > temp`; edit temp; `git hash-object -w temp`; stage it via
+a scratch `GIT_INDEX_FILE`; `git write-tree`; `git commit-tree`; then
+`echo <hash> > .git/refs/heads/master`) — adopted to route around this
+mount's confirmed `unlink()` failures, which make ordinary `git add`/
+`git commit` leave lock-file debris. This pattern only ever touches
+git's internal object database (blobs/trees/commits) and the ref
+pointer; it never writes the edited content back into the actual
+checked-out file, unlike a normal `git commit`, where the working tree
+and index are assumed already in sync because the edit happened in
+place first. The pattern's own verification step (`diff <(git show
+HEAD:<path>) /tmp/clean.md`) masked this: it compared the new commit
+against the same temp file used to build it, so it always passed even
+when the real working-tree file was left stale. This is the same
+failure class already flagged in "Tooling note: bash vs. direct file
+tools" (rules/general.md) — content diverging between what the shell
+can see and what's actually true — but that rule's wording ("reads a
+file, transforms it, and writes it back") didn't anticipate a
+workaround that never writes to the file at all, only to git's object
+database, so it wasn't obviously covered.
+Possible cause: rules/general.md's "Tooling note" section predates the
+safe-commit git-plumbing workaround and doesn't require working-tree/
+HEAD parity after a manual commit built this way.
+Suggested follow-up: Extend "Tooling note: bash vs. direct file tools"
+(or "Version control and history") to require: (1) after building a
+commit via manual git plumbing, `cp` the exact content used for the
+new blob over the real working-tree file; (2) verify with `diff
+<(git show HEAD:<path>) <the actual working-tree file>`, never a temp
+file, so the check cannot pass while the real file is stale. Applied
+as a corrective fix within this session (re-synced all five affected
+files, each verified individually) but not yet formalized as a rule —
+needs a development-session pass to update rules/general.md, with a
+matching journal/improvements.md entry, since this execution session
+must not commit to the playbook repo.
+
 ## 2026-07-15 — A new candidate fact was about to be patched directly into the profile, bypassing /input
 
 Observed by: orchestrator
@@ -158,6 +204,13 @@ or an addition to rules/outputs.md's Linking section requiring posting
 lightweight per-candidate tracking artifact for requests/outcomes
 during a review pass). Not actioned as a playbook change yet per the
 candidate's own instruction — noted here so it isn't lost.
+
+**Resolved (2026-07-17):** candidate asked directly for this to become
+a standing rule. Added a "Presenting artifacts for candidate review"
+subsection to rules/outputs.md's Linking section — see
+[journal/improvements.md](improvements.md), 2026-07-17. The
+lightweight per-candidate tracking artifact for requests/outcomes
+during a review pass remains unactioned.
 
 **Resolved (2026-07-15, later same day):** the candidate asked to batch-
 patch the mechanical fixes across the remaining 13 tailored CVs and 13

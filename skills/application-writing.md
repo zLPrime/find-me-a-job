@@ -50,6 +50,12 @@ review.
   ("Dear Hiring Manager" is a standard English-language convention and
   not wrong, but the candidate prefers the more personalized default;
   revisit if the candidate indicates otherwise.)
+- **Vacancy language**: write the cover letter and any application
+  question responses in the same language as the vacancy posting
+  itself, not English by default — same rule as
+  [skills/cv-tailoring.md](cv-tailoring.md)'s Style Conventions. If the
+  posting is bilingual or the target language is unclear, ask the
+  candidate rather than guessing.
 
 ## Limitations
 
