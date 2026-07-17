@@ -22,6 +22,22 @@ or employer — is a **draft** until the candidate explicitly approves it.
 - Approval is specific to the artifact and version; approving one CV does
   not pre-approve a later revision of it.
 
+## Draft format and PDF rendering
+
+Tailored CVs and cover letters are drafted, reviewed, and edited as
+markdown first. A PDF is a production output, not a draft format — it
+can't be hand-edited the way a .md file can, so producing one before
+the candidate has approved the underlying content pre-empts their
+review rather than supporting it.
+
+- Share the .md artifact for candidate review; don't generate a PDF at
+  the same time by default.
+- Only render a PDF once the candidate has confirmed the .md draft is
+  ready to be finalized. Treat rendering as the last production step,
+  not an automatic accompaniment to every draft or revision.
+- If the candidate requests further changes after a PDF already
+  exists, edit the .md and re-render — never hand-edit a PDF directly.
+
 ## Traceability
 
 Every artifact should make it possible to answer: *where did this
@@ -123,6 +139,30 @@ surface the playbook change for human review rather than folding it
 silently into the run. If it is unclear which kind of session is underway,
 ask the candidate rather than guessing — committing to the wrong repo
 mixes exactly the histories this structure exists to keep separate.
+
+## Commit cadence
+
+Committing after every individual edit slows the process down without
+adding meaningful history. Execution sessions should batch commits
+rather than committing after each artifact touched:
+
+- Commit at the end of a coherent unit of work — typically once a
+  vacancy (or other target) is fully wrapped up — rather than after
+  each file edited along the way. This sharpens "natural checkpoints"
+  from Version control and history above: the checkpoint is the unit
+  of work, not the individual edit within it.
+- Always commit once the candidate confirms an actual submission (see
+  "Recording actual submissions" below) — a submission is itself a
+  natural checkpoint regardless of how much batching happened before
+  it.
+- If a unit of work ends early for an unrelated reason (e.g., a
+  vacancy turns out to be already filled before any tailoring starts),
+  that correction can still be folded into a single commit rather than
+  committed separately.
+
+This changes how *often* commits happen, not whether they happen —
+uncommitted work at the end of a run should still be caught and
+committed before the session ends.
 
 ## Tooling note: bash vs. direct file tools
 

@@ -20,6 +20,184 @@ Expected effect: <what should be different going forward>
 
 ## Entries
 
+## 2026-07-17 — Formalized "clickable contact links" into skills/cv-tailoring.md (had recurred)
+
+Triggered by: a direct candidate question in an execution session ("We
+forgot to make links clickable. Is it a rule?"), asked after the
+Upvanta CV's contact block was rendered with GitHub/LinkedIn as plain
+text. This exact feedback was already given once before (2026-07-15,
+Xebia Azure CV) but was only ever captured as a private cross-session
+memory note ("worth folding into skills/cv-tailoring.md's Style
+Conventions next time that file is touched") — never actually written
+into the playbook itself, so it recurred the next time a fresh CV was
+drafted.
+Change made: [skills/cv-tailoring.md](../skills/cv-tailoring.md)'s
+existing "Contact line" Style Convention gained a sentence: render
+GitHub/LinkedIn/portfolio URLs as clickable markdown links, not bare
+text.
+Reasoning: A rule that only lives in an agent's private memory isn't
+durable across sessions or agents the way a playbook rule is — this is
+the same structural lesson as the "outcome" gap earlier today (an
+instruction given once needs to land in a shared, checked artifact, not
+just be remembered informally).
+Expected effect: Future tailored CVs render contact URLs as clickable
+links by default; this specific feedback shouldn't need to be given a
+third time.
+
+## 2026-07-17 — Added "State the outcome" rule and refined language ordering in skills/cv-tailoring.md
+
+Triggered by: a direct candidate request in an execution session while
+reviewing the Upvanta Polish CV ("The typical task - I want the
+outcome to be always present... Put English above Russian"). Reviewing
+the request also surfaced a real gap: the print-job-visibility
+outcome (increased postcard output) had been added to the Megapolis IT
+tailored CV by the candidate's own hand-edit, but was never actually
+propagated into candidate-profile.md — so it was missing from the
+source of truth, not just under-used.
+Change made: [skills/cv-tailoring.md](../skills/cv-tailoring.md)'s
+Style Conventions gained a "State the outcome, not just the task"
+bullet (check candidate-profile.md for a recorded outcome whenever an
+achievement/task is included; some outcomes have more than one
+recorded framing — pick the one that fits the vacancy). The existing
+"Language order" bullet was refined: below the target-market language,
+rank English (the candidate's actual professional working language)
+above other native languages not tied to the target market. Also
+backfilled candidate-profile.md's Manufacturing project entry with the
+missing outcome (postcard output / general "factory productivity"
+framing) — see the corresponding commit in work/jakub-charabet.
+Reasoning: An outcome that only lives in one tailored CV's hand-edit
+isn't durable — the next tailored CV for a different vacancy has no
+way to find it. Making outcome-inclusion a standing check against
+candidate-profile.md (not tailored-CV memory) closes that gap
+structurally, not just for this one instance.
+Expected effect: Future tailored CVs state outcomes by default and
+pull them from candidate-profile.md; language ordering for non-target-
+market native languages defaults to professional-usage ranking instead
+of a flat native-language tier.
+
+## 2026-07-17 — Added a "Technical achievements/typical tasks and scale" rule to skills/cv-tailoring.md
+
+Triggered by: a direct candidate request in an execution session ("I
+want to always include technical achievements/typical tasks and scale
+unless stated otherwise"), after this content had previously only been
+added to a tailored CV on request (Megapolis IT, following the
+candidate's complaint that Work Experience entries were "too brief").
+Change made: [skills/cv-tailoring.md](../skills/cv-tailoring.md)'s
+Style Conventions gained a "Technical achievements/typical tasks and
+scale" bullet: include each project's documented technical
+achievement(s)/typical task(s) and scale/load figures by default,
+respecting whichever label candidate-profile.md already uses for each
+(achievement vs. typical task — don't relabel), omitting only on
+explicit candidate instruction for a given vacancy.
+Reasoning: What had been a one-off enrichment for a single vacancy
+(Megapolis IT) is now the candidate's stated general preference — every
+future tailored CV should be full by default, not thin unless asked.
+Expected effect: New tailored CVs (and re-tailored existing ones,
+starting with Upvanta) include achievements/tasks and scale figures
+without the candidate needing to ask each time.
+
+## 2026-07-17 — Added a "Vacancy language" rule to skills/cv-tailoring.md and skills/application-writing.md
+
+Triggered by: a direct candidate request in an execution session
+("Respect the vacancy language. Is it a rule already?"), asked while
+reviewing the Upvanta vacancy (a Polish posting). It wasn't yet a
+rule — the one existing precedent (the Megapolis IT tailored CV,
+drafted in Russian, 2026-07-17) was done per one-off explicit
+instruction, not a standing default.
+Change made: both [skills/cv-tailoring.md](../skills/cv-tailoring.md)
+and [skills/application-writing.md](../skills/application-writing.md)
+gained a "Vacancy language" Style Convention: draft the tailored CV,
+cover letter, and application question responses in the vacancy
+posting's own language by default, not English; ask the candidate if
+the posting is bilingual or the target language is unclear.
+Reasoning: The candidate had already applied this once via explicit
+instruction (Megapolis IT); asking whether it was already a standing
+rule signals they expect it to apply by default going forward, not to
+be re-requested per vacancy.
+Expected effect: Future tailored CVs/cover letters for non-English
+postings (e.g., Upvanta and other Poland-based Polish-language
+postings) are drafted in that language automatically.
+
+## 2026-07-17 — Added a "Presenting artifacts for candidate review" rule to rules/outputs.md
+
+Triggered by: a direct candidate request in an execution session
+("Always give a link to the vacancy alongside CV and other artifacts.
+Make it a rule") plus the [journal/observations.md](observations.md)
+2026-07-15 entry ("Candidate started a one-by-one submission review
+pass; wants links included by default...") that had already flagged
+this exact gap and predicted it would need formalizing later.
+Change made: [rules/outputs.md](../rules/outputs.md)'s "Linking"
+section gained a "Presenting artifacts for candidate review"
+subsection: whenever a tailored CV, cover letter, application package,
+or other artifact is presented for review/decision, always include a
+link to the vacancy artifact, and where available the employer
+artifact and original posting URL — by default, not only when asked.
+Reasoning: The existing "Linking" section only covered link formatting
+*within* written artifacts, not what must accompany a chat presentation
+of those artifacts. The candidate had already had to ask for this once
+per the 2026-07-15 observation; asking a second time later in the
+search made clear it should be a standing default, not a one-off
+request.
+Expected effect: Every future artifact presentation (CV, cover letter,
+application package) includes the vacancy link automatically, without
+the candidate needing to ask.
+
+## 2026-07-17 — Added a "Draft format and PDF rendering" rule to rules/general.md
+
+Triggered by: a direct maintainer request in a development session (not
+a prior observation) — after two tailored-CV PDFs were generated
+automatically as part of drafting, the candidate asked for markdown
+artifacts they can hand-edit instead, with PDF rendering deferred until
+after they approve the .md content, and asked for this to become a
+standing rule.
+Change made: [rules/general.md](../rules/general.md) gained a "Draft
+format and PDF rendering" section, placed directly after "Human review
+before anything external" (before "Traceability"). It states that
+tailored CVs/cover letters are drafted and reviewed as markdown, that a
+PDF should only be rendered once the candidate has approved the
+underlying .md content, and that further edits after a PDF exists
+should go through the .md source and a re-render, never a hand-edit of
+the PDF itself.
+Reasoning: The PDF-rendering step (tools/render_cv_pdf.py) had grown
+into this candidate's workflow ad hoc, with no rule governing when it
+should run — the default in practice had become "render immediately
+after drafting," which conflicts with "Human review before anything
+external": a PDF is harder to review/edit than markdown, so generating
+one before approval works against the review step rather than
+supporting it.
+Expected effect: Future tailored CV/cover letter work shares the .md
+draft first and only produces a PDF once the candidate confirms it's
+ready, avoiding wasted renders and keeping the editable source, not a
+PDF, as the thing under active review.
+
+## 2026-07-17 — Added a "Commit cadence" rule to rules/general.md
+
+Triggered by: a direct maintainer request in a development session (not
+a prior observation) — the candidate found per-artifact commits during
+execution sessions too slow and asked for commits to be batched, at
+minimum to once per coherent unit of work (e.g., once a vacancy is
+wrapped up), with an actual submission always triggering a commit
+regardless of other batching.
+Change made: [rules/general.md](../rules/general.md) gained a "Commit
+cadence" section, placed directly after "Version control and history"
+(before "Tooling note: bash vs. direct file tools"). It sharpens the
+existing "natural checkpoints" language: the checkpoint is a coherent
+unit of work, not each individual edit; an actual submission is always
+its own checkpoint; and an early-ending unit of work (e.g., a vacancy
+found already filled before tailoring starts) can still be folded into
+one commit rather than committed separately. It's explicit that this
+changes commit frequency, not whether commits happen.
+Reasoning: "Version control and history" already named natural
+checkpoints as the commit trigger, but didn't say how large a
+checkpoint should be, so the default in practice had drifted to
+committing after nearly every artifact edit — correct per the letter
+of the existing rule, but slower than the candidate wanted and not
+what "natural checkpoint" was meant to convey.
+Expected effect: Execution sessions commit noticeably less often —
+around once per vacancy/unit of work, plus always on confirmed
+submission — without losing the underlying history-preservation intent
+of the original rule.
+
 ## 2026-07-15 — Made /input the mandatory first stop for facts surfaced mid-session
 
 Triggered by: [journal/observations.md](observations.md), 2026-07-15 —
