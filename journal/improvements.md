@@ -20,6 +20,36 @@ Expected effect: <what should be different going forward>
 
 ## Entries
 
+## 2026-07-17 — Required working-tree/HEAD parity after a manual git-plumbing commit
+
+Triggered by: [journal/observations.md](observations.md),
+2026-07-17 — the "safe-commit" git-plumbing workaround (`hash-object`/
+`write-tree`/`commit-tree`/ref-move, adopted to route around this
+mount's `unlink()` failures) silently desynced the working tree from
+git HEAD across five files: the plumbing pattern only writes git's
+object database and the ref pointer, never the checked-out file, so
+later reads saw stale content while `git show HEAD:<path>` showed the
+new content. The pattern's own verification masked it by diffing HEAD
+against the same temp file used to build the blob.
+Change made: [rules/general.md](../rules/general.md)'s "Tooling note:
+bash vs. direct file tools" section gained a paragraph covering the
+manual-plumbing commit case: after building such a commit, copy the
+exact blob content over the real working-tree file, and verify parity
+with `diff <(git show HEAD:<path>) <path>` against the actual file —
+never the temp file, which always passes even when the real file is
+stale.
+Reasoning: The existing "Tooling note" already covered content
+diverging between the shell's view and what's actually true, but its
+wording ("reads a file, transforms it, and writes it back") assumed a
+workaround that writes to the file; the plumbing pattern never writes
+to the file at all, only to git's object database, so it fell outside
+the rule's plain reading. Naming the pattern explicitly closes that
+gap.
+Expected effect: A manual-plumbing commit is followed by a
+working-tree copy-back and a real-file parity check, so the working
+tree can't silently drift from HEAD after a commit built this way, and
+the verification step can no longer pass on a stale file.
+
 ## 2026-07-17 — Formalized "clickable contact links" into skills/cv-tailoring.md (had recurred)
 
 Triggered by: a direct candidate question in an execution session ("We

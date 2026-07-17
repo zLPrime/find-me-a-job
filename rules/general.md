@@ -178,6 +178,25 @@ in doubt, read and write through the direct file tools, and treat the
 shell as advisory (e.g., for `grep`-style searching) rather than
 authoritative.
 
+If this mount's `unlink()` failures force a commit to be built via
+manual git plumbing (`git hash-object -w`, `write-tree`, `commit-tree`,
+then moving the branch ref) instead of an ordinary `git add`/`git
+commit`, remember that this pattern only writes to git's object
+database and the ref pointer — it never writes the edited content back
+into the checked-out working-tree file. A normal `git commit` doesn't
+need that step because the edit already happened in the file in place;
+a plumbing commit built from a temp file does not. So:
+
+- After building the commit, copy the exact content used for the new
+  blob over the real working-tree file, so the working tree matches the
+  new HEAD. Skipping this leaves the file stale — later reads see old
+  content while `git show HEAD:<path>` shows the new content, and the
+  divergence is silent.
+- Verify parity against the **actual working-tree file**, never the
+  temp file used to build the blob: `diff <(git show HEAD:<path>)
+  <path>`. Diffing HEAD against that same temp file always passes even
+  when the real file is stale, so it proves nothing.
+
 ## Source liveness
 
 For any artifact built from an external listing (a vacancy, primarily),

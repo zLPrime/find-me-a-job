@@ -67,6 +67,13 @@ needs a development-session pass to update rules/general.md, with a
 matching journal/improvements.md entry, since this execution session
 must not commit to the playbook repo.
 
+**Resolved (2026-07-17):** formalized in a development session —
+rules/general.md's "Tooling note: bash vs. direct file tools" now
+requires copying the blob content over the real working-tree file
+after a manual-plumbing commit, and verifying with `diff <(git show
+HEAD:<path>) <path>` against the actual file rather than the temp
+file. See [journal/improvements.md](improvements.md), 2026-07-17.
+
 ## 2026-07-15 — A new candidate fact was about to be patched directly into the profile, bypassing /input
 
 Observed by: orchestrator
