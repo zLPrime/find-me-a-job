@@ -20,6 +20,53 @@ Expected effect: <what should be different going forward>
 
 ## Entries
 
+## 2026-08-11 — Documented the bulk job-board sweep as an alternate path, and promoted its field-level rules into a skill
+
+Triggered by: [journal/observations.md](observations.md), 2026-08-11 —
+the candidate's recurring bulk-sweep workflow (direct browsing,
+lightweight fit judgment, real-form pre-fill via a browser session) had
+never been written into the playbook, and its field-level rules lived
+only in per-session memory, one of which (1-click Apply handling) had
+gone stale by the time it was written down.
+Change made: [docs/workflow.md](../docs/workflow.md) gained an
+"Alternate path: bulk job-board sweep" section describing the loop
+end-to-end (trigger → direct browse → lightweight triage → determine
+real form vs. 1-click → pre-fill or set aside → record as draft →
+auto-proceed → candidate submits/process records → reconcile at the
+end of a sweep), framed explicitly as trading the staged pipeline's
+evaluation/matching rigor for speed, and noting a vacancy handled this
+way can still graduate into the staged pipeline later. New
+[skills/bulk-application-fill.md](../skills/bulk-application-fill.md)
+captures the field-level rules this path depends on: always fill a
+LinkedIn field, match the form's own UI language, ground per-skill form
+answers in the candidate profile (with an explicit non-claim rather
+than an invented figure for unconfirmed skills), leave complex
+multi-field forms for the candidate, fold "why this fits" framing into
+the CV Summary when there's no cover-letter field, never touch consent
+checkboxes or the submit control, and — the corrected rule — never
+click a genuine 1-click Apply button on the candidate's behalf; set it
+aside instead. Board- and ATS-specific detail (which platforms this
+candidate's search touches, and quirks specific to each — e.g. a
+Greenhouse react-select click-not-type behavior, Traffit's widely
+varying form scope) was deliberately kept out of the shared skill and
+recorded instead in
+[work/jakub-charabet/job-board-notes.md](../work/jakub-charabet/job-board-notes.md),
+per the candidate's request to separate general rules from site- or
+candidate-specific detail — the skill only notes that such detail
+exists and where to find it.
+Reasoning: This mirrors the exact lesson already recorded for the
+clickable-CV-links fix below (2026-07-17): a rule that only lives in
+private, cross-session memory isn't durable the way a playbook
+document is, and the fact that the 1-click Apply rule had drifted from
+the candidate's actual current preference by the time this session
+tried to document it is direct evidence of that gap doing damage in
+practice, not just a theoretical risk.
+Expected effect: A future session running a bulk job-board sweep — with
+or without this specific memory intact — has a documented path to
+follow and a single shared place for its field-level rules, so the
+1-click-handling mistake (and similar staleness) shouldn't recur
+silently.
+
 ## 2026-07-17 — Required working-tree/HEAD parity after a manual git-plumbing commit
 
 Triggered by: [journal/observations.md](observations.md),

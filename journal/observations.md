@@ -21,6 +21,52 @@ Suggested follow-up: <optional — a concrete idea, or "needs discussion">
 
 ## Entries
 
+## 2026-08-11 — Bulk job-board sweep workflow recurred repeatedly but was never documented in the playbook
+
+Observed by: orchestrator (execution session)
+Context: A long-running session where the candidate directed a bulk
+sweep of justjoin.it's .NET/Remote listings — reviewing each posting,
+determining whether "Apply" opened a real external form (Traffit,
+Greenhouse, Teamtailor, Recruitify, or a company's own site) versus a
+genuine 1-click widget, pre-filling the real forms directly via a
+Claude-in-Chrome browser session, and recording each as a vacancy
+artifact. At the end, the candidate asked to analyze the conversation
+and update "the runbook" to summarize the workflow.
+Observation: This entire path — company/vacancy discovery via direct
+browsing, fit judged directly against candidate-profile.md, no
+employer-evaluation-agent or matching-agent scoring, no tailored CV per
+posting, no formal application package — never touches the staged
+pipeline in [docs/workflow.md](../docs/workflow.md). Yet it's not a
+one-off: dozens of already-applied vacancy files across this repo
+carry the same disclaimer ("Not run through the formal matching-agent
+decision process — part of a candidate-directed bulk browse/rank/
+pre-fill request"), meaning the candidate has been using this as a
+standing second workflow for a while. The specific field-level rules
+that make it work (always fill a LinkedIn field, match the form's own
+UI language, leave complex multi-field forms for the candidate, ground
+per-skill form answers in the profile the same way as CV claims, fold
+"why this fits" into the CV Summary when there's no cover-letter
+field, a Greenhouse react-select quirk that needs a click rather than
+typed text) existed only as private cross-session memory notes, not in
+the shared playbook — the same structural gap already named once
+before for clickable CV links (see the 2026-07-17 entry below on this
+same page, and its
+[journal/improvements.md](improvements.md) counterpart). One rule
+(1-click Apply: use it directly) was actively wrong by this session's
+end — the candidate corrected it to "set it aside, let me click it
+later" once the workflow was being written down explicitly, suggesting
+that writing informal practice down surfaces stale guidance that
+would otherwise keep being silently followed.
+Possible cause: docs/workflow.md documents only the staged pipeline;
+no playbook document ever anticipated a candidate-driven, browser-only
+sweep as a legitimate alternate path, so its rules had nowhere durable
+to live except per-session memory.
+Suggested follow-up: Document the alternate path in
+docs/workflow.md and promote the field-level rules into a dedicated
+skill so they stop depending on any one session's memory. Tracked as a
+same-day improvement — see
+[journal/improvements.md](improvements.md), 2026-08-11.
+
 ## 2026-07-17 — "Safe-commit" git-plumbing workaround silently desynced the working tree from git HEAD
 
 Observed by: orchestrator (execution session)
