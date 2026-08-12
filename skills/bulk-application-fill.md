@@ -157,21 +157,31 @@ you're in it.
     don't register a typed value). Report against the actual browser
     state, not against what the artifact claims — a false "it's
     pre-filled" is worse than an honest "I couldn't fill it," because the
-    candidate acts on it without checking.
+    candidate acts on it without checking. This verification is **one
+    confirmation of the finished form's state** — read the assembled form
+    back once, before hand-off — not a re-check after every individual
+    field; confirming the whole form at the end is enough, and reading it
+    back as structured field data is both faster and a truer check than
+    a per-field visual pass.
 
-## Known Form Quirks
+## Known Form Quirks and Tool-Driving Notes
 
 Custom form widgets vary in how they actually commit a value — for
 example, some dropdown-style components don't register a selection
 just from typed text and need the rendered option clicked directly, or
 a form's real extent only becomes clear after scrolling to its end.
-These behaviors are properties of the specific ATS or platform a given
-employer happens to use, not of this process, so they're recorded
-per-candidate under `work/<candidate>/` (see
-[work/README.md](../work/README.md)) as they're discovered, rather
-than catalogued here — this skill stays applicable to any board or
-platform. Check that candidate's notes before assuming a form behaves
-like the last one.
+The same is true of *how the tools are driven* for speed — which
+operations can be batched, which reads are faster or more reliable than
+others, and how results are transferred back. Both kinds of detail are
+properties of the specific ATS, platform, or tool surface a given run
+happens to use, not of this process, so they're recorded per-candidate
+under `work/<candidate>/` (see [work/README.md](../work/README.md)) as
+they're discovered, rather than catalogued here — this skill stays
+applicable to any board, platform, or toolset. Check that candidate's
+notes before assuming a form behaves, or a tool performs, like the last
+one; working efficiently (batching independent steps, avoiding redundant
+verification passes) is expected, but never at the cost of the
+verify-before-report guarantee in step 12.
 
 ## Quality Criteria
 

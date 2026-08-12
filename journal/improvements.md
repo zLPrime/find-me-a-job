@@ -20,6 +20,48 @@ Expected effect: <what should be different going forward>
 
 ## Entries
 
+## 2026-08-12 — Clarified the verify step's granularity and made the per-candidate notes the home for tool-driving/efficiency detail
+
+Triggered by: [journal/observations.md](observations.md), 2026-08-12 —
+"A bulk run's time went mostly to per-field tool round trips; the verify
+rule risked being read as per-field." A performance report on a 10-form
+bulk run, with a maintainer request to speed up the sweep without
+sacrificing accuracy.
+Change made:
+- [skills/bulk-application-fill.md](../skills/bulk-application-fill.md):
+  step 12 now states the verification is **one confirmation of the
+  finished form's state** (read the assembled form back once before
+  hand-off), not a re-check after every field — and notes a structured
+  read-back is both faster and a truer check than a per-field visual
+  pass. The "Known Form Quirks" section was broadened to "Known Form
+  Quirks and Tool-Driving Notes": it now explicitly houses *how the tools
+  are driven for speed* (batching, faster/more-reliable reads, transfer
+  method) alongside widget quirks, all recorded per-candidate under
+  `work/<candidate>/`, with an explicit reminder that efficiency never
+  overrides the step-12 guarantee. Per Operating Principle 2, no tool
+  names were added to the shared skill.
+- [work/jakub-charabet/job-board-notes.md](../work/jakub-charabet/job-board-notes.md)
+  (candidate repo, committed separately): added a "Driving the tools
+  efficiently" section (batch independent field-fills/reads into one
+  call; prefer structured reads over screenshots, reserving a full
+  screenshot for the final confirmation; transfer via the file tools
+  per-file, not a shell base64 blob) and two ATS-interaction facts
+  (native `<select>` needs a set-value call, not coordinate clicks —
+  correcting the stale "no quirks" note on DCG; a React-controlled-input
+  platform needs screenshot-before-click + triple-click-select-all).
+Reasoning: The speed lived almost entirely in tool mechanics, which
+Principle 2 keeps out of the playbook, so the substantive fixes go to the
+candidate's notes where such detail already lives. The only playbook-
+level defect was step 12's silence on granularity, which invited an
+expensive per-field reading of a rule that only requires the finished
+state be confirmed once. Fixing the wording captures the speed win at the
+process level without weakening the guarantee.
+Expected effect: A future bulk run has the tool-driving shortcuts and ATS
+quirks on record instead of rediscovering them, and reads step 12 as a
+single final confirmation — cutting the per-field screenshot cost that
+dominated this run — while re-grounding and verify-before-report stay
+fully intact.
+
 ## 2026-08-12 — Captured the application-form URL as a first-class field and the strongest dedup key
 
 Triggered by: [journal/observations.md](observations.md), 2026-08-12 —

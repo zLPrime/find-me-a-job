@@ -21,6 +21,47 @@ Suggested follow-up: <optional — a concrete idea, or "needs discussion">
 
 ## Entries
 
+## 2026-08-12 — A bulk run's time went mostly to per-field tool round trips; the verify rule risked being read as per-field
+
+Observed by: orchestrator (development session, from a performance
+report on a 10-form bulk run, with a maintainer request to speed up the
+sweep while keeping accuracy first)
+Context: An agent's own stage-by-stage report of a bulk sweep: diagnosis
+and re-grounding were cheap and necessary; form-filling dominated the
+cost, and the write-back step wasted time on avoidable transfer
+mechanics.
+Observation: The big time sinks were mostly *tool-driving* inefficiency,
+not process defects — filling one field per tool call instead of
+batching independent fields, screenshotting to confirm after every field
+instead of reading the form back once, and transferring results to the
+candidate's device via a shell base64 encode/decode round trip (with a
+first attempt sending all files as one ~40KB blob that truncated). Two
+ATS-interaction facts also cost trial-and-error time: native `<select>`
+dropdowns don't respond to coordinate clicks (need a set-value call), and
+one platform's React-controlled inputs needed a screenshot-before-click +
+triple-click-select-all pattern. Per Operating Principle 2, none of that
+tool/mechanics detail belongs in the shared playbook — it's exactly the
+"how it's executed" the playbook keeps out — so it belongs in the
+candidate's job-board-notes.md. The one genuinely playbook-level risk:
+the verify-before-report step added earlier the same day could be read as
+"screenshot after every field," which is both slow and not what it
+requires — the guarantee is that the *finished* form's values are
+confirmed present before hand-off, i.e. one final confirmation, ideally a
+structured read-back (faster *and* a truer check than eyeballing).
+Possible cause: the tool-mechanics learnings had no recorded home for
+this candidate yet, so each run rediscovered them; and step 12's wording
+didn't state the granularity of the required check, leaving "verify" open
+to an expensive per-field reading.
+Suggested follow-up: Record the efficiency mechanics and the two ATS
+quirks in work/jakub-charabet/job-board-notes.md (candidate repo);
+clarify in skills/bulk-application-fill.md that verification is one
+final-state confirmation, not per-field, and that the per-candidate notes
+section also houses tool-driving/efficiency detail. Actioned same day —
+see [journal/improvements.md](improvements.md), 2026-08-12. The
+accuracy-preserving steps (re-grounding from artifacts before refilling;
+verify-before-report itself) were deliberately left intact — only the
+*cost* of verification was clarified, not the requirement.
+
 ## 2026-08-12 — Vacancy artifacts recorded only the listing URL, discarding the application-form URL — the strongest dedup key
 
 Observed by: orchestrator (development session, prompted by a maintainer
