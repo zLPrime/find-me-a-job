@@ -157,20 +157,40 @@ candidate-specific detail, not playbook content.
    rather than routing through vacancy-discovery-agent's more formal
    capture. See [rules/general.md](../rules/general.md)'s "Source
    liveness" section — a non-JS fetch is never sufficient here.
-2. **Lightweight triage per posting.** For each listing: check whether
-   it's a distinct requisition from an already-tracked employer (same
-   employer, different URL slug or hash — this has recurred and been
-   missed before), and judge fit directly against the [candidate
+2. **Lightweight triage per posting.** For each listing, first run two
+   distinct checks — don't conflate them:
+   - *Is this exact requisition already tracked?* The same posting
+     recurs under a different board URL, slug, or hash, or resurfaces
+     through a job board's "similar offers" carousel — this has been
+     missed before. Check the posting against existing vacancy artifacts
+     via the [deduplication](../skills/deduplication.md) skill *before*
+     creating anything (including the checkpoint stub in step 5); if it's
+     already tracked, update that artifact instead of opening a second
+     one. This is an initial check on the listing; the strongest key —
+     the application-form URL — only becomes known once Apply is resolved
+     (step 3), so re-run the check against it then.
+   - *Is this employer already tracked?* A distinct opening at an
+     already-tracked employer is kept as its own vacancy, clearly
+     distinguished from the employer's other requisitions — same
+     employer is not the same posting.
+
+   Then judge fit directly against the [candidate
    profile](../templates/candidate-profile.md) — skipping
    employer-evaluation-agent and matching-agent's formal scoring. Hard
    blockers (a residency requirement, an unusual on-call commitment, an
    unconfirmed skill gate) are flagged inline on the vacancy artifact
    rather than escalated through decision-log formality.
-3. **Determine the real application path.** Click Apply and confirm
-   whether it opens a real external application form (hosted by
-   whatever ATS or company site the employer uses) or a genuine
-   1-click widget — record this explicitly on the artifact, since it
-   has been misjudged in both directions before.
+3. **Determine the real application path — and record the form URL.**
+   Click Apply and confirm whether it opens a real external application
+   form (hosted by whatever ATS or company site the employer uses) or a
+   genuine 1-click widget — record this explicitly on the artifact, since
+   it has been misjudged in both directions before. Capture the resolved
+   application-form URL in the artifact's Links block (see
+   [templates/vacancy.md](../templates/vacancy.md)); it's often the only
+   stable identifier when the listing is a thin redirect. Now that it's
+   known, re-run the requisition dedup check (step 2) against it — the
+   form URL is the strongest key, so a match here catches a duplicate the
+   listing-level check missed.
    - **Real form:** proceed to pre-fill (next step).
    - **Genuine 1-click widget:** do not click it. A true 1-click flow
      submits instantly with no review step, unlike a pre-filled form
@@ -188,13 +208,22 @@ candidate-specific detail, not playbook content.
    GDPR/consent checkboxes and the final submit button are always left
    untouched, per "Human review before anything external" in
    [rules/general.md](../rules/general.md).
-5. **Record as draft.** The vacancy artifact gets `Status: draft
-   (pre-filled, awaiting candidate review — not submitted)`, documenting
-   what was filled, what was deliberately left blank and why, and any
-   open questions for the candidate to weigh.
+5. **Record as draft — as you go, to disk.** The vacancy artifact gets
+   `Status: draft (pre-filled, awaiting candidate review — not
+   submitted)`, documenting what was filled, what was deliberately left
+   blank and why, and any open questions for the candidate to weigh.
+   Write it *as each posting is handled*, before moving to the next — a
+   browser tab is never the sole record of a posting's existence or
+   state. A posting gets at least a stub artifact (URL, employer,
+   `Status: draft`) the moment it's triaged, updated in place as the
+   pre-fill proceeds, so a lost browser session can be rebuilt from disk
+   rather than starting over.
 6. **Auto-proceed.** Move to the next posting in the batch without
    waiting for an explicit "next" — surface a running list of drafts and
-   flag decisions inline rather than blocking on confirmation.
+   flag decisions inline rather than blocking on confirmation. Only
+   advance once the current posting is checkpointed to disk (step 5), so
+   a lost browser session costs at most the posting in hand, not the
+   whole sweep.
 7. **Candidate submits, the process records.** When the candidate
    reports a posting sent — sometimes with a correction, like a revised
    rate — log any new fact to `input/notes.md` first (see

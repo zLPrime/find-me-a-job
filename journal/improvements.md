@@ -20,6 +20,178 @@ Expected effect: <what should be different going forward>
 
 ## Entries
 
+## 2026-08-12 — Captured the application-form URL as a first-class field and the strongest dedup key
+
+Triggered by: [journal/observations.md](observations.md), 2026-08-12 —
+"Vacancy artifacts recorded only the listing URL, discarding the
+application-form URL — the strongest dedup key." A single free-text
+`Source:` field captured only the discovery listing; the resolved Apply
+target (often a different ATS domain, and sometimes a thin-redirect
+listing's only stable identifier) was seen during the bulk sweep and
+thrown away.
+Change made:
+- [templates/vacancy.md](../templates/vacancy.md): replaced the single
+  `Source:` header line with a structured **Links** block — listing URL,
+  application-form URL (the resolved Apply target when it differs, noted
+  as the primary dedup key and the identifier to record when a listing is
+  a thin redirect), and an optional employer canonical posting.
+- [skills/bulk-application-fill.md](../skills/bulk-application-fill.md):
+  step 2 now records the resolved application-form URL in the Links
+  block; step 1's dedup check calls out the form URL as the strongest key
+  and says to re-check against it once resolved.
+- [skills/deduplication.md](../skills/deduplication.md): added "Same
+  application-form URL" as the first (strongest) matching heuristic —
+  same form URL ⇒ same requisition, no fuzzy comparison — above the
+  existing locator/employer/name-variance cases.
+- [docs/workflow.md](../docs/workflow.md): the alternate path's triage
+  step 2 now notes its dedup check is an initial listing-level pass and
+  the form-URL key isn't known until Apply is resolved; step 3 records
+  the form URL in the Links block and re-runs the dedup check against it.
+Reasoning: The application-form URL is the one identifier that settles
+requisition identity deterministically, and it's exactly what the bulk
+sweep already surfaces when it resolves the Apply target — but nothing
+captured it, so the dedup work landed earlier the same day was left
+matching on softer signals. This completes that work: give the URL a
+home in the artifact, capture it at the step that already resolves it,
+and make it the top dedup key. The check is deliberately two-stage
+(listing-level at triage, form-URL once Apply resolves) because the form
+URL isn't knowable until the Apply flow is opened.
+Expected effect: Every bulk-sweep vacancy records both its listing and
+its application-form URL; duplicates that share a form URL but differ in
+listing/board/title are caught deterministically; and a thin-redirect
+listing that exposes only the final form link still has a stable
+identifier on file.
+
+## 2026-08-12 — Made the live pre-filled form a protected, verified deliverable — its tab must stay open, and the fill must be confirmed before it's reported
+
+Triggered by: [journal/observations.md](observations.md), 2026-08-12 —
+"Agent reported forms pre-filled after closing their tabs; the pre-fill
+was gone and the claim was false." The agent closed three form tabs
+after saving their records and reported the postings ready; the
+pre-filled forms were unrecoverable and the claim was untrue.
+Change made: [skills/bulk-application-fill.md](../skills/bulk-application-fill.md):
+- Expected Outputs: the "form left mid-review" bullet now says a
+  **live, still-open** tab, and spells out that the form is a separate
+  deliverable from the vacancy artifact — the artifact records *what*
+  was filled, but the pre-filled form exists only while its tab is open,
+  cannot be rebuilt from the artifact, and is destroyed by closing the
+  tab.
+- Step 11 (checkpoint): added that the record is **not** a substitute
+  for the live form, that a pre-filled form's tab must never be closed,
+  that checkpointing the record is not permission to close it, and that
+  "move on" means opening the next posting in a new tab — not closing the
+  filled ones.
+- New step 12: "Verify in the browser before reporting a posting
+  pre-filled" — never claim a form was filled unless the live browser
+  was just checked (fields hold the values, tab still open); a saved
+  record is not evidence; report against browser state, not the
+  artifact; a false "it's pre-filled" is worse than an honest "I
+  couldn't."
+- Quality Criteria: added that every pre-filled form is still open in
+  its own live tab at hand-off (no tab closed after filling; the
+  artifact is never a stand-in), and that a posting is reported
+  pre-filled only after the live form is confirmed filled and open.
+Reasoning: The 2026-08-12 checkpoint fix correctly made the on-disk
+artifact the durable record of *progress*, but its framing ("a browser
+tab is not a record") was over-generalized into "the record is the
+deliverable, so the tab can go." A pre-filled form is unreconstructable
+browser-only state, so the record and the live form are two distinct,
+both-required deliverables — and the skill never said so, nor required
+the fill to be verified before it was reported. Naming the live form as
+protected and adding a browser-state verification step closes both the
+lost-work and the false-report failure at once.
+Expected effect: A bulk sweep leaves every pre-filled form open in its
+own tab for the candidate, never closes a filled tab on the strength of
+a saved record, and only reports a posting pre-filled after confirming
+the live form actually holds the values — so "I pre-filled them" can no
+longer be true on disk and false in the browser.
+
+## 2026-08-12 — Attached deduplication to the bulk sweep and gave it a concrete matching heuristic
+
+Triggered by: [journal/observations.md](observations.md), 2026-08-12 —
+"Deduplication was effectively absent from the bulk sweep, and its one
+inline check was mis-scoped." The sweep bypasses the discovery agents
+that are the only callers of the deduplication skill, the skill an
+operator follows during the sweep never mentioned dedup, the dedup skill
+didn't know the sweep existed, and the one inline check conflated
+"employer already tracked" with "requisition already tracked."
+Change made:
+- [skills/bulk-application-fill.md](../skills/bulk-application-fill.md):
+  added a new Procedure step 1, "Deduplicate before creating anything
+  for this posting" — run the deduplication skill against existing
+  vacancy artifacts, matched on the *requisition* (not just the
+  employer), *before* the form is opened or the checkpoint stub (now
+  step 11) is written; renumbered the rest. Added the existing artifact
+  set to Required Inputs and a "no duplicate because of a different
+  URL/slug/similar-offers link" Quality Criterion. This also fixes an
+  ordering risk introduced by the 2026-08-12 checkpoint change (stub
+  written "the moment a posting is triaged"): dedup now gates that write
+  so the sweep can't mint duplicate stubs.
+- [docs/workflow.md](../docs/workflow.md): split the alternate path's
+  triage step 2 into two explicit, separate checks — "is this exact
+  requisition already tracked?" (via the deduplication skill, before
+  creating anything including the step-5 stub) and "is this employer
+  already tracked?" — instead of the single conflated sentence.
+- [skills/deduplication.md](../skills/deduplication.md): added the bulk
+  sweep to "When to Invoke" (per posting, before any artifact/stub,
+  noting the sweep bypasses the agents that normally call this skill);
+  added a "Matching heuristics" section promoting the now-observed
+  patterns (same requisition/different locator; same employer/different
+  opening; employer name-variance normalization) out of "Future
+  Improvements," which was still deferring heuristics as unobserved.
+Reasoning: Dedup was one of the responsibilities the discovery agents
+carried, and the bulk sweep was documented as a path that skips those
+agents (2026-08-11) without re-attaching dedup to the sweep's own skill
+and steps — so it survived only as one mis-scoped inline sentence that
+its own text admitted "has recurred and been missed before." Making the
+check an explicit first per-posting step, teaching the dedup skill about
+the sweep, and writing down the concrete pattern closes the gap the same
+way the checkpoint and 1-click fixes did: move the rule out of implicit
+practice into the shared, checked documents.
+Expected effect: A bulk sweep runs an explicit requisition-level dedup
+check on each posting before creating any artifact for it, so the same
+posting reached via a different URL, slug, or "similar offers" link
+updates the existing artifact instead of spawning a duplicate — and the
+check no longer depends on remembering a single sentence buried in a
+triage step.
+
+## 2026-08-12 — Required a per-posting durability checkpoint in the bulk sweep so a lost browser can't erase progress
+
+Triggered by: [journal/observations.md](observations.md), 2026-08-11 —
+"A bulk sweep lost its browser tabs and, with them, all in-session
+progress." Per-posting artifact writes were being deferred toward the
+end of the sweep, so the browser tabs were the only record of which
+postings had been found and how far each had gotten; losing the tabs
+lost all of it.
+Change made:
+- [skills/bulk-application-fill.md](../skills/bulk-application-fill.md):
+  replaced the old "Move on without waiting for 'next'" procedure step
+  with "Checkpoint each posting to disk before moving on" — the on-disk
+  vacancy artifact is the single source of truth for a posting's
+  existence and progress, written as each posting is triaged/pre-filled
+  (at minimum a stub with URL, employer, `Status: draft`) and updated in
+  place, before the next tab is opened; auto-proceed now follows that
+  checkpoint. Added a matching Quality Criterion (every posting touched
+  has an on-disk artifact before the next is opened; tabs are never the
+  sole record). The step explicitly distinguishes this durability
+  checkpoint (persist the file) from git "Commit cadence" (batched per
+  unit of work) — the disk write, not the commit, is what survives a
+  browser crash.
+- [docs/workflow.md](../docs/workflow.md): the alternate path's "Record
+  as draft" step now says "as you go, to disk" and requires the stub-
+  then-update-in-place write before moving on; "Auto-proceed" now only
+  advances once the current posting is checkpointed to disk, so a lost
+  session costs at most the posting in hand.
+Reasoning: The workflow and skill already produced a per-posting
+artifact but never fixed *when* it had to be written relative to
+advancing, so batching (correct for git commits) leaked into the disk
+write and left the browser as the only durable-feeling record — which it
+isn't. Naming the checkpoint and separating it from commit cadence
+closes that gap without contradicting the existing commit-batching rule.
+Expected effect: A browser tab loss mid-sweep costs at most the single
+posting in hand; everything earlier is already on disk and the sweep can
+be rebuilt from the vacancy artifacts rather than restarted.
+
 ## 2026-08-11 — Documented the bulk job-board sweep as an alternate path, and promoted its field-level rules into a skill
 
 Triggered by: [journal/observations.md](observations.md), 2026-08-11 —

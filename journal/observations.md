@@ -21,6 +21,215 @@ Suggested follow-up: <optional — a concrete idea, or "needs discussion">
 
 ## Entries
 
+## 2026-08-12 — Vacancy artifacts recorded only the listing URL, discarding the application-form URL — the strongest dedup key
+
+Observed by: orchestrator (development session, prompted by a maintainer
+question: does the process track all vacancy URLs? Sometimes the listing
+only exposes a link to the final form, which could identify the vacancy)
+Context: Reviewing how URLs are captured, right after wiring
+deduplication into the bulk sweep (same-day entries below).
+Observation: [templates/vacancy.md](../templates/vacancy.md) had a single
+free-text `Source:` field ("where this vacancy was found") plus a
+free-text `Application method:` under logistics. In practice every real
+vacancy artifact records exactly one URL in `Source:` — the board/careers
+listing it was discovered on (e.g. justjoin.it, a Teamtailor listing,
+career.luxoft.com) — and none record the actual target the "Apply" button
+resolves to when it differs, which in the bulk sweep is routinely a
+separate ATS domain. This matters for identity: the application-form URL
+is the single strongest deduplication key — two listings (two boards, an
+aggregator plus the original, a "similar offers" re-surfacing) that
+resolve to the same form URL are provably the same requisition, no fuzzy
+matching needed — and in the case the maintainer named (a listing that is
+a thin redirect exposing only the final form link) it may be the *only*
+stable identifier the posting has. The dedup heuristics added earlier the
+same day matched on employer + role + requirement substance and listing-
+URL variants, but couldn't use the form URL because nothing captured it.
+Possible cause: templates/vacancy.md predates the bulk sweep and assumed
+one "source" URL per vacancy; the bulk flow resolves a distinct Apply
+target at its "determine the real application path" step but was never
+told to record it, so the strongest identity signal was seen and thrown
+away.
+Suggested follow-up: Give the vacancy template a structured Links block
+(listing URL, application-form URL, optional employer canonical posting),
+have the bulk skill capture the resolved form URL when it checks the
+form, and make "same application-form URL ⇒ same requisition" the
+strongest dedup heuristic. Actioned same day — see
+[journal/improvements.md](improvements.md), 2026-08-12.
+
+## 2026-08-12 — Agent reported forms pre-filled after closing their tabs; the pre-fill was gone and the claim was false
+
+Observed by: orchestrator (execution session; caught by the candidate)
+Context: A bulk sweep where three real application forms were, per the
+agent's own account, filled and their vacancy records saved — after
+which the agent **closed all three form tabs** and reported the postings
+as pre-filled and ready for the candidate to review and submit. The
+candidate found none of the forms were actually in a reviewable state.
+The agent acknowledged it: "I closed all three form tabs after saving
+the records, but the actual point of pre-filling is to leave the live
+form open for you to review and submit."
+Observation: Two failures, both traceable to the bulk skill:
+(1) *A pre-filled form is not a checkpointable artifact.* The whole
+deliverable is a live, open browser tab the candidate reviews and
+submits; its filled state exists only in the browser and cannot be
+rebuilt from the saved vacancy artifact, so closing the tab discards the
+pre-fill entirely (re-filling starts from scratch). The skill's Expected
+Outputs did name "a form left mid-review in the browser," but nothing
+warned that the tab must stay open or that the artifact does not stand
+in for it.
+(2) *The completion claim was never verified against the browser.* The
+agent reported the forms filled on the strength of having saved the
+records, not on any check that the live forms held the values and were
+still open — so the report was confidently wrong.
+This is a direct, ironic side effect of the 2026-08-12 checkpoint fix,
+whose framing ("a browser tab is not a record"; "the on-disk artifact
+is the single source of truth for a posting's existence and progress")
+is true for *progress tracking* but was over-generalized into "the saved
+record is the deliverable, so the tab can be closed." The record and the
+live form are two different, both-required deliverables; nothing in the
+skill said so, and the checkpoint wording nudged the wrong way.
+Possible cause: skills/bulk-application-fill.md treated the vacancy
+artifact and the live pre-filled form as if the artifact captured the
+work, when the filled form is unreconstructable browser-only state; and
+the skill had no "verify in the browser before claiming pre-filled"
+step, so a saved record could pass for a filled form.
+Suggested follow-up: In skills/bulk-application-fill.md, state that the
+live form is a separate, non-recoverable deliverable whose tab must
+never be closed (and that checkpointing the record is not permission to
+close it), and add a step requiring the fill to be verified in the live
+browser before it's reported — report against browser state, not the
+saved artifact. Actioned same day — see
+[journal/improvements.md](improvements.md), 2026-08-12.
+
+## 2026-08-12 — Deduplication was effectively absent from the bulk sweep, and its one inline check was mis-scoped
+
+Observed by: orchestrator (development session, prompted by a
+maintainer suspicion that the duplicate check "sometimes doesn't work or
+isn't applied," especially in the bulk flow)
+Context: Inspecting how [skills/deduplication.md](../skills/deduplication.md)
+is wired across the runbook, comparing the staged pipeline against the
+bulk job-board sweep alternate path.
+Observation: In the staged pipeline, dedup is wired into
+[agents/company-discovery-agent.md](../agents/company-discovery-agent.md)
+and [agents/vacancy-discovery-agent.md](../agents/vacancy-discovery-agent.md)
+in several redundant places each (a responsibility, a Skill Used, an
+input of "existing artifacts to avoid duplication," a success criterion,
+and a named failure mode). The bulk sweep had almost none of that:
+- The sweep deliberately bypasses both discovery agents
+  (docs/workflow.md's alternate path, step 0–1), and those agents are
+  the *only* callers of the deduplication skill — so bypassing them
+  dropped the entire dedup wiring.
+- [skills/bulk-application-fill.md](../skills/bulk-application-fill.md),
+  the skill an operator actually follows during the form-filling loop,
+  never referenced the deduplication skill or included any "check for an
+  existing artifact first" step.
+- skills/deduplication.md's own "When to Invoke" was framed entirely
+  around "after employer or vacancy discovery" — it didn't know the bulk
+  sweep existed. Neither document pointed at the other.
+- The single dedup instruction that did exist in the bulk flow
+  (docs/workflow.md, triage step 2) was mis-scoped: it checked for "a
+  distinct requisition from an already-tracked *employer* (same
+  employer, different URL slug or hash)," conflating "is this employer
+  tracked?" with "is this exact requisition tracked?" The duplicate that
+  actually recurs is the same posting reached via a different URL/slug/
+  hash or a "similar offers" carousel — and that step's own text admits
+  it "has recurred and been missed before."
+- skills/deduplication.md still listed "define concrete matching
+  heuristics once real-world duplicate patterns are observed" as a
+  future improvement, even though the pattern (same requisition,
+  different locator) was already observed and written down elsewhere.
+There was also a fresh ordering risk: the 2026-08-11 checkpoint fix
+tells the sweep to write a stub artifact "the moment a posting is
+triaged," so without a dedup check *before* that write, the flow would
+mint duplicate stubs faster than before. (Conversely, the checkpoint fix
+is what makes within-sweep dedup reliable at all — every earlier posting
+is now on disk to match against, not just an open tab.) This is also
+adjacent to the same-day Applications-page audit entry below: that found
+a posting with *no* local record and another with a *stale* one — the
+opposite failure from a duplicate, but the same underlying theme of the
+on-disk artifact set drifting out of sync with reality.
+Possible cause: the bulk sweep was documented (2026-08-11) as a
+speed-over-rigor path that skips the discovery agents, but dedup was one
+of the things those agents carried, and it was never re-attached to the
+sweep's own skill/steps — it survived only as one mis-scoped inline
+sentence.
+Suggested follow-up: Attach dedup explicitly to the bulk flow (a first
+per-posting step in the skill, before the checkpoint stub; split the
+triage check into employer-tracking vs. requisition-duplicate in the
+workflow), teach skills/deduplication.md that the bulk sweep is an
+invocation site, and promote the observed same-requisition pattern into
+a concrete matching heuristic. Actioned same day — see
+[journal/improvements.md](improvements.md), 2026-08-12.
+
+## 2026-08-11 — Applications-page audit found local records that were missing or stale, not just tracking gaps on justjoin.it's side
+
+Observed by: orchestrator (execution session)
+Context: Candidate asked to check justjoin.it's Applications page for
+missed applications, then separately asked whether any applications
+were "not recorded in the work folder." Cross-referenced all 38 live
+Applications-page entries against local vacancy artifacts one by one.
+Observation: Two distinct failure modes surfaced, beyond the
+justjoin.it-side tracking gap already logged in
+[job-board-notes.md](../work/jakub-charabet/job-board-notes.md).
+(1) A vacancy (Shimi ".NET Software Developer") that justjoin.it shows
+as applied 2026-08-04 had **no local record at all** — no vacancy
+artifact, no employer cross-reference, no decision-log entry. (2) A
+different vacancy (N-iX "Lead .NET Engineer") had a local record that
+was actively wrong: marked `expired`/"no application submitted" as of
+2026-07-27, while justjoin.it shows it applied 2026-07-29 — the
+correction never made it back into the artifact. Both are consistent
+with a pattern already named in the 2026-07-17 "safe-commit" entry and
+the entry below this one: this process reliably records what *it*
+does, but has no systematic check that catches submissions the
+candidate makes directly and never explicitly reports back, or
+outcomes (like a "closed" listing quietly reopening) that change after
+a vacancy's last write.
+Possible cause: No step in docs/workflow.md or the bulk-sweep
+alternate path ever re-verifies already-written vacancy artifacts
+against an authoritative external source (like justjoin.it's own
+Applications page) after the fact — recording only happens going
+forward from a decision or a candidate report, never backward via
+audit.
+Suggested follow-up: Consider a periodic (not necessarily every
+session) reconciliation pass — diff justjoin.it's Applications page
+against local vacancy statuses — as a standing checklist item, rather
+than only running one when the candidate happens to ask. Both gaps
+found this session were fixed in place (see job-board-notes.md,
+shimi.md, n-ix.md, and the two decision-log entries dated 2026-08-11).
+
+## 2026-08-11 — A bulk sweep lost its browser tabs and, with them, all in-session progress
+
+Observed by: orchestrator (execution session)
+Context: During a candidate-directed bulk job-board sweep (the alternate
+path in [docs/workflow.md](../docs/workflow.md), field-level rules in
+[skills/bulk-application-fill.md](../skills/bulk-application-fill.md)),
+the browser session's tabs were lost mid-sweep. The progress for that
+sitting was completely gone — the postings discovered, which had been
+triaged, and which forms had been pre-filled all lived only as open
+tabs, so there was nothing on disk to resume from.
+Observation: The alternate path already has a "Record as draft" step
+(workflow step 5) and the skill already produces a per-posting vacancy
+artifact, but neither said *when* that write has to happen relative to
+moving on. In practice the artifact writes were being deferred/batched
+toward the end of the sweep, so the browser tabs were the only record
+of everything not yet written. Losing the tabs therefore lost not just
+the in-flight form values (unavoidable — those live in the browser) but
+the record that a posting had even been found or how far it got, which
+is recoverable if it's on disk. The playbook's "Commit cadence" rule
+points the other way (batch commits per unit of work), which is correct
+for git history but is a different concern from persisting the artifact
+file itself; nothing distinguished "persist the file now" from "commit
+later," so batching leaked into the disk write too.
+Possible cause: docs/workflow.md's alternate path and
+skills/bulk-application-fill.md described *what* to record but not the
+durability requirement — that the on-disk artifact, not the browser
+tab, is the source of truth for a posting's existence and progress, and
+must be written as each posting is handled rather than at the end.
+Suggested follow-up: Require a per-posting durability checkpoint (write
+the artifact, at minimum a stub, before opening the next tab; update it
+in place as the pre-fill proceeds), stated explicitly as distinct from
+git commit cadence. Actioned same day — see
+[journal/improvements.md](improvements.md), 2026-08-12.
+
 ## 2026-08-11 — Bulk job-board sweep workflow recurred repeatedly but was never documented in the playbook
 
 Observed by: orchestrator (execution session)
