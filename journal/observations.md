@@ -21,6 +21,32 @@ Suggested follow-up: <optional — a concrete idea, or "needs discussion">
 
 ## Entries
 
+## 2026-08-28 — Draft messages to people defaulted to English, ignoring the recipient's (and candidate's) language
+
+Observed by: orchestrator (development session, from a candidate report)
+Context: The candidate asked the agent to draft outreach/contact messages
+to people (e.g. a recruiter or contact at a Poland-based employer) and
+found the drafts kept coming back in English, even though the recipient
+is a Polish speaker and the candidate is a native Polish speaker per the
+profile's Languages section.
+Observation: For a message addressed to a specific person, English "reads
+as unnatural" when the candidate could write to them in their own
+language. The playbook had language rules only for posting-bound
+materials — "Vacancy language" in
+[skills/cv-tailoring.md](../skills/cv-tailoring.md) and
+[skills/application-writing.md](../skills/application-writing.md), and the
+form's-own-UI-language rule in
+[skills/bulk-application-fill.md](../skills/bulk-application-fill.md).
+None of these cover a direct message to a person, whose correct language
+signal is the *recipient's* language cross-checked against what the
+candidate actually speaks — so drafting fell back to English.
+Possible cause: A gap in [rules/outputs.md](../rules/outputs.md) (Language
+and tone) — no rule distinguished person-directed messages from
+posting-bound materials, and no skill owns outreach-message drafting.
+Suggested follow-up: Add a Language selection rule that names both cases
+explicitly and, for messages, infers language from the recipient and the
+candidate profile's Languages rather than defaulting to English.
+
 ## 2026-08-12 — A bulk run's time went mostly to per-field tool round trips; the verify rule risked being read as per-field
 
 Observed by: orchestrator (development session, from a performance

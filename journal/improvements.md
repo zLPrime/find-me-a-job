@@ -20,6 +20,46 @@ Expected effect: <what should be different going forward>
 
 ## Entries
 
+## 2026-08-28 — Added a Language selection rule so messages to a person take the recipient's language, not English by default
+
+Triggered by: [journal/observations.md](observations.md), 2026-08-28 —
+"Draft messages to people defaulted to English, ignoring the recipient's
+(and candidate's) language." A candidate report that outreach drafts to a
+Polish-speaking recipient came back in English despite the candidate being
+a native Polish speaker.
+Change made:
+- [rules/outputs.md](../rules/outputs.md): added a "Language selection"
+  subsection under "Language and tone" that names two cases with different
+  signals — (a) materials bound to a posting or form keep the existing
+  posting/form-language rule; (b) a message addressed to a specific person
+  is written in *that person's* language, inferred from concrete evidence
+  (the language they wrote in, then location/nationality/employer country;
+  a name alone is not evidence), then cross-checked against the candidate
+  profile's Languages so the recipient's language is used when the
+  candidate is proficient (native/advanced) and English is only a
+  fallback, stated when used. Contacting a native speaker of a language
+  the candidate also commands, in English, is called out as a defect.
+- [skills/application-writing.md](../skills/application-writing.md): added
+  a "Message to a named person" Style Convention alongside the existing
+  "Vacancy language" bullet, pointing at the new rule, so the
+  person-directed case is visible at the point where prose-to-a-person is
+  drafted (the skill already disclaims sending on the candidate's behalf).
+Reasoning: The existing language rules all keyed off the posting or the
+form UI, which is correct for a CV, cover letter, application answers, or
+form fields — but a message to an actual person has a different natural
+signal (the recipient), and no rule or skill covered it, so drafting
+defaulted to English. The fix lives at the rules level because
+person-directed messages are cross-cutting and not owned by a single
+skill. The rule stays candidate-agnostic (it references the profile's
+Languages generically rather than hardcoding Polish/Russian), per the
+playbook/candidate-data separation.
+Expected effect: Future outreach drafts to a named person are written in
+the recipient's language when the candidate can write it (e.g. Polish to a
+Polish contact, given the candidate's native Polish), with English used
+only as an explicit shared-language fallback and the agent asking when the
+language or proficiency is genuinely unclear — instead of silently
+defaulting to English.
+
 ## 2026-08-12 — Clarified the verify step's granularity and made the per-candidate notes the home for tool-driving/efficiency detail
 
 Triggered by: [journal/observations.md](observations.md), 2026-08-12 —

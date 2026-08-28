@@ -56,6 +56,14 @@ review.
   [skills/cv-tailoring.md](cv-tailoring.md)'s Style Conventions. If the
   posting is bilingual or the target language is unclear, ask the
   candidate rather than guessing.
+- **Message to a named person**: a covering note, email, or LinkedIn/DM
+  message addressed to an actual person (recruiter, hiring manager,
+  referral, networking contact) takes its language from the *recipient*,
+  not the vacancy — per the Language selection rule in
+  [rules/outputs.md](../rules/outputs.md). Contacting someone in English
+  when they and the candidate share a stronger common language (e.g. both
+  native speakers of the recipient's language) reads as unnatural; match
+  the person, and ask if the right language is genuinely unclear.
 
 ## Limitations
 

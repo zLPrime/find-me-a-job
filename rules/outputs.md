@@ -55,6 +55,37 @@ jargon that a candidate would need to look up. Avoid overstated or
 salesy language in candidate-facing materials — confidence should come
 from real, stated facts, not from adjectives.
 
+### Language selection
+
+Pick the language the reader will find most natural; never fall back to
+English out of habit. The right signal depends on what is being written:
+
+- **Materials bound to a posting or form** — a tailored CV, cover
+  letter, application answers, and every field of an application form —
+  are written in the language of the posting (or, for a form, its own UI
+  language), not English by default. See
+  [skills/cv-tailoring.md](../skills/cv-tailoring.md),
+  [skills/application-writing.md](../skills/application-writing.md), and
+  [skills/bulk-application-fill.md](../skills/bulk-application-fill.md).
+  If a posting is bilingual or the target language is unclear, ask rather
+  than guessing.
+- **A message addressed to a specific person** — an email, LinkedIn
+  message, or DM to a recruiter, hiring manager, referral, or networking
+  contact — is written in *that person's* language, not the posting's and
+  not English by default. Infer it from concrete evidence, strongest
+  first: the language the person themselves wrote in (a message or
+  profile being replied to), then their stated location/nationality and
+  the employer's country. A name alone is not evidence of a language.
+  Then cross-check the candidate profile's Languages: write in the
+  recipient's language when the candidate is genuinely proficient in it
+  (a native or advanced language), and fall back to the best language
+  both share — usually English — only when the candidate is not, saying
+  so when you do. Writing to a native speaker of a language the candidate
+  also commands natively (or at an advanced level) in English instead is
+  a defect, not a safe default. If the evidence conflicts, or the
+  candidate's proficiency in the recipient's language is borderline, ask
+  which language to use rather than silently defaulting to English.
+
 ## Reviewability
 
 Every output should be reviewable by the candidate without needing to
