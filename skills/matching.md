@@ -27,6 +27,17 @@ to produce a reasoned, evidence-based judgment of fit — recorded as a
   factors, opposing factors, unknowns, and an explicit confidence level,
   per [rules/decision-making.md](../rules/decision-making.md).
 - An updated match status on the vacancy artifact.
+- A keyword/terminology gap check against the vacancy's named
+  requirements, splitting them three ways: (a) skills/keywords the
+  candidate genuinely has and the CV already surfaces; (b) skills the
+  candidate genuinely has but the profile expresses in different words
+  than the posting — flagged for honest terminology alignment by
+  [cv-tailoring](cv-tailoring.md), so a real match isn't lost to
+  vocabulary; and (c) keywords the candidate does not genuinely have —
+  recorded as opposing factors or unknowns, never as something to insert
+  into the CV to "match the keyword." This makes the honest half of
+  keyword-matching (align wording for skills truly held) explicit while
+  keeping the dishonest half (claim a skill to hit a keyword) out.
 
 ## Quality Criteria
 
@@ -39,6 +50,11 @@ to produce a reasoned, evidence-based judgment of fit — recorded as a
   against their own profile and the vacancy posting.
 - Rejections are just as well-reasoned and recorded as positive matches —
   a rejected vacancy still gets a decision log entry explaining why.
+- The keyword/terminology gap check never blurs the line between "the
+  candidate has this but the CV words it differently" (fixable by honest
+  alignment) and "the candidate doesn't have this" (a real gap): the two
+  are always kept distinct, so terminology alignment can never be misread
+  as license to claim a missing skill.
 
 ## Limitations
 

@@ -20,6 +20,94 @@ Expected effect: <what should be different going forward>
 
 ## Entries
 
+## 2026-09-08 — Turned seven external job-search prompt tips into playbook enhancements, three new skills, and a new agent
+
+Triggered by: [journal/observations.md](observations.md), 2026-09-08 — a
+maintainer-provided set of seven external job-search prompt tips, mapped
+against existing agents and skills, surfaced four implicit-craft gaps and
+three missing capabilities.
+Change made:
+- [skills/cv-tailoring.md](../skills/cv-tailoring.md): added two Style
+  Conventions — "Bullet construction" (lead with a strong action verb, one
+  idea, state the outcome, keep to ~two lines; strength from fact +
+  outcome, not adjectives — a phrasing rule that never licenses a new
+  fact) and "ATS-parseable content and terminology" (literal section
+  headings; expand an acronym once alongside it; align the CV's wording to
+  the *posting's* term for a skill the candidate genuinely holds, while a
+  keyword they lack stays a surfaced gap, not inserted). Extended the
+  Limitations formatting note to distinguish in-scope ATS *content/
+  terminology* from render-time ATS *visual layout*, preserving the
+  existing scope boundary.
+- [skills/matching.md](../skills/matching.md): added a keyword/terminology
+  gap check to Expected Outputs and a matching Quality Criterion — split
+  the vacancy's named requirements into (a) held-and-surfaced, (b)
+  held-but-worded-differently (for honest alignment by cv-tailoring), and
+  (c) genuinely absent (recorded as opposing factors/unknowns, never
+  inserted). This gives the honest half of "match the job description" a
+  procedure while keeping the dishonest half out, and keeps the two
+  strictly distinct.
+- [skills/application-writing.md](../skills/application-writing.md): added
+  a "Human voice — avoid an AI-written tell" Style Convention naming the
+  concrete machine-generated hallmarks to cut (hollow superlatives,
+  throat-clearing openers, boilerplate connectives) and grounding
+  confidence in a stated fact + outcome, cross-referencing
+  rules/outputs.md's "Language and tone."
+- New [skills/role-discovery.md](../skills/role-discovery.md) + new
+  [agents/role-discovery-agent.md](../agents/role-discovery-agent.md): a
+  new upstream capability that generates the *role types* (including
+  adjacent/transferable ones) a candidate is qualified for from the
+  profile alone, ranked with honest, explicitly-hedged demand/response
+  estimates and visible constraint-driven exclusions. It feeds both
+  discovery agents. Wired as an input and a broadened responsibility into
+  [agents/company-discovery-agent.md](../agents/company-discovery-agent.md)
+  and
+  [agents/vacancy-discovery-agent.md](../agents/vacancy-discovery-agent.md)
+  so discovery searches across role types, not just the one title first
+  named.
+- New [skills/outreach-messaging.md](../skills/outreach-messaging.md):
+  concise, person-directed recruiter/contact outreach and follow-up
+  messages (hook-led, reply-seeking, not favor-asking; specific and human;
+  factual; recipient's language). Owned by
+  [agents/application-agent.md](../agents/application-agent.md) (Purpose,
+  a responsibility, and Skills Used extended), which drafts them for the
+  candidate to send — never sending itself.
+- New [skills/search-strategy.md](../skills/search-strategy.md): advisory
+  synthesis over the pipeline — application volume/cadence, customization
+  tiering (choosing the staged pipeline vs. the bulk sweep per
+  opportunity), and follow-up timing, all as adjustable suggestions.
+  Owned by [agents/reporting-agent.md](../agents/reporting-agent.md)
+  (Purpose, a responsibility, and Skills Used extended).
+- [docs/workflow.md](../docs/workflow.md): inserted "Explore fitting role
+  types" as new stage 3 (renumbering the rest, diagram included) between
+  building the profile and discovering employers; noted the matching-stage
+  keyword/terminology gap check; noted the tailoring stage now produces
+  action-verb/ATS-parseable, honestly-aligned content; folded outreach
+  drafting into the application-guidance stage and search-strategy into the
+  reporting stage.
+Reasoning: The tips were a useful external checklist against a playbook
+that had grown around producing and submitting materials for postings a
+candidate already knew to search for. The genuinely-covered tips still
+pointed at craft the playbook left to each agent's discretion, so writing
+them down as conventions closes silent-default gaps the same way the
+2026-07-15 house-style round did. The three missing capabilities were real
+holes at the three edges the pipeline never reached — upstream (what to
+search for), sideways (messaging a person, not a posting), and meta (how
+to pace the search). Each was built to the playbook's own standards: no
+candidate/profession/technology specifics (per
+[docs/operating-principles.md](../docs/operating-principles.md)), every
+new judgment kept honest (hedged estimates with stated basis; terminology
+alignment that can't become a claim of a missing skill; nothing sent on
+the candidate's behalf), and role-discovery given its own agent per the
+single-responsibility principle rather than overloading an existing one.
+Expected effect: A search can start from "what roles fit me?" and widen
+beyond a single title; tailored CVs default to tight, action-led,
+ATS-parseable bullets with honest keyword alignment; matching makes the
+held-vs-absent keyword split explicit; cover letters and outreach read as
+human and specific; and the candidate can get concrete, honest guidance on
+how much to apply, where to spend tailoring effort, and when to follow up —
+none of it at the cost of the factual-accuracy and human-approval
+guarantees.
+
 ## 2026-08-28 — Added a Language selection rule so messages to a person take the recipient's language, not English by default
 
 Triggered by: [journal/observations.md](observations.md), 2026-08-28 —

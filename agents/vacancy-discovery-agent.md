@@ -7,8 +7,10 @@ record them as structured vacancy artifacts.
 
 ## Responsibilities
 
-- Search for open vacancies matching the candidate's stated role and
-  preference criteria.
+- Search for open vacancies matching the candidate's preference criteria
+  across the role types identified by
+  [role-discovery-agent](role-discovery-agent.md) — not only the single
+  title the candidate first named.
 - Record each discovered vacancy using the
   [vacancy template](../templates/vacancy.md) via the
   [vacancy-analysis](../skills/vacancy-analysis.md) skill.
@@ -21,6 +23,10 @@ record them as structured vacancy artifacts.
 ## Inputs
 
 - The candidate profile and stated preferences.
+- The candidate role types identified by
+  [role-discovery-agent](role-discovery-agent.md), which set the range of
+  roles — including adjacent ones — to search for, rather than only the
+  single title the candidate first named.
 - Existing employer artifacts.
 - Existing vacancy artifacts (to avoid duplication).
 

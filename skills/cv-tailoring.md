@@ -103,6 +103,36 @@ profile.
   first one found. (Standing default since 2026-07-17, prompted by a
   case where an outcome had been given by the candidate but never
   actually made it into candidate-profile.md.)
+- **Bullet construction**: write each experience/project bullet to lead
+  with a strong, specific action verb, carry one idea, state its outcome
+  (per the bullet above), and stay tight — roughly two lines or under.
+  Prefer a concrete verb tied to what the candidate actually did over a
+  vague framing ("led," "built," "cut," "migrated" over "responsible for,"
+  "worked on," "helped with"), and don't pad a bullet with adjectives to
+  make it look bigger — the strength comes from the fact and its outcome,
+  not the wording, per [rules/outputs.md](../rules/outputs.md)'s "Language
+  and tone." This is a phrasing/condensing convention only; it never
+  licenses adding a fact, a verb, or an outcome the candidate profile
+  doesn't support.
+- **ATS-parseable content and terminology**: assume the CV may first be
+  read by an applicant-tracking system, not a person, so keep it parseable
+  at the *content* level — use conventional, literal section headings
+  (Summary, Experience, Skills, Education) rather than clever or decorative
+  ones, and the first time an acronym for a genuinely-held skill appears,
+  give both the expanded term and the acronym once (e.g. the full name and
+  its abbreviation) so a keyword search matches either. Where the vacancy
+  names a skill the candidate genuinely has but the profile expresses in
+  different words, align the CV to the *vacancy's* term for it (or state
+  both), so an honest match isn't missed over vocabulary — this is
+  terminology alignment for skills the candidate really holds, never
+  inserting a term for a skill they lack. A keyword the candidate does not
+  genuinely have stays absent and is surfaced as a gap (see
+  [skills/matching.md](matching.md)'s keyword/terminology gap check), not
+  papered into the CV. Visual/layout parseability (avoiding multi-column
+  layouts, text inside images, or graphics an ATS can't read) is a
+  render-time concern governed by [rules/general.md](../rules/general.md)'s
+  "Draft format and PDF rendering," not this content-level skill — but the
+  content chosen here should not assume any layout an ATS would choke on.
 
 ## Limitations
 
@@ -110,7 +140,10 @@ profile.
   background and a vacancy's requirements — it reframes truthfully, it
   does not close real gaps.
 - Formatting/visual design of the CV is out of scope; this skill concerns
-  content selection and framing only.
+  content selection and framing only. ATS-parseable *content and
+  terminology* is in scope (see Style Conventions), but ATS-safe *visual
+  layout* is a render-time concern handled where PDF rendering is governed,
+  not here.
 
 ## Future Improvements
 

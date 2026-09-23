@@ -21,6 +21,75 @@ Suggested follow-up: <optional — a concrete idea, or "needs discussion">
 
 ## Entries
 
+## 2026-09-08 — A set of external job-search prompt tips exposed capability gaps: role exploration, ATS/keyword handling, human cover-letter voice, outreach, and search strategy
+
+Observed by: orchestrator (development session, from a maintainer-provided
+set of seven external job-search "prompt tips")
+Context: The maintainer shared seven widely-circulated job-search prompt
+tips (resume conversion/ATS fixer; job-description keyword matcher; role
+fit finder; bullet-point upgrader; cover-letter personalizer; recruiter
+hook message; application optimizer/strategy) and asked which roles and
+skills they could enhance, to modify or create accordingly, and to verify
+the workflow. Each tip was mapped against the existing agents and skills.
+Observation: Four tips (1, 2, 4, 5) were largely *already* covered by the
+factual-accuracy ethos and existing Style Conventions — but each named a
+concrete craft dimension the playbook had left implicit:
+- No skill mentioned **ATS-parseability** at the content level (literal
+  section headings, spelling out an acronym once), and
+  [skills/cv-tailoring.md](../skills/cv-tailoring.md) explicitly put
+  "formatting" out of scope without distinguishing *content/terminology*
+  parseability (in scope) from *visual layout* parseability (a render-time
+  concern) — leaving ATS content handling in a gap between the two.
+- **Honest keyword matching** had no home. The dishonest version
+  (keyword-stuffing skills the candidate lacks) is well-guarded, but the
+  honest version — aligning the CV's *wording* to the posting's term for a
+  skill the candidate genuinely holds, and surfacing genuinely-absent
+  keywords as gaps rather than papering them in — was written down nowhere,
+  so the useful half of "match the job description" had no procedure.
+- **Bullet craft** (action-verb-led, one idea, ~two lines) was implied by
+  the outcome/scale conventions but never stated as a phrasing rule.
+- **Cover-letter human voice** — avoiding the generic "AI-written" tell —
+  was only obliquely covered by rules/outputs.md's "no salesy adjectives";
+  nothing named the specific machine-generated hallmarks to cut.
+Three tips (3, 6, 7) named capabilities the playbook genuinely *lacked*:
+- **Role fit finding** (tip 3): the search space of *role types* to look
+  for was never generated from the profile.
+  [skills/profile-analysis.md](../skills/profile-analysis.md) deliberately
+  doesn't judge role fit, and [skills/matching.md](../skills/matching.md)
+  only judges one specific posting — so nothing explored which titles or
+  adjacent/transferable roles a candidate should even search for. Both
+  discovery agents assumed the role types were already known ("the
+  candidate's stated role... criteria"), so a candidate anchored on one
+  title would never have the space widened.
+- **Recruiter/contact outreach** (tip 6): only the *language* of a
+  person-directed message was covered (the 2026-08-28 rule); nothing
+  covered the *shape* of a proactive recruiter note or a follow-up —
+  concise, hook-led, reply-seeking, not favor-asking — and
+  [skills/application-writing.md](../skills/application-writing.md)'s scope
+  is strictly the application *package*, not messages sent to a person.
+- **Search strategy** (tip 7): no skill advised on application
+  volume/cadence, how to tier tailoring effort (the two existing paths —
+  staged pipeline vs. bulk sweep — already *are* an effort-tiering
+  mechanism, but nothing helped a candidate choose between them per
+  opportunity), or when/how to follow up. Follow-up in particular had no
+  place in the workflow, which ended at recording a submission.
+Possible cause: The playbook grew stage-by-stage around producing and
+submitting materials for postings the candidate already knew to search
+for; the upstream question ("what should I even search for?"), the
+sideways channel (messaging a person, not a posting), and the meta layer
+(how to pace and prioritize the whole search) were never given owners.
+Suggested follow-up: Enhance cv-tailoring (bullet craft; ATS content +
+honest terminology alignment), matching (keyword/terminology gap check),
+and application-writing (human-voice convention); create a role-discovery
+skill + agent as an upstream stage feeding both discovery agents, an
+outreach-messaging skill owned by the application-agent, and a
+search-strategy skill owned by the reporting-agent; and thread all of it
+through docs/workflow.md. Actioned same day — see
+[journal/improvements.md](improvements.md), 2026-09-08. Honesty guardrails
+were kept central throughout: role/demand rankings are hedged estimates
+with stated basis, keyword alignment never crosses into claiming a missing
+skill, and no new skill sends anything on the candidate's behalf.
+
 ## 2026-08-28 — Draft messages to people defaulted to English, ignoring the recipient's (and candidate's) language
 
 Observed by: orchestrator (development session, from a candidate report)

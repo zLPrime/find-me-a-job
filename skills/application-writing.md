@@ -64,6 +64,20 @@ review.
   when they and the candidate share a stronger common language (e.g. both
   native speakers of the recipient's language) reads as unnatural; match
   the person, and ask if the right language is genuinely unclear.
+- **Human voice — avoid an AI-written tell**: a cover letter should read
+  as though this candidate wrote it about this role, not as generic
+  assistant prose. Keep it specific and concrete — name the actual
+  responsibility, project, or outcome from the candidate profile that
+  makes the case — and cut the hallmarks of machine-generated filler:
+  hollow superlatives ("passionate," "dynamic," "world-class"), throat-
+  clearing openers ("I am writing to express my keen interest in..."),
+  and boilerplate connective phrasing ("Furthermore," "In today's fast-
+  paced world," "I am confident that my skills align perfectly"). Confidence
+  comes from a real, stated fact and its outcome, not from adjectives —
+  the same principle as [rules/outputs.md](../rules/outputs.md)'s "Language
+  and tone." This is a phrasing convention; it never licenses inventing a
+  fact or an enthusiasm the candidate hasn't expressed to sound more
+  human.
 
 ## Limitations
 

@@ -5,7 +5,10 @@
 Summarize the state of the candidate's job search — pipeline status,
 highlights, concerns, recommended next actions — into a
 [report](../templates/report.md), synthesizing existing artifacts rather
-than producing new findings.
+than producing new findings. When useful, extend the "next actions" into a
+concrete search strategy — application volume/cadence, how to tier
+tailoring effort across opportunities, and follow-up timing — using the
+[search-strategy](../skills/search-strategy.md) skill.
 
 ## Responsibilities
 
@@ -15,6 +18,12 @@ than producing new findings.
   decision log, and application artifacts.
 - Surface concerns and blockers plainly.
 - Recommend concrete, candidate-specific next actions.
+- When the candidate wants direction on how to run the search — how much
+  to apply, how to prioritize tailoring effort, when to follow up — apply
+  the [search-strategy](../skills/search-strategy.md) skill to turn the
+  pipeline state and the candidate's capacity into an adjustable strategy,
+  keeping every number a stated, hedged suggestion rather than a target
+  the candidate must hit.
 
 ## Inputs
 
@@ -28,6 +37,7 @@ than producing new findings.
 ## Skills Used
 
 - [report-generation](../skills/report-generation.md)
+- [search-strategy](../skills/search-strategy.md)
 - [quality-review](../skills/quality-review.md)
 
 ## Rules

@@ -5,7 +5,10 @@
 Assemble the full [application package](../templates/application.md) —
 cover letter, application question responses, submission notes — for a
 matched vacancy, and route it for candidate approval before anything is
-considered ready to send.
+considered ready to send. Also draft the person-directed messages that sit
+alongside an application — a recruiter/contact outreach note and a
+post-application or post-outreach follow-up — for the candidate to review
+and send themselves.
 
 ## Responsibilities
 
@@ -17,6 +20,14 @@ considered ready to send.
   package to the candidate.
 - Track approval status on the package; never submit or send anything
   without explicit candidate approval.
+- When the candidate wants to reach out to a recruiter or contact about a
+  role, or follow up on a submitted application or an earlier message,
+  apply the [outreach-messaging](../skills/outreach-messaging.md) skill to
+  draft that message for the candidate to review and send — never sending
+  it for them. Follow-up *cadence* (when to nudge) is advised by
+  [search-strategy](../skills/search-strategy.md) via the
+  [reporting-agent](reporting-agent.md); this agent drafts the message
+  itself.
 - When the candidate reports an actual submission (through this
   package or a standalone tailored CV/cover letter), create or update
   the application package artifact to `submitted`, recording the
@@ -41,6 +52,7 @@ considered ready to send.
 ## Skills Used
 
 - [application-writing](../skills/application-writing.md)
+- [outreach-messaging](../skills/outreach-messaging.md)
 - [quality-review](../skills/quality-review.md)
 
 ## Rules

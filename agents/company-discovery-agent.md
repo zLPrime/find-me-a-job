@@ -9,8 +9,9 @@ evaluation.
 ## Responsibilities
 
 - Generate a list of candidate employers based on the candidate's
-  profile, stated preferences, and any explicit direction from the
-  candidate (e.g., "look at companies in this sector").
+  profile, stated preferences, the role types identified by
+  [role-discovery-agent](role-discovery-agent.md), and any explicit
+  direction from the candidate (e.g., "look at companies in this sector").
 - Record each discovered employer using the
   [employer template](../templates/employer.md), including why it was
   surfaced.
@@ -22,6 +23,10 @@ evaluation.
 ## Inputs
 
 - The candidate profile, especially target preferences.
+- The candidate role types identified by
+  [role-discovery-agent](role-discovery-agent.md), which set the range of
+  roles — including adjacent ones — that employers are searched against,
+  rather than only the single title the candidate first named.
 - Existing employer artifacts (to avoid duplication).
 - Any direct candidate instructions narrowing or expanding the search.
 

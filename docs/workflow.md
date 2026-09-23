@@ -13,23 +13,25 @@ arrives.
         ↓
 2. Build candidate profile
         ↓
-3. Discover employers
+3. Explore fitting role types
         ↓
-4. Discover vacancies
+4. Discover employers
         ↓
-5. Evaluate employers
+5. Discover vacancies
         ↓
-6. Match opportunities
+6. Evaluate employers
         ↓
-7. Prepare tailored materials
+7. Match opportunities
         ↓
-8. Prepare application guidance
+8. Prepare tailored materials
         ↓
-9. Generate reports
+9. Prepare application guidance
         ↓
-10. Collect observations
+10. Generate reports
         ↓
-11. Improve the playbook
+11. Collect observations
+        ↓
+12. Improve the playbook
 ```
 
 ### 1. Receive candidate materials
@@ -45,20 +47,33 @@ The [profile-agent](../agents/profile-agent.md) uses the
 materials into a structured [candidate profile](../templates/candidate-profile.md).
 This profile becomes the reference point for every later stage.
 
-### 3. Discover employers
+### 3. Explore fitting role types
+
+The [role-discovery-agent](../agents/role-discovery-agent.md) uses the
+[role-discovery](../skills/role-discovery.md) skill to identify the *types
+of role* the candidate is genuinely qualified for — including adjacent or
+transferable ones they may be overlooking — ranked with honest,
+explicitly-hedged demand/response estimates. This widens what the next two
+stages search for, so discovery isn't limited to the single title the
+candidate first named. It runs on the candidate profile alone; no specific
+employer or posting is involved yet.
+
+### 4. Discover employers
 
 The [company-discovery-agent](../agents/company-discovery-agent.md)
-identifies employers that plausibly fit the candidate's profile and
-stated preferences, producing candidate employer entries using the
+identifies employers that plausibly fit the candidate's profile, stated
+preferences, and the role types from the previous stage, producing
+candidate employer entries using the
 [employer template](../templates/employer.md).
 
-### 4. Discover vacancies
+### 5. Discover vacancies
 
 The [vacancy-discovery-agent](../agents/vacancy-discovery-agent.md) finds
-open vacancies, either at discovered employers or independently, and
-records them with the [vacancy template](../templates/vacancy.md).
+open vacancies — across those same role types — either at discovered
+employers or independently, and records them with the
+[vacancy template](../templates/vacancy.md).
 
-### 5. Evaluate employers
+### 6. Evaluate employers
 
 The [employer-evaluation-agent](../agents/employer-evaluation-agent.md)
 assesses discovered (or candidate-supplied) employers against criteria
@@ -66,47 +81,64 @@ that matter to this candidate — using the
 [employer-analysis](../skills/employer-analysis.md) skill — and records
 findings and open questions on the employer artifact.
 
-### 6. Match opportunities
+### 7. Match opportunities
 
 The [matching-agent](../agents/matching-agent.md) compares the candidate
 profile against evaluated employers and vacancies using the
 [matching](../skills/matching.md) skill, producing ranked, reasoned match
 decisions recorded in the [decision log](../templates/decision-log.md).
+Matching also runs a keyword/terminology gap check, separating skills the
+candidate genuinely holds but the CV words differently (for honest
+alignment in the next stage) from keywords the candidate simply lacks
+(recorded as gaps, never papered over).
 
-### 7. Prepare tailored materials
+### 8. Prepare tailored materials
 
 The [tailoring-agent](../agents/tailoring-agent.md) produces a tailored
 CV and supporting materials for a specific matched vacancy using the
 [cv-tailoring](../skills/cv-tailoring.md) skill — strictly from facts
-already present in the candidate profile.
+already present in the candidate profile, with action-verb, results-first,
+ATS-parseable content and honest terminology alignment to the posting.
 
-### 8. Prepare application guidance
+### 9. Prepare application guidance
 
 The [application-agent](../agents/application-agent.md) assembles the
 full [application package](../templates/application.md) (cover letter,
 answers to application questions, submission notes) using the
 [application-writing](../skills/application-writing.md) skill, and
 routes it for candidate approval before anything is considered ready to
-send. Once the candidate reports they've actually submitted — whether
+send. The same agent also drafts the person-directed messages that go
+alongside an application — a recruiter/contact outreach note or a
+follow-up — using the
+[outreach-messaging](../skills/outreach-messaging.md) skill, for the
+candidate to review and send themselves.
+
+Once the candidate reports they've actually submitted — whether
 through this package or by applying directly with a standalone tailored
 CV and cover letter — the application package is created (if it doesn't
 exist yet) or updated to `submitted` status, recording the materials
 actually sent and the vacancy's status updated to `applied`. See
 rules/general.md's "Recording actual submissions."
 
-### 9. Generate reports
+### 10. Generate reports
 
 The [reporting-agent](../agents/reporting-agent.md) summarizes progress,
 pipeline status, and outcomes for the candidate using the
 [report-generation](../skills/report-generation.md) skill, producing a
-[report](../templates/report.md).
+[report](../templates/report.md). When the candidate wants direction on how
+to run the search rather than just where it stands, the same agent uses the
+[search-strategy](../skills/search-strategy.md) skill to recommend
+application volume/cadence, how to tier tailoring effort across
+opportunities (including when to use the bulk sweep below versus the full
+staged pipeline), and follow-up timing — all as adjustable suggestions, not
+targets.
 
-### 10. Collect observations
+### 11. Collect observations
 
 Any agent, at any stage, may record an observation — a gap, a surprising
 result, a candidate correction — in [journal/observations.md](../journal/observations.md).
 
-### 11. Improve the playbook
+### 12. Improve the playbook
 
 Observations are periodically reviewed and, where warranted, turned into
 concrete edits to agents, skills, rules, or templates, tracked in
