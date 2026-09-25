@@ -77,6 +77,24 @@ other agents at the right time. It does not itself perform profile
 building, discovery, evaluation, matching, tailoring, or reporting — it
 delegates all of that to the specialized agents that own it.
 
+**Question Bank**
+A set of difficulty-graded interview questions for one target (a
+vacancy or a role type), each with the key points a strong answer
+covers and follow-up angles. See
+[templates/question-bank.md](../templates/question-bank.md).
+
+**Mock Interview Session**
+One practice interview: its plan, a faithful transcript, and an
+independent evaluation. See
+[templates/mock-interview-session.md](../templates/mock-interview-session.md).
+
+**Practice Profile**
+The candidate's running interview-practice record — topic scores,
+recurring weak spots, question history, and next session focus — that
+carries practice across sessions. Separate from the candidate profile:
+practice scores are never candidate facts. See
+[templates/practice-profile.md](../templates/practice-profile.md).
+
 **Fabrication**
 Any invented fact not traceable to user-supplied source material. Strictly
 prohibited everywhere in this process. See

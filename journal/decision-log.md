@@ -24,6 +24,29 @@ Revisit trigger: <what would prompt reconsidering this decision>
 
 ## Entries
 
+## 2026-09-25 — Interview practice as a parallel track with a separate interviewer and evaluator
+
+Decision: Add interview practice as a parallel track (not a numbered
+pipeline stage) with four agents: question building, interviewing,
+evaluation, and progress tracking. The interviewer never grades; the
+evaluator works from the recorded transcript alone. Practice memory
+lives in a practice profile kept separate from the candidate profile.
+Alternatives considered: A single "mock interviewer" agent that asks,
+grades, and remembers (simpler, but an interviewer that also grades
+drifts into coaching mid-interview and grades its own conversation
+generously); folding practice scores into the candidate profile
+(rejected: practice performance is a judgment, not a candidate fact,
+and must never leak into matching or tailoring); a numbered stage 10
+(rejected: practice runs repeatedly and alongside the pipeline, not
+once in sequence).
+Reasoning: Keeps each responsibility traceable, per Principle 3 in
+[docs/operating-principles.md](../docs/operating-principles.md), and
+makes the evaluator's independence structural rather than a matter of
+prompt discipline.
+Revisit trigger: If evaluating in a separate step proves too slow to
+be worth it in practice, or if evaluation scores prove unreliable
+without the interviewer's context.
+
 ## 2026-07-14 — Initial repository structure and agent boundaries
 
 Decision: Organize the playbook as small, single-responsibility agents

@@ -82,7 +82,10 @@ journal/                     — observations, improvements, process decisions
    is used — nothing is sent without your sign-off.
 5. Ask for a report at any point via the
    [reporting-agent](agents/reporting-agent.md).
-6. When something goes wrong or looks off, record it in
+6. Practice for interviews with mock interviews that are evaluated and
+   remembered across sessions — see "Parallel track: interview
+   practice" in [docs/workflow.md](docs/workflow.md).
+7. When something goes wrong or looks off, record it in
    [journal/observations.md](journal/observations.md) — that's how the
    playbook gets better.
 

@@ -23,7 +23,20 @@ work/
       <application-name>.md
     reports/
       <date>.md
+    interviews/
+      <employer>-<round>-prep-<date>.md   # real-interview prep notes
+      practice/
+        practice-profile.md
+        question-banks/
+          <vacancy-or-role-type>.md
+        sessions/
+          <date>-<vacancy-or-role-type>.md
 ```
+
+The `interviews/practice/` layout follows the interview practice track
+in [docs/workflow.md](../docs/workflow.md): one practice profile per
+candidate, one question bank per target, one session artifact per mock
+interview.
 
 This structure is a suggestion, not a requirement — adapt it if a clearer
 organization emerges, and note the change in

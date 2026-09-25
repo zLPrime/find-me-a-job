@@ -21,6 +21,22 @@ Suggested follow-up: <optional — a concrete idea, or "needs discussion">
 
 ## Entries
 
+## 2026-09-25 — No process for practicing interviews once a vacancy reaches the interview stage
+
+Observed by: orchestrator (development session, candidate request)
+Context: The candidate asked for agents that conduct a realistic mock
+interview, evaluate it, remember results across sessions, and build a
+relevant question list from the CV or job description.
+Observation: The playbook stops at application; interview preparation
+has so far been ad hoc prep notes in `work/<candidate>/interviews/`
+(e.g. the cerebre and Proxify prep files), with no way to rehearse,
+get an honest assessment, or track improvement across sessions.
+Possible cause: Interview preparation was never scoped as a stage or
+track in [docs/workflow.md](../docs/workflow.md).
+Suggested follow-up: Add an interview practice track with separate
+question-building, interviewing, evaluation, and progress-tracking
+responsibilities.
+
 ## 2026-09-08 — A set of external job-search prompt tips exposed capability gaps: role exploration, ATS/keyword handling, human cover-letter voice, outreach, and search strategy
 
 Observed by: orchestrator (development session, from a maintainer-provided
