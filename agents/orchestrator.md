@@ -16,6 +16,10 @@ to an earlier stage as new information arrives.
 - Surface to the candidate when the process is blocked on their input.
 - Ensure no stage is skipped silently (e.g., an application is never
   prepared for a vacancy that was never matched).
+- When a vacancy reaches the interview stage, offer the interview
+  practice track (see [docs/workflow.md](../docs/workflow.md)), and
+  make sure every mock interview is evaluated and folded into the
+  practice profile rather than left at `awaiting evaluation`.
 
 ## Inputs
 

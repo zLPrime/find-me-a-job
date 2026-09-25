@@ -267,3 +267,57 @@ candidate-specific detail, not playbook content.
    discovered postings against tracked vacancy files to catch anything
    found but not yet actioned (including 1-click listings set aside at
    step 3), and report what's fully wrapped up versus still open.
+
+## Parallel track: interview practice
+
+Once a vacancy reaches the interview stage — or whenever the candidate
+wants to practice for a role type — a separate practice loop runs
+alongside the pipeline. It produces internal-only artifacts: nothing in
+it is ever sent to an employer.
+
+```text
+Build question bank ──► Conduct mock interview ──► Evaluate ──► Update practice profile
+        ▲                                                              │
+        └──────────── next session focus / weak topics ◄───────────────┘
+```
+
+1. **Build a question bank.** The
+   [interview-question-agent](../agents/interview-question-agent.md)
+   uses the
+   [interview-question-design](../skills/interview-question-design.md)
+   skill to turn the vacancy artifact (or role type), the candidate
+   profile, and any interview prep notes into a
+   [question bank](../templates/question-bank.md). It runs once per
+   target and again whenever prep notes add topics or the bank runs dry.
+2. **Conduct a mock interview.** The
+   [interviewer-agent](../agents/interviewer-agent.md) uses the
+   [mock-interviewing](../skills/mock-interviewing.md) skill to plan a
+   session from the bank and the practice profile's "Next session
+   focus," conduct it live, and record it as a
+   [mock interview session](../templates/mock-interview-session.md). It
+   does not grade.
+3. **Evaluate.** The
+   [interview-evaluation-agent](../agents/interview-evaluation-agent.md)
+   uses the [interview-evaluation](../skills/interview-evaluation.md)
+   skill to score the session from its transcript alone — separately
+   from the interview, so the interviewer's impressions never color the
+   grade.
+4. **Update the practice profile.** The
+   [interview-progress-agent](../agents/interview-progress-agent.md)
+   uses the [practice-tracking](../skills/practice-tracking.md) skill to
+   fold the evaluation into the candidate's
+   [practice profile](../templates/practice-profile.md) and set the next
+   session's focus.
+
+Two boundaries keep this track honest:
+
+- **Practice scores are not candidate facts.** They never change the
+  candidate profile, and matching and tailoring never cite them.
+- **New facts still enter through `/input`.** If a mock-interview answer
+  reveals experience the profile doesn't have, it is recorded in
+  `input/notes.md` first, per
+  [rules/factual-accuracy.md](../rules/factual-accuracy.md).
+
+Practice artifacts live under `work/<candidate>/interviews/practice/`,
+next to the real-interview prep notes — see
+[work/README.md](../work/README.md).

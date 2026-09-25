@@ -20,6 +20,47 @@ Expected effect: <what should be different going forward>
 
 ## Entries
 
+## 2026-09-25 — Added an interview practice track: four agents, four skills, three templates
+
+Triggered by: [journal/observations.md](observations.md), 2026-09-25 —
+no process for practicing interviews once a vacancy reaches the
+interview stage.
+Change made:
+- New agents:
+  [interview-question-agent](../agents/interview-question-agent.md),
+  [interviewer-agent](../agents/interviewer-agent.md),
+  [interview-evaluation-agent](../agents/interview-evaluation-agent.md),
+  [interview-progress-agent](../agents/interview-progress-agent.md).
+- New skills:
+  [interview-question-design](../skills/interview-question-design.md),
+  [mock-interviewing](../skills/mock-interviewing.md),
+  [interview-evaluation](../skills/interview-evaluation.md),
+  [practice-tracking](../skills/practice-tracking.md).
+- New templates:
+  [question-bank](../templates/question-bank.md),
+  [mock-interview-session](../templates/mock-interview-session.md),
+  [practice-profile](../templates/practice-profile.md).
+- [docs/workflow.md](../docs/workflow.md): added "Parallel track:
+  interview practice."
+- [docs/glossary.md](../docs/glossary.md): added Question Bank, Mock
+  Interview Session, Practice Profile.
+- [work/README.md](../work/README.md): added the
+  `interviews/practice/` layout.
+- [agents/orchestrator.md](../agents/orchestrator.md): offer the
+  practice track at the interview stage; don't leave sessions
+  unevaluated.
+- [README.md](../README.md): added the practice track to "How to Use
+  the Playbook."
+Reasoning: Interview practice needs the same discipline as the rest of
+the process: artifacts instead of conversation, single-responsibility
+agents, and honest judgments. See
+[journal/decision-log.md](decision-log.md), 2026-09-25, for why the
+interviewer and evaluator are separate.
+Expected effect: The candidate can rehearse for a real interview
+against questions drawn from the vacancy and prep notes, get a direct
+evidence-backed assessment, and see progress across sessions, with the
+next session targeting their weakest topics.
+
 ## 2026-09-08 — Turned seven external job-search prompt tips into playbook enhancements, three new skills, and a new agent
 
 Triggered by: [journal/observations.md](observations.md), 2026-09-08 — a
