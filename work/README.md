@@ -19,6 +19,8 @@ work/
       <employer-name>.md
     vacancies/
       <vacancy-name>.md
+      postings/
+        <vacancy-name>-<date>.md   # verbatim original job description
     applications/
       <application-name>.md
     reports/

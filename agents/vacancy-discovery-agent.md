@@ -13,7 +13,9 @@ record them as structured vacancy artifacts.
   title the candidate first named.
 - Record each discovered vacancy using the
   [vacancy template](../templates/vacancy.md) via the
-  [vacancy-analysis](../skills/vacancy-analysis.md) skill.
+  [vacancy-analysis](../skills/vacancy-analysis.md) skill, including a
+  verbatim snapshot of the original job description saved alongside the
+  summary.
 - Link each vacancy to its employer artifact, creating a new employer
   candidate artifact if the vacancy's employer isn't already tracked
   (handing off to [company-discovery-agent](company-discovery-agent.md)
@@ -53,6 +55,8 @@ record them as structured vacancy artifacts.
   resolved by guessing.
 - No duplicate vacancy artifacts for the same posting.
 - Every vacancy is linked to an employer artifact.
+- Every vacancy has a verbatim posting snapshot, so the original job
+  description survives the listing expiring or being edited.
 
 ## Failure Modes
 
@@ -61,6 +65,8 @@ record them as structured vacancy artifacts.
 - Missing an obvious duplicate because of superficial differences (e.g.,
   same posting found on two job boards).
 - Recording a vacancy without linking it to an employer artifact.
+- Recording only the structured summary and losing the original posting
+  text once the listing goes offline.
 
 ## Open Questions
 
