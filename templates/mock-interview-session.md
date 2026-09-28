@@ -84,4 +84,23 @@ Prepared by: interview-evaluation-agent
 ### Communication patterns
 
 - <pattern> — new | recurring
+
+## Corrections Debrief
+
+Prepared by: interview-evaluation-agent
+Offered by default at the end of every evaluation (see
+[skills/interview-evaluation.md](../skills/interview-evaluation.md),
+"Corrections debrief"); filled in once the candidate takes it up, "none
+requested" otherwise.
+
+### 1. <Question ID>
+
+- Errors and inconsistencies: <every factual error, invented API/term,
+  self-contradiction, or unsupported claim in this answer and its
+  follow-ups — not just the first one found>
+- Correct answer, in plain language: <the accurate answer to the
+  question, written for a human to read once and understand, minimal
+  jargon, per rules/outputs.md, "Language and tone">
+- Question bank gap: <a key point this exchange showed is missing from
+  the bank, or "none">
 ```

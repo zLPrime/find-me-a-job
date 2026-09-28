@@ -29,6 +29,7 @@ work/
       <employer>-<round>-prep-<date>.md   # real-interview prep notes
       practice/
         practice-profile.md
+        study-topics.md
         question-banks/
           <vacancy-or-role-type>.md
         sessions/

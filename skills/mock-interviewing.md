@@ -64,6 +64,12 @@ artifact.
 
 ## Quality Criteria
 
+- If a tangential concept, tool, or technique comes up during the
+  interview — in a candidate's answer, a hint given, or the
+  candidate's own question at the close — that's worth studying later
+  but wasn't itself what the question was testing, record it in
+  [templates/study-topics.md](../templates/study-topics.md) with the
+  context it came up in, alongside the session.
 - The interviewer never reveals key points, directly or through
   leading questions.
 - Help given on request is recorded as `[hint requested]` with the hint

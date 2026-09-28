@@ -95,6 +95,14 @@ carries practice across sessions. Separate from the candidate profile:
 practice scores are never candidate facts. See
 [templates/practice-profile.md](../templates/practice-profile.md).
 
+**Study Topics**
+The candidate's running "look into this later" list — concepts, tools,
+or techniques that came up tangentially during a mock interview,
+evaluation, or corrections debrief, recorded with the context they
+surfaced in. Separate from the practice profile, which tracks scored
+performance against the question bank. See
+[templates/study-topics.md](../templates/study-topics.md).
+
 **Fabrication**
 Any invented fact not traceable to user-supplied source material. Strictly
 prohibited everywhere in this process. See
