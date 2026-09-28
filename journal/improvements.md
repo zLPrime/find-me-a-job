@@ -20,6 +20,35 @@ Expected effect: <what should be different going forward>
 
 ## Entries
 
+## 2026-09-28 — Saved the original job description as a verbatim posting snapshot
+
+Triggered by: the candidate asking whether vacancy artifacts keep the
+original job description. They did not: the vacancy summary held links
+and a structured extraction only, so once a listing expired or was
+edited, the full posting text was gone — even though it is what CV and
+cover-letter tailoring, interview prep, and "did the requirements
+change after I applied?" checks need.
+Change made: Added a "Posting Snapshot" template to
+[templates/vacancy.md](../templates/vacancy.md) (verbatim text, capture
+time, source URL, capture method, language, completeness, supersedes
+link) and a "Posting snapshot" line in its Links block; added the
+snapshot as an expected output and quality criterion in
+[skills/vacancy-analysis.md](../skills/vacancy-analysis.md), with a
+new dated snapshot on every posting change; added it to the
+responsibilities, success criteria and failure modes of
+[agents/vacancy-discovery-agent.md](../agents/vacancy-discovery-agent.md);
+added `vacancies/postings/<vacancy-name>-<date>.md` to
+[work/README.md](../work/README.md)'s suggested layout. Kept in a
+separate file rather than inline so summaries stay short to scan.
+Existing vacancy artifacts were not backfilled.
+Reasoning: the same "nothing important lives only somewhere
+ephemeral" principle behind every artifact here — a live web page is
+as ephemeral as a chat transcript. Snapshots are never edited, which
+also preserves the exact version the candidate applied against.
+Expected effect: every newly recorded vacancy keeps its original text,
+so later work that depends on the posting still has it after the
+listing goes offline.
+
 ## 2026-09-25 — Added an interview practice track: four agents, four skills, three templates
 
 Triggered by: [journal/observations.md](observations.md), 2026-09-25 —

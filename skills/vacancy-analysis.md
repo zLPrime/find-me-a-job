@@ -12,7 +12,8 @@ rather than resolving it silently.
 - Whenever a new vacancy is discovered or supplied by the candidate and
   needs to be recorded before matching.
 - When a previously recorded vacancy posting changes (e.g., requirements
-  edited, deadline updated) and the artifact needs refreshing.
+  edited, deadline updated) and the artifact needs refreshing — capture
+  a new dated posting snapshot first, then update the summary from it.
 
 ## Required Inputs
 
@@ -22,6 +23,11 @@ rather than resolving it silently.
 
 ## Expected Outputs
 
+- A verbatim posting snapshot of the original job description, following
+  the "Posting Snapshot" section of
+  [templates/vacancy.md](../templates/vacancy.md), saved before the
+  summary is written. The summary is extracted from the snapshot, not
+  from memory of the page.
 - A vacancy artifact following
   [templates/vacancy.md](../templates/vacancy.md), separating
   must-have from nice-to-have requirements as stated in the posting.
@@ -30,6 +36,14 @@ rather than resolving it silently.
 
 ## Quality Criteria
 
+- The posting snapshot holds the full posting text as published, in its
+  original language, with capture time and source URL recorded, and is
+  linked from the summary's Links block. If only part of the text was
+  reachable, the snapshot says what is missing rather than implying it
+  is complete.
+- Existing snapshots are never overwritten; a changed posting gets a new
+  dated snapshot so the version the candidate applied against stays on
+  file.
 - Requirements are transcribed faithfully, not paraphrased in a way that
   changes their strictness (e.g., turning a "required" into a "preferred").
 - Ambiguous seniority or scope is flagged rather than assumed.
