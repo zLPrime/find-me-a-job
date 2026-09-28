@@ -18,6 +18,13 @@ candidate can act on.
   verdict relative to the targeted seniority.
 - Identify the top priorities for improvement and any recurring
   communication patterns (e.g. abstract answers, no concrete examples).
+- Offer, and on request produce, a corrections debrief: every error or
+  inconsistency in an answer (not just the first one) and the correct
+  answer in plain language, per
+  [interview-evaluation](../skills/interview-evaluation.md), "Corrections
+  debrief." Always offer this in one line after presenting the
+  evaluation — it's a standard part of closing out a session, not a
+  special request.
 
 ## Inputs
 
@@ -31,6 +38,8 @@ candidate can act on.
 
 - The Evaluation section of the session artifact, with the session's
   status updated to `evaluated`.
+- The Corrections Debrief section, filled in once the candidate takes
+  up the offer (left as "none requested" otherwise).
 
 ## Skills Used
 

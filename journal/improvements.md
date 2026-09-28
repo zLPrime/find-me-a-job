@@ -49,6 +49,80 @@ Expected effect: every newly recorded vacancy keeps its original text,
 so later work that depends on the posting still has it after the
 listing goes offline.
 
+## 2026-09-25 — Added a "Study Topics" list to the interview practice track
+
+Triggered by: the candidate asking, mid-session, to note "Bloom
+filters" as a topic to explore later (surfaced tangentially while
+explaining the correct answer to a deduplication question), then
+asking for a genuine structured place for such notes rather than an
+ad hoc line in work/jakub-charabet/TODO.txt — a plain personal scratch
+list not meant to hold this kind of thing — plus a request that the
+context each topic surfaced in be captured, not just its name.
+Change made: Added
+[templates/study-topics.md](../templates/study-topics.md) (one running
+list per candidate: topic, first-surfaced date, context — the specific
+question/session/exchange it came from — why it matters, and status);
+added it to [docs/glossary.md](../docs/glossary.md) and to
+[work/README.md](../work/README.md)'s suggested directory layout,
+alongside the practice profile; added a step to the "Parallel track:
+interview practice" section of
+[docs/workflow.md](../docs/workflow.md) so capturing a tangential topic
+is a standing part of the loop, not something remembered only when
+asked; and added matching quality-criteria lines to
+[skills/mock-interviewing.md](../skills/mock-interviewing.md) and
+[skills/interview-evaluation.md](../skills/interview-evaluation.md),
+since a tangential topic can surface during the interview itself, the
+evaluation, or a corrections debrief. Created
+work/jakub-charabet/interviews/practice/study-topics.md with the Bloom
+filter entry. Also cleaned up the earlier ad hoc line in
+work/jakub-charabet/TODO.txt (removed — it had also lost its line
+break on append, a good example of why an unstructured scratch file
+isn't the right home for this).
+Reasoning: matches the same "nothing important lives only in
+conversation" principle behind every other artifact in this repo — a
+topic worth studying later is exactly the kind of thing that gets lost
+if it only exists as a line in a chat transcript, and a plain-text
+scratch file with no structure doesn't preserve *why* something was
+flagged, which is the part that makes it useful months later.
+Expected effect: future sessions capture tangential study topics with
+real context automatically, in a place that scales past a couple of
+ad hoc lines, without the candidate having to ask each time.
+
+## 2026-09-25 — Added a "Corrections Debrief" step to the interview practice track
+
+Triggered by: the candidate's direct request, during a mock interview
+session, for a detailed breakdown of every error and inconsistency in
+an answer (not just what the Evaluation's "key points missed" field
+captured), with the correct answer given in plain language — and his
+observation that this should be a standard part of every session
+rather than something he has to remember to ask for.
+Change made: Added a "Corrections Debrief" section to
+[templates/mock-interview-session.md](../templates/mock-interview-session.md);
+a "Corrections Debrief" procedure to
+[skills/interview-evaluation.md](../skills/interview-evaluation.md)
+describing when to offer it (always, in one line, right after
+presenting the Evaluation), what it must cover (every error, not just
+the first found; a plain-language correct answer per
+[rules/outputs.md](../rules/outputs.md)'s existing "Language and tone"
+rule; any question bank gap surfaced); a matching Responsibilities/
+Outputs update to
+[agents/interview-evaluation-agent.md](../agents/interview-evaluation-agent.md);
+and a one-line addition to the "Evaluate" step in
+[docs/workflow.md](../docs/workflow.md) so it isn't missed by an agent
+following the workflow doc alone.
+Reasoning: The Evaluation section's existing "key points missed" and "a
+strong answer would add" fields are written for scoring, not for
+studying from — they're terse and assume the reader already knows the
+correct answer. A candidate actually improving between sessions needs
+the specific errors named plainly and the correct answer spelled out,
+not just a score. Making the offer standard (rather than only available
+if asked) prevents it from being skipped in a future session run by an
+agent that wasn't part of this conversation.
+Expected effect: Every future evaluated session ends with an explicit,
+one-line offer of a corrections debrief; when taken up, the result is
+recorded in the session artifact itself (not left only in conversation)
+and question-bank gaps it surfaces get folded back into the bank.
+
 ## 2026-09-25 — Added an interview practice track: four agents, four skills, three templates
 
 Triggered by: [journal/observations.md](observations.md), 2026-09-25 —

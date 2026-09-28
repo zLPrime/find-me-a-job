@@ -301,13 +301,26 @@ Build question bank ──► Conduct mock interview ──► Evaluate ──�
    uses the [interview-evaluation](../skills/interview-evaluation.md)
    skill to score the session from its transcript alone — separately
    from the interview, so the interviewer's impressions never color the
-   grade.
+   grade. It then always offers a corrections debrief — every error and
+   inconsistency in an answer, plus the correct answer in plain
+   language — as a standard, one-line offer at the end of every
+   session, not something the candidate has to think to ask for.
 4. **Update the practice profile.** The
    [interview-progress-agent](../agents/interview-progress-agent.md)
    uses the [practice-tracking](../skills/practice-tracking.md) skill to
    fold the evaluation into the candidate's
    [practice profile](../templates/practice-profile.md) and set the next
    session's focus.
+5. **Capture tangential study topics.** If the interview, the
+   evaluation, or a corrections debrief surfaces something worth
+   studying later that isn't itself the subject of the question asked
+   (a related concept, a tool, a technique mentioned in passing), record
+   it — with the context it came up in, not just its name — in the
+   candidate's [study topics](../templates/study-topics.md) list. This
+   is a standing step, not something to remember only when the
+   candidate happens to ask for it; see
+   [skills/mock-interviewing.md](../skills/mock-interviewing.md) and
+   [skills/interview-evaluation.md](../skills/interview-evaluation.md).
 
 Two boundaries keep this track honest:
 
