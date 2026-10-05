@@ -2,7 +2,10 @@
 
 > Structural template only. One artifact per session. The interviewer
 > writes Plan and Transcript; the evaluator writes Evaluation; neither
-> edits the other's sections.
+> edits the other's sections. Status owners: the interviewer sets up to
+> `awaiting evaluation`, the evaluator sets `evaluated`, and only the
+> interview-progress-agent sets `recorded in practice profile`, after
+> the practice profile's change note cites this session.
 
 ```markdown
 # Mock Interview — <target> — <date>
@@ -21,9 +24,9 @@ Language: <language>
 
 Prepared by: interviewer-agent
 
-| # | Question ID | Topic | Difficulty | Why selected |
-|---|---|---|---|---|
-| 1 | <ID> | <topic> | <1–5> | <prep-note topic / next session focus / re-ask / new> |
+| # | Question ID | Scope version | Topic | Difficulty | Why selected |
+|---|---|---|---|---|---|
+| 1 | <bank ID — every row must exist in the bank> | <n> | <topic> | <1–5> | <prep-note topic / next session focus / re-ask / new> |
 
 ## Transcript
 
@@ -35,9 +38,19 @@ Prepared by: interviewer-agent
 
 **Candidate:** <answer in the candidate's own words>
 
-**Interviewer:** <follow-up>
+**Interviewer:** `[probe]` <neutral probe, at most two per question>
 
 **Candidate:** <answer>
+
+**Interviewer:** `[F1]` <required follow-up, as actually asked>
+
+**Candidate:** <answer>
+
+**Interviewer:** `[F2 narrowed]` <the part of the follow-up the answer
+hadn't covered yet, as actually asked>
+
+<`[F3 skipped — already covered]`, if a follow-up was fully answered
+unprompted.>
 
 <`[hint requested]` and the hint given, if any.>
 
@@ -57,11 +70,15 @@ Prepared by: interview-evaluation-agent
 
 ### Per answer
 
-#### 1. <Question ID> — score <1–5>
+#### 1. <Question ID> (scope v<n>) — score <1–5>
 
-- Evidence: "<quote from the transcript>"
-- Key points covered:
-- Key points missed:
+| Key point | Result | Evidence |
+|---|---|---|
+| K1 | covered / partial / missed / wrong | "<quote from the transcript>" |
+
+- Coverage: <covered + ½ × partial> of <total> (<percent>)
+- Outside scope (noted, not scored): <anything correct or incorrect the
+  candidate said beyond the scope, or "none">
 - A strong answer would add:
 - Hint used: yes | no
 

@@ -40,6 +40,10 @@ candidate can act on.
   status updated to `evaluated`.
 - The Corrections Debrief section, filled in once the candidate takes
   up the offer (left as "none requested" otherwise).
+- A hand-off to the
+  [interview-progress-agent](interview-progress-agent.md) once the
+  debrief is recorded or declined. The evaluator never sets the status
+  past `evaluated`.
 
 ## Skills Used
 
@@ -71,6 +75,10 @@ candidate can act on.
 - Crediting keywords or confident delivery without substance.
 - Scoring from memory of the conversation instead of the transcript.
 - Feedback so generic it could apply to any candidate.
+- Treating the corrections debrief as the end of the session, so the
+  practice profile is never updated.
+- Setting `recorded in practice profile` itself, which claims a profile
+  update that never happened.
 
 ## Open Questions
 

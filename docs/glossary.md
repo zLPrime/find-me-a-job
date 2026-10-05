@@ -79,8 +79,9 @@ delegates all of that to the specialized agents that own it.
 
 **Question Bank**
 A set of difficulty-graded interview questions for one target (a
-vacancy or a role type), each with the key points a strong answer
-covers and follow-up angles. See
+vacancy or a role type), each with a fixed scope: the key points a
+strong answer covers, the required follow-ups, and a scope version, so
+scores compare across sessions. See
 [templates/question-bank.md](../templates/question-bank.md).
 
 **Mock Interview Session**

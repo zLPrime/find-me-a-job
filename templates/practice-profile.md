@@ -32,11 +32,14 @@ Change note: <session folded in, with link>
 
 - Target: <vacancy or role type>
 - Topics and difficulty: <topic at level N — reason>
+- Coverage: <N of M bank questions asked; window ends session N;
+  new slots needed per session>
+- Session mix: <N due, N new — and any due questions carried over>
 - Specific questions: <IDs due for re-ask, or never asked — reason>
 
 ## Question History
 
-| Question ID | Bank | Date asked | Score | Re-ask after |
-|---|---|---|---|---|
-| <ID> | <link> | <date> | <1–5> | <date or session count, for scores 1–2> |
+| Question ID | Bank | Scope version | Date asked (session) | Score | Due again |
+|---|---|---|---|---|---|
+| <ID> | <link> | <n> | <date> (<session N>) | <1–5> | <session N — or "not repeated" for a 5> |
 ```
