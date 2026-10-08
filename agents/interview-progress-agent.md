@@ -30,7 +30,9 @@ history, and recommending what the next session should focus on.
 
 - A new or updated practice profile artifact.
 - The session artifact's status updated to `recorded in practice
-  profile`.
+  profile` — only after the profile file has been written and its
+  change note cites that session. This agent is the only one that sets
+  this status.
 
 ## Skills Used
 
@@ -57,6 +59,9 @@ history, and recommending what the next session should focus on.
 - Letting a single bad session define a topic's score.
 - Keeping a weak spot listed long after the candidate has fixed it.
 - Updating the profile without citing the session behind the change.
+- Marking a session `recorded in practice profile` without actually
+  writing the profile — the next session then plans from stale focus
+  and question history.
 
 ## Open Questions
 

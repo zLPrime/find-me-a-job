@@ -20,6 +20,79 @@ Expected effect: <what should be different going forward>
 
 ## Entries
 
+## 2026-09-29 — Named commit checkpoints for interview practice
+
+Triggered by: the candidate noticing only one mock interview session
+was committed. Four sessions (2026-09-27, three on 2026-09-29) and
+changes to the practice profile, study topics, and question bank sat
+uncommitted in the candidate repo; the one committed session was
+committed during a playbook development session, not by the practice
+track.
+Change made: Commit steps at the end of the interview dialog (step 5)
+and an uncommitted-files check before planning (step 0) in
+[skills/mock-interviewing.md](../skills/mock-interviewing.md); a
+commit step in "Closing the session" in
+[skills/practice-tracking.md](../skills/practice-tracking.md); practice
+checkpoints and "commit at the checkpoint, not at session end" in
+[rules/general.md](../rules/general.md), "Commit cadence".
+Reasoning: The commit rule tied checkpoints to vacancies and
+submissions, which practice sessions never reach, and its fallback
+("commit before the session ends") never fires when a dialog ends with
+the agent asking a question and the candidate leaving.
+Expected effect: Every practice session is committed when the
+interview ends and again when it is closed out; leftovers are caught
+before the next session is planned.
+
+## 2026-09-29 — Mock interviews only ask questions from the question bank
+
+Triggered by: a standing rule from the candidate: always take questions
+from the bank; if new questions are needed, add them to the bank first.
+Change made: Planning and interview steps in
+[skills/mock-interviewing.md](../skills/mock-interviewing.md) (bank-only
+main questions, follow-ups scoped to the current bank question);
+responsibilities and failure modes in
+[agents/interviewer-agent.md](../agents/interviewer-agent.md) and
+[agents/interview-question-agent.md](../agents/interview-question-agent.md);
+a new trigger in
+[skills/interview-question-design.md](../skills/interview-question-design.md);
+the Plan table in
+[templates/mock-interview-session.md](../templates/mock-interview-session.md);
+step 1 of the practice track in [docs/workflow.md](../docs/workflow.md).
+Reasoning: The evaluator scores against the bank's key points and the
+practice profile tracks questions by bank ID; a question asked outside
+the bank can be neither scored fairly nor tracked for re-asks.
+Expected effect: Every asked question has an ID, key points, and a
+place in question history; the bank grows from real practice needs.
+
+## 2026-09-29 — Gated mock interview close-out on an actual practice profile update
+
+Triggered by: [observations.md](observations.md), "2026-09-29 — Mock
+interview results never reached the practice profile."
+Change made: Added a hand-off step after the corrections debrief in
+[skills/interview-evaluation.md](../skills/interview-evaluation.md) and
+matching output/failure modes in
+[agents/interview-evaluation-agent.md](../agents/interview-evaluation-agent.md);
+made the interview-progress-agent the sole owner of the `recorded in
+practice profile` status, set only after the profile's change note
+cites the session
+([agents/interview-progress-agent.md](../agents/interview-progress-agent.md),
+[skills/practice-tracking.md](../skills/practice-tracking.md), "Closing
+the session",
+[templates/mock-interview-session.md](../templates/mock-interview-session.md));
+added a pre-planning check (step 0) and a question-history check to
+[skills/mock-interviewing.md](../skills/mock-interviewing.md), plus a
+per-exchange write checkpoint for the transcript; reinforced the
+sequence in [agents/orchestrator.md](../agents/orchestrator.md) and
+[docs/workflow.md](../docs/workflow.md), "Parallel track: interview
+practice."
+Reasoning: The failure was not a missing rule but a missing hand-off
+and an unverified status: the debrief ended the conversation, a status
+claimed work that wasn't done, and the next session trusted it.
+Expected effect: Every evaluated session is folded into the profile
+before the next one is planned; a stale profile is caught at planning
+time instead of producing repeated questions; an interrupted session
+keeps its transcript up to the interruption.
+
 ## 2026-09-28 — Saved the original job description as a verbatim posting snapshot
 
 Triggered by: the candidate asking whether vacancy artifacts keep the
@@ -1016,3 +1089,138 @@ artifacts in this one.
 Expected effect: New artifacts produced by any agent should link
 internal and external references from the start, without needing a
 candidate to ask for a cleanup pass.
+
+## 2026-10-01 — Made interview recording silent
+
+Triggered by: [journal/observations.md](observations.md) — "Interviewer
+narrated its record-keeping to the candidate" (2026-10-01).
+Change made: Added a "Recording is silent" paragraph to step 4 of
+[skills/mock-interviewing.md](../skills/mock-interviewing.md) and a
+matching failure mode to
+[agents/interviewer-agent.md](../agents/interviewer-agent.md).
+Reasoning: Recording as you go is required so an interrupted session
+loses nothing, but announcing each write turns the interviewer back
+into an assistant mid-interview.
+Expected effect: Interview turns contain only the question, probe, or
+follow-up; file writes still happen after every exchange.
+
+## 2026-10-01 — Fixed question scopes and coverage-based scoring
+
+Triggered by: [journal/observations.md](observations.md) — "Mock
+interview scores weren't comparable between sessions" (2026-10-01), and
+the candidate's request that each question's scope be defined.
+Change made:
+- [skills/interview-question-design.md](../skills/interview-question-design.md)
+  and [templates/question-bank.md](../templates/question-bank.md): every
+  question has a fixed scope — numbered scored key points, one to three
+  required follow-ups (each with its own key points), optional "out of
+  scope," and a scope version raised on any change.
+- [skills/mock-interviewing.md](../skills/mock-interviewing.md) and
+  [agents/interviewer-agent.md](../agents/interviewer-agent.md): ask the
+  main question and every required follow-up as written; at most two
+  neutral probes per question that never steer toward a key point; no
+  follow-ups outside the scope; difficulty adapts between sessions only.
+- [skills/interview-evaluation.md](../skills/interview-evaluation.md):
+  mark each key point covered / partial / missed / wrong, score from
+  coverage (under 25% → 1 … 100% → 5), with caps for wrong key points
+  and hints; anything outside the scope is noted, not scored.
+- [skills/practice-tracking.md](../skills/practice-tracking.md): question
+  history records the scope version, and scores are only compared
+  within the same version.
+- [templates/mock-interview-session.md](../templates/mock-interview-session.md):
+  plan carries the scope version, transcript tags `[F1]` / `[probe]`,
+  evaluation has a per-key-point table and coverage.
+- The candidate's bank was converted to scope version 1 (all 47
+  questions) and past scores in the practice profile marked version 0.
+Reasoning: The candidate wants results that compare between sessions.
+A fixed scope plus mechanical scoring from key-point coverage means a
+score change reflects the answer, not what the interviewer chose to
+ask that day.
+Expected effect: Re-asks of a question test the same thing; scores and
+trends per question are comparable within a scope version. Trade-off:
+less improvisation, so a vague answer is challenged only within two
+neutral probes.
+
+## 2026-10-01 — Spaced re-asks by score and a default session mix
+
+Triggered by: [journal/observations.md](observations.md) — "No rule for
+repeating questions scored 3, or for mixing due and new questions"
+(2026-10-01), and the candidate's approval of both changes.
+Change made:
+- [skills/practice-tracking.md](../skills/practice-tracking.md): a
+  question is due again 2 sessions after a 1–2, 4 after a 3, 8 after a
+  4, and never after a 5; a due question that isn't asked keeps its
+  due session and becomes overdue. Sessions default to half due
+  questions (rounded up) and half new; when too many are due, most
+  overdue then lowest score go first and the rest carry over.
+- [skills/mock-interviewing.md](../skills/mock-interviewing.md): planning
+  order follows that mix.
+- [templates/practice-profile.md](../templates/practice-profile.md):
+  "Session mix" line in Next Session Focus; question history records
+  scope version, session number, and the session a question is due.
+- The candidate's practice profile was recomputed under the new rule.
+Reasoning: Scores of 3 mean the depth isn't there yet, so they need a
+retest; a fixed mix keeps new material flowing even after a weak
+session, and an overdue-first queue stops due questions slipping
+indefinitely.
+Expected effect: Every question below 5 comes back on a predictable
+schedule, and each session's plan states its due/new split.
+
+## 2026-10-01 — Coverage window for the question bank
+
+Triggered by: [journal/observations.md](observations.md) — "Nothing
+guaranteed every bank question gets asked" (2026-10-01), and the
+candidate's choice of 4 sessions at 8 questions each.
+Change made:
+- [skills/practice-tracking.md](../skills/practice-tracking.md):
+  "Coverage window" — every active bank question is asked within 4
+  sessions of being added (sessions 6–9 for the current backlog); the
+  session mix sets new slots to keep that pace (at least half the
+  session, at least 3 slots left for due questions), offers a longer
+  session if the pace can't be met, and runs shorter sessions once the
+  bank is exhausted. "Choosing new questions" puts never-asked topics
+  first and uses the closest difficulty level instead of skipping a
+  topic.
+- [skills/mock-interviewing.md](../skills/mock-interviewing.md):
+  planning order and difficulty fallback updated to match.
+- [templates/practice-profile.md](../templates/practice-profile.md):
+  "Coverage" line in Next Session Focus.
+- The candidate's practice profile: coverage plan for sessions 6–9 and
+  the missing Estimation topic row.
+Reasoning: The candidate wants the whole bank covered in a reasonable
+time; a fixed window makes that a scheduled outcome rather than
+something that depends on how each focus is written.
+Expected effect: All 47 questions asked by session 9. Trade-off: due
+re-asks get only 3 slots per session during the window, so a backlog
+builds up and is cleared in the sessions after it.
+
+## 2026-10-02 — Follow-ups keep their scope but adapt their wording
+
+Triggered by: [observations.md](observations.md), "2026-10-02 —
+Fixed follow-ups felt rigid and abstract."
+Change made: The interview step in
+[skills/mock-interviewing.md](../skills/mock-interviewing.md) now
+fixes what each follow-up tests, not its words. The interviewer
+bridges into a follow-up from the candidate's answer, narrows a partly
+covered follow-up (`[F2 narrowed]`), falls back to a hypothetical when
+a follow-up's premise doesn't hold, asks probes that name what the
+candidate said, gives a small concrete setup when asking for an
+example, and answers questions about the process in role. Matching
+responsibilities and failure modes are in
+[agents/interviewer-agent.md](../agents/interviewer-agent.md). Each
+follow-up gets a `Tests:` line, plus concreteness, no-overlap, and
+hypothetical-fallback criteria, in
+[skills/interview-question-design.md](../skills/interview-question-design.md)
+and [templates/question-bank.md](../templates/question-bank.md).
+Rewording without changing what a follow-up tests no longer raises
+the scope version
+([agents/interview-question-agent.md](../agents/interview-question-agent.md)).
+The `[F2 narrowed]` marker is added in
+[templates/mock-interview-session.md](../templates/mock-interview-session.md).
+Reasoning: Scores stay comparable because they come from key-point
+coverage, not from the exact words of the follow-up. Fixing the words
+added nothing to comparability and made the interviewer sound
+scripted.
+Expected effect: Follow-ups read as a reaction to the answer. Nothing
+already answered gets asked again, and every probe is specific enough
+to answer. Scores are still compared at the same scope version.

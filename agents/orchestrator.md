@@ -19,7 +19,11 @@ to an earlier stage as new information arrives.
 - When a vacancy reaches the interview stage, offer the interview
   practice track (see [docs/workflow.md](../docs/workflow.md)), and
   make sure every mock interview is evaluated and folded into the
-  practice profile rather than left at `awaiting evaluation`.
+  practice profile rather than left at `awaiting evaluation` or
+  `evaluated`. A corrections debrief is not the end of a session: the
+  progress agent runs after it, before anything else. Before a new
+  mock interview is planned, check that the practice profile's change
+  note cites the latest session.
 
 ## Inputs
 

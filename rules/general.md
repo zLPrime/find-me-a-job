@@ -155,6 +155,16 @@ rather than committing after each artifact touched:
   "Recording actual submissions" below) — a submission is itself a
   natural checkpoint regardless of how much batching happened before
   it.
+- Interview practice has its own checkpoints, since a practice session
+  is not a vacancy and never gets "wrapped up": commit when a mock
+  interview reaches `awaiting evaluation` or `abandoned` (end of the
+  interview dialog), and again when it reaches `recorded in practice
+  profile` (end of the close-out dialog). See
+  [skills/mock-interviewing.md](../skills/mock-interviewing.md) and
+  [skills/practice-tracking.md](../skills/practice-tracking.md).
+- Don't rely on noticing the end of a session: a dialog often ends with
+  the candidate simply leaving after a question. Commit at the
+  checkpoint itself, before asking the candidate what to do next.
 - If a unit of work ends early for an unrelated reason (e.g., a
   vacancy turns out to be already filled before any tailoring starts),
   that correction can still be folded into a single commit rather than
@@ -178,24 +188,34 @@ in doubt, read and write through the direct file tools, and treat the
 shell as advisory (e.g., for `grep`-style searching) rather than
 authoritative.
 
-If this mount's `unlink()` failures force a commit to be built via
-manual git plumbing (`git hash-object -w`, `write-tree`, `commit-tree`,
-then moving the branch ref) instead of an ordinary `git add`/`git
-commit`, remember that this pattern only writes to git's object
-database and the ref pointer — it never writes the edited content back
-into the checked-out working-tree file. A normal `git commit` doesn't
-need that step because the edit already happened in the file in place;
-a plumbing commit built from a temp file does not. So:
+## Stale git lock files
 
-- After building the commit, copy the exact content used for the new
-  blob over the real working-tree file, so the working tree matches the
-  new HEAD. Skipping this leaves the file stale — later reads see old
-  content while `git show HEAD:<path>` shows the new content, and the
-  divergence is silent.
-- Verify parity against the **actual working-tree file**, never the
-  temp file used to build the blob: `diff <(git show HEAD:<path>)
-  <path>`. Diffing HEAD against that same temp file always passes even
-  when the real file is stale, so it proves nothing.
+Some agent environments can create and rename files but not delete
+them, so git leaves `.git/HEAD.lock` (which git only ever deletes,
+never renames into place) behind after every commit, and the next
+`git commit` fails with "Unable to create '…/index.lock': File exists".
+Agents may also be blocked from deleting lock files by their own
+permission checks. When a commit fails on a lock file:
+
+1. Check that no git process is running (a lock held by a live process
+   is not stale — wait instead).
+2. Stop and ask the candidate to delete the named lock file(s), giving
+   the exact path, or to allow the agent to delete them. Say which work
+   is sitting uncommitted meanwhile.
+3. Do **not** route around it. Never rename the lock aside
+   (`HEAD.lock.stale-…`, `.bak` — this is how ~400 debris files piled up
+   in the candidate repo by 2026-10-02), and never build commits by hand
+   with git plumbing (`hash-object`/`write-tree`/`commit-tree` plus
+   rewriting the branch ref) — that pattern once silently desynced the
+   working tree from HEAD (journal/observations.md, 2026-07-17).
+
+Leaving the work uncommitted and flagged is the correct outcome when
+the candidate isn't available; it is still caught by the end-of-session
+check in "Commit cadence" above.
+
+Separately, when staging with `git add -A`, check `git status` first for
+editor/office lock markers (e.g. LibreOffice's `.~lock.<file>#`) — they
+are not work product and must not be committed.
 
 ## Source liveness
 

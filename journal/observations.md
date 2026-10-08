@@ -21,6 +21,27 @@ Suggested follow-up: <optional — a concrete idea, or "needs discussion">
 
 ## Entries
 
+## 2026-09-29 — Mock interview results never reached the practice profile
+
+Observed by: orchestrator (development session, candidate report)
+Context: The candidate reported that the agent forgot to save results
+after an interview training session.
+Observation: The 2026-09-27 session was evaluated and debriefed, and
+its status was set to `recorded in practice profile`, but the practice
+profile was never written (still dated 2026-09-25, citing only the
+first session). The next session (2026-09-29) was then planned from
+the stale "Next session focus" and listed four questions as "never
+asked" that had been asked two days earlier. Its transcript was left
+empty at `in progress`.
+Possible cause: The close-out is split across three agents with no
+explicit hand-off after the corrections debrief, which feels like the
+natural end of a session; any agent could set `recorded in practice
+profile` without proof the profile changed; mock-interviewing planning
+trusted the profile without checking it was current or checking
+question history; "record as you go" had no concrete checkpoint.
+Suggested follow-up: see the matching entry in
+[improvements.md](improvements.md).
+
 ## 2026-09-25 — No process for practicing interviews once a vacancy reaches the interview stage
 
 Observed by: orchestrator (development session, candidate request)
@@ -949,3 +970,96 @@ Suggested follow-up: Consider adding a lightweight self-check step
 closing section) to general.md's artifact-discipline guidance, so a
 truncated write is caught immediately rather than discovered stages
 later.
+
+## 2026-10-01 — Interviewer narrated its record-keeping to the candidate
+
+Observed by: candidate
+Context: Mock interview session 2026-10-01, question 2 (Q-002, GC),
+right after the interviewer saved the candidate's answer to the
+session file.
+Observation: Instead of just asking the follow-up, the interviewer
+added a status line in assistant voice: "I've recorded your garbage
+collection answer and asked how you would tell whether GC pauses
+cause latency spikes. I'm waiting for your reply." This breaks the
+interview frame.
+Possible cause: skills/mock-interviewing.md step 4 requires writing
+each exchange to the file as the interview proceeds, but said nothing
+about keeping that silent, so the default habit of reporting
+completed tool work leaked into the interviewer's turns.
+Suggested follow-up: State explicitly that recording is silent and
+that interview turns contain only interviewer speech.
+
+## 2026-10-01 — Mock interview scores weren't comparable between sessions
+
+Observed by: candidate
+Context: Asking how deep the interviewer goes on each question and when
+an answer counts as complete, during session 5.
+Observation: How deep a question went depended on the interviewer's
+judgment in the moment: follow-up angles were optional, the number of
+probes had no limit, and "solid" wasn't tied to the key points. The
+evaluator then scored against judgment-based anchors ("lacks depth,"
+"adds insight"). Two attempts at the same question could test
+different things, so a change in score didn't clearly mean progress.
+Possible cause: The bank defined key points and follow-up angles but
+not a fixed scope; mock-interviewing step 3 told the interviewer to
+push harder on solid answers, which makes depth depend on the answer.
+Suggested follow-up: Give every question a fixed scope (required
+follow-ups, numbered key points, a version) and score from key-point
+coverage.
+
+## 2026-10-01 — No rule for repeating questions scored 3, or for mixing due and new questions
+
+Observed by: candidate
+Context: Asking how a session decides between new questions and ones
+asked before.
+Observation: Only questions scored 1–2 ever came back; a 3 ("core idea
+correct, lacks depth") was treated as done, leaving 13 of 27 asked
+questions with no retest. Nothing set how many due versus new questions
+a session gets, and nothing ordered due questions when more came due
+than fit — Q-012 and Q-027 slipped a session that way.
+Possible cause: skills/practice-tracking.md had a single re-ask rule
+for scores 1–2 and left the session mix to the progress agent's
+judgment.
+Suggested follow-up: Space re-asks by score and set a default due/new
+split with an overdue-first queue.
+
+## 2026-10-01 — Nothing guaranteed every bank question gets asked
+
+Observed by: candidate
+Context: Asking how many sessions it takes to cover every topic.
+Observation: Never-asked topics had no priority (new slots went to the
+lowest-scoring topics, and an unasked topic has no score), and a topic
+with no question at its current difficulty level could be skipped
+indefinitely — Code quality & static analysis has only difficulty-2
+questions against a level-4 default. At about 4 new questions per
+session, the 18 unasked questions would take until about session 10,
+with no guarantee. Separately, the practice profile had no topic row
+for Estimation & technical leadership although Q-043 was asked.
+Possible cause: practice-tracking had no coverage target; planning
+treated never-asked questions as the lowest priority.
+Suggested follow-up: A coverage window per question, never-asked
+topics first, and a closest-level fallback.
+
+## 2026-10-02 — Fixed follow-ups felt rigid and abstract
+
+Observed by: candidate
+Context: Mock interview session 2026-10-02, the first full session
+after follow-ups became required with fixed wording.
+Observation: The follow-ups were hard to answer. The interviewer
+re-asked what had just been answered (Q-003 F2: "Didn't I just
+explain it?"), used generic probes the candidate couldn't act on
+("Why exactly?" got "I don't understand the question"; "What else
+would be part of your overall approach?"), asked open-ended
+hypotheticals that could only get "it depends" (Q-044: "it's hard to
+answer in abstract"), asked for an example without giving anything to
+work from (Q-045), and stepped out of the interview to explain that
+follow-ups "were fixed on 2026-10-01" (Q-011).
+Possible cause: The 2026-10-01 scope change fixed each follow-up's
+wording as well as what it tests. It allowed a skip only when every
+key point was already covered, and its example probes were stock
+phrases. Some bank follow-ups also repeat main-question key points or
+are framed abstractly.
+Suggested follow-up: Fix what a follow-up tests, not its words; let
+the interviewer bridge from the answer and narrow partly covered
+follow-ups; make probes name what the candidate said; write bank
+follow-ups concretely.

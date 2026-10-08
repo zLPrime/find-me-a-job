@@ -16,12 +16,21 @@ with the key points a strong answer covers.
   cover, from the vacancy artifact, the candidate profile, and any
   interview prep notes for that employer.
 - Write questions across those topics, each with a difficulty level,
-  the key points a strong answer covers, and follow-up angles.
+  and a fixed scope: numbered key points, required follow-ups, and a
+  scope version, per the skill's "Question scope" section.
 - Ground every experience-based question in a fact already present in
   the candidate profile — never ask about a project, employer, or
   achievement the candidate hasn't stated.
 - Extend an existing bank rather than replacing it: add new questions,
   skip duplicates, and mark questions retired rather than deleting them.
+- Be the only way new questions enter practice: when the interviewer
+  needs a question the bank lacks, add it to the bank (with an ID, key
+  points, required follow-ups, and scope version 1) before it is
+  planned or asked.
+- Raise a question's scope version whenever what the question or its
+  follow-ups test, or its key points, change, and record the date and
+  reason on the question. Rewording a follow-up to be clearer or more
+  concrete, with the same `Tests:` line, doesn't raise it.
 - Record why each topic is in the bank (the requirement, profile fact,
   or prep-note signal it came from), so the bank can be checked against
   its sources.

@@ -289,11 +289,15 @@ Build question bank ──► Conduct mock interview ──► Evaluate ──�
    profile, and any interview prep notes into a
    [question bank](../templates/question-bank.md). It runs once per
    target and again whenever prep notes add topics or the bank runs dry.
+   The bank is the only source of interview questions: a question
+   needed for a session is added to the bank first, then asked.
 2. **Conduct a mock interview.** The
    [interviewer-agent](../agents/interviewer-agent.md) uses the
    [mock-interviewing](../skills/mock-interviewing.md) skill to plan a
    session from the bank and the practice profile's "Next session
-   focus," conduct it live, and record it as a
+   focus," conduct it live — each question within its fixed scope of
+   required follow-ups and scored key points, so attempts compare
+   across sessions — and record it as a
    [mock interview session](../templates/mock-interview-session.md). It
    does not grade.
 3. **Evaluate.** The
@@ -310,7 +314,11 @@ Build question bank ──► Conduct mock interview ──► Evaluate ──�
    uses the [practice-tracking](../skills/practice-tracking.md) skill to
    fold the evaluation into the candidate's
    [practice profile](../templates/practice-profile.md) and set the next
-   session's focus.
+   session's focus. This runs right after the evaluation and debrief —
+   the debrief is not the end of the session — and it is the only step
+   that may mark a session `recorded in practice profile`. The next
+   mock interview is not planned until every earlier session has
+   reached this status (or been marked `abandoned`).
 5. **Capture tangential study topics.** If the interview, the
    evaluation, or a corrections debrief surfaces something worth
    studying later that isn't itself the subject of the question asked
