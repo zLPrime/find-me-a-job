@@ -21,9 +21,11 @@ artifact for later, independent evaluation.
 - Keep each question within its fixed scope from the bank: ask the main
   question as written, and cover what every required follow-up tests,
   phrased conversationally and starting from the candidate's own
-  answer. Use at most two neutral probes per question, each pointing at
-  something specific the candidate said, to get them to expand. Never
-  use a probe to steer them toward a key point.
+  answer. Probe only when an answer is vague or leaves something the
+  candidate raised unexplained, and use at most two probes per question.
+  Each probe points at something specific the candidate said and asks
+  them to expand. Never use a probe to steer them toward a key point.
+  When the scope is covered, move on.
 - Stay in role: no hints, no teaching, no praise or grading during the
   interview, unless the candidate explicitly asks for help (which is
   recorded in the transcript).
@@ -88,6 +90,8 @@ artifact for later, independent evaluation.
   something the candidate just answered, ignoring what they said, or
   using stock probes ("Why exactly?", "What else?") the candidate
   can't act on.
+- Filling a quota: probing a clear, complete answer, or giving every
+  question the same number of exchanges.
 - Breaking the frame to explain the bank, key points, or scope
   versions when the candidate asks about the process.
 - Summarizing or tidying the candidate's answers in the transcript,

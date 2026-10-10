@@ -1224,3 +1224,49 @@ scripted.
 Expected effect: Follow-ups read as a reaction to the answer. Nothing
 already answered gets asked again, and every probe is specific enough
 to answer. Scores are still compared at the same scope version.
+
+## 2026-10-08 — Probes are conditional, not a quota
+
+Triggered by: [observations.md](observations.md), "2026-10-08 —
+Every question seemed to get exactly three follow-ups."
+Change made: In [skills/mock-interviewing.md](../skills/mock-interviewing.md),
+neutral probes are now used only when an answer is vague, skips over
+something the candidate raised, or makes a claim worth testing. Zero
+probes is the normal case, and two is a limit, not a target. A new
+"Moving on" step sends the interviewer to the next main question once
+the scope is covered. The quality criteria require a reason for every
+probe and an exchange count that varies with the answers.
+[agents/interviewer-agent.md](../agents/interviewer-agent.md) matches
+this and adds "filling a quota" as a failure mode.
+Reasoning: Scores come from the required follow-ups and key points,
+and those don't change. Probes only get the candidate to expand, so
+probing a complete answer adds turns without adding signal.
+Expected effect: Questions get different numbers of exchanges: a
+strong answer moves on quickly, and a vague one gets probed. No scope
+version changes.
+
+## 2026-10-09 — Key points score the idea, not the API name
+
+Triggered by: [observations.md](observations.md), "2026-10-09 —
+Evaluation read as a test of exact method names."
+Change made: [skills/interview-evaluation.md](../skills/interview-evaluation.md)
+gets a "Mark the idea, not the name" rule. A correct mechanism without
+the name, or with a near-miss name, is covered. A name with no
+mechanism is at most partial. An invented API that changes the design
+is judged as a wrong claim. Name slips go to a new per-answer "Names to
+learn" line that doesn't affect the score. Top priorities rank design
+gaps above name recall.
+[templates/mock-interview-session.md](../templates/mock-interview-session.md)
+adds the "Names to learn" line, and
+[agents/interview-evaluation-agent.md](../agents/interview-evaluation-agent.md)
+adds marking down a correct mechanism for a missing name as a failure
+mode. [skills/interview-question-design.md](../skills/interview-question-design.md)
+asks for key points to state the idea first, with the name in brackets.
+Reasoning: Real technical interviews reward understanding and treat a
+half-remembered name as a lookup. Scoring names made practice scores
+both stricter than a real interview and misleading about what to study.
+Expected effect: Scores reflect what an interviewer would credit, names
+remain on the study list, and priorities point at real gaps. No bank
+scope versions change: key points still test the same ideas, but they
+are read differently. Scores from sessions evaluated before this date
+were marked under the older reading.

@@ -49,6 +49,12 @@ across sessions.
   questions below, at, and above the targeted seniority where possible.
 - Key points are concrete and checkable ("names the thread-pool
   starvation risk of sync-over-async"), not vague ("understands async").
+- Key points state the idea first and give API or term names as the
+  usual label, in brackets: "the app validates settings at startup and
+  refuses to start with a bad value (`ValidateOnStart()`)", not
+  "uses `ValidateOnStart()`". The evaluator scores the idea; see
+  [interview-evaluation](interview-evaluation.md), "Mark the idea, not
+  the name."
 - Required follow-ups push on trade-offs, failure modes, scale, and
   "why not the alternative" — the places where shallow knowledge shows.
   Each one is unconditional (no "if the answer says X, ask Y") and has

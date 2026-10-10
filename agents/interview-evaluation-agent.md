@@ -73,6 +73,8 @@ candidate can act on.
 
 - Grading generously to be encouraging.
 - Crediting keywords or confident delivery without substance.
+- The reverse: marking down a correctly explained mechanism because
+  the candidate didn't recall the exact API or term name.
 - Scoring from memory of the conversation instead of the transcript.
 - Feedback so generic it could apply to any candidate.
 - Treating the corrections debrief as the end of the session, so the

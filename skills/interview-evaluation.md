@@ -23,12 +23,17 @@ The Evaluation section of the session artifact, containing:
 - **Per answer:** the scope version, a result per key point (covered,
   partial, missed, or wrong) with evidence quoted from the transcript,
   the coverage, the score (1–5), what was said outside the scope, what
-  a strong answer would add, and whether a hint was used.
+  a strong answer would add, whether a hint was used, and "Names to
+  learn": the exact API or term names the candidate missed or got
+  wrong where the idea itself was right (or "none"). These do not
+  change the score.
 - **Per topic:** score and a one-line summary.
 - **Overall verdict** relative to the targeted seniority: below level,
   borderline, at level, or above level — with reasoning and an explicit
   confidence level.
 - **Top 3 priorities** to work on, each specific enough to act on.
+  Gaps in ideas and design come before name recall; a list of names to
+  learn is a priority only when name slips are most of what went wrong.
 - **Communication patterns** observed (structure, concreteness,
   conciseness), noting whether each is new or recurring per the
   practice profile.
@@ -47,6 +52,28 @@ performance gets the same score in any session.
    - **missed:** not mentioned;
    - **wrong:** stated incorrectly. The candidate correcting it
      themselves later in the same question turns it into partial.
+
+   **Mark the idea, not the name.** "Specifically" means the mechanism
+   is specific: what happens, why, and what it costs. When a key point
+   mentions an API, type, setting, or term (`ValidateOnStart()`,
+   `DbUpdateConcurrencyException`, "captive dependency"), the name is
+   the bank's shorthand for the idea, not part of what is scored:
+   - The mechanism explained correctly without the name, or with a
+     near-miss name ("`GetHttpClient`, the name might differ" for
+     `CreateClient`), is **covered**.
+   - The name alone, with no mechanism or a wrong one, is at most
+     **partial**: a keyword is not an explanation.
+   - An invented API that would change the design (claiming a step is
+     optional when it isn't, a method that does something else) is
+     judged on that wrong claim, not on the spelling.
+   - "I don't remember the name" followed by nothing is **missed**
+     because the idea is missing, not because the name is.
+
+   Record every name slip in the answer's "Names to learn" line (see
+   Expected Outputs) so it still reaches the study list. A real
+   interviewer accepts "there's an option that validates config at
+   startup, something like `ValidateOnStart`" and moves on; scoring
+   should do the same.
 2. **Coverage** = (covered + ½ × partial) ÷ number of key points.
 3. **Score from coverage:**
 
@@ -77,6 +104,10 @@ Those scores stay as recorded and are not re-scored.
   recorded.
 - Substance beats delivery: confident answers without key points score
   low; correct hesitant answers score on their content.
+- Substance beats recall: a correct mechanism without the exact name
+  scores as covered; a name without the mechanism does not. The verdict
+  and reasoning don't treat missing names as a seniority gap on their
+  own.
 - Follow-up answers count: a key point that is contradicted under a
   follow-up or probe is marked by what the candidate finally held to.
 - Scoring is mechanical once each key point is marked; judgment goes
