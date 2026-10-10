@@ -81,6 +81,8 @@ Prepared by: interview-evaluation-agent
   candidate said beyond the scope, or "none">
 - A strong answer would add:
 - Hint used: yes | no
+- Names to learn (not scored): <exact API or term names missed or
+  misremembered where the idea was right> | none
 
 ### Per topic
 

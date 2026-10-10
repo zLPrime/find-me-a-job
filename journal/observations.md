@@ -1063,3 +1063,42 @@ Suggested follow-up: Fix what a follow-up tests, not its words; let
 the interviewer bridge from the answer and narrow partly covered
 follow-ups; make probes name what the candidate said; write bank
 follow-ups concretely.
+
+## 2026-10-08 — Every question seemed to get exactly three follow-ups
+
+Observed by: candidate
+Context: Mock interview practice sessions across the three banks.
+Observation: The interviewer seemed to ask about three follow-ups after
+every main question, however complete the answer was, so sessions felt
+scripted.
+Possible cause: Most bank questions have one or two required
+follow-ups, and [skills/mock-interviewing.md](../skills/mock-interviewing.md)
+allowed "at most two" neutral probes without saying when to use them.
+The interviewer filled the limit, so a required follow-up plus two
+probes came to three exchanges almost every time.
+Suggested follow-up: Probe only when the answer gives a reason. Say
+that zero probes is normal and that the interviewer moves on once the
+scope is covered.
+
+## 2026-10-09 — Evaluation read as a test of exact method names
+
+Observed by: candidate
+Context: The 2026-10-08 mBank mock interview
+([2026-10-08-fullstack-net-mbank.md](../work/jakub-charabet/interviews/practice/sessions/2026-10-08-fullstack-net-mbank.md)).
+Observation: The session felt like a test of exact API names
+(`ValidateOnStart()`, `AddHttpClient`/`CreateClient`, EF Core
+concurrency calls), and the verdict said "a Senior interview will want
+these names." Going back over the marks, names cost points in only
+about four answers, mostly partial marks. The below-level verdict came
+from missed designs (deadlock prevention, idempotency key plus unique
+index, outbox, splitting money, company sign-in). Even so, the feedback
+put name recall among the top priorities.
+Possible cause: Bank key points were written around API names ("uses
+`ValidateOnStart()`"), and
+[skills/interview-evaluation.md](../skills/interview-evaluation.md)
+defined covered as "stated correctly and specifically" without saying
+whether the name is part of what's specific. A real interviewer accepts
+a correct mechanism with a half-remembered name.
+Suggested follow-up: Score the idea, not the name. Record name slips
+separately as study material, and rank design gaps above name recall in
+the priorities.

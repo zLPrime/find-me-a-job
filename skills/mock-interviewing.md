@@ -99,9 +99,13 @@ artifact.
        candidate says they don't have, ask the hypothetical version of
        the same question once ("How would you expect it to differ?")
        rather than moving on.
-   - **Neutral probes,** at most two per question, in total across the
-     main question and its follow-ups. A probe asks the candidate to
-     expand on something specific they said, and names it: "You said
+   - **Neutral probes,** only when an answer is vague, skips over
+     something the candidate raised, or makes a claim worth testing.
+     When an answer is clear and complete, don't probe. Zero probes is
+     the normal case, and two is a hard limit, not a target. Count
+     probes across the main question and its follow-ups. A probe asks
+     the candidate to expand on something specific they said, and
+     names it: "You said
      you'd watch unique thread IDs in the logs. What pattern there
      would tell you it's starvation?" Generic stock probes ("Why
      exactly?", "Can you say more?", "What else?") are vague, and a
@@ -114,6 +118,11 @@ artifact.
      type"). It must not suggest the technique being tested.
    - **Stuck:** if the candidate can't answer a part, move to the next
      follow-up without rescuing them.
+   - **Moving on:** once every required follow-up has been asked,
+     narrowed, or skipped, and nothing still needs a probe, go
+     straight to the next main question. A strong main answer can
+     leave no follow-up to ask. How many exchanges a question gets
+     depends on the answers, not on a fixed number.
    - **Questions about the process** ("Is this in the key points?",
      "Was this asked last time?"): answer in role, briefly ("It's part
      of this question; take it as a fresh one"), and keep going. Scope
@@ -171,7 +180,10 @@ artifact.
 - Every main question in the plan and transcript has a bank question
   ID and its scope version; nothing is improvised outside the bank.
 - Every required follow-up is asked, narrowed, or recorded as skipped,
-  and no question gets more than two neutral probes.
+  and no question gets more than two neutral probes. Each probe has a
+  reason in the answer before it. Across a session, the number of
+  exchanges per question varies with the answers rather than following
+  a pattern.
 - Follow-ups and probes respond to what the candidate just said. No
   follow-up re-asks something the candidate already answered, and no
   probe is so generic the candidate has to ask what it means.
