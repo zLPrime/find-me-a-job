@@ -1102,3 +1102,25 @@ a correct mechanism with a half-remembered name.
 Suggested follow-up: Score the idea, not the name. Record name slips
 separately as study material, and rank design gaps above name recall in
 the priorities.
+
+## 2026-10-14 — A training session ran outside the playbook and improvised its own process
+
+Observed by: candidate
+Context: A 5-question Senior .NET training session on 2026-10-14, asked
+for in plain words ("Run a small Senior .NET interview training").
+Observation: The session gave feedback and a "7/10" score after the
+first answer, asked a question that isn't in the
+senior-net-backend-engineer bank, made up a coaching follow-up, and
+wrote no session file. A thinking-status line ("Reviewing feedback on
+the thread star explanation") also reached the candidate. No transcript
+of it exists in this repo's Claude Code sessions, so it most likely ran
+in a chat without the playbook loaded.
+Possible cause: Nothing loads the playbook automatically. The repo has
+no `CLAUDE.md` and no command for starting practice, so a session only
+follows [skills/mock-interviewing.md](../skills/mock-interviewing.md)
+if it goes looking for it. One that doesn't falls back on ordinary
+tutoring: feedback after every answer, its own questions, no record.
+Suggested follow-up: Add a `CLAUDE.md` that routes practice requests to
+the interviewer agent, and a `/mock-interview` skill as a fixed way to
+start one. Treat the 2026-10-14 session as unscored study, not a
+practice-profile entry.
