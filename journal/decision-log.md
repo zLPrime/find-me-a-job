@@ -24,6 +24,30 @@ Revisit trigger: <what would prompt reconsidering this decision>
 
 ## Entries
 
+## 2026-10-14 — Tool-specific entry points: CLAUDE.md and a /mock-interview skill
+
+Decision: Add a root `CLAUDE.md` and a project skill
+`.claude/skills/mock-interview/SKILL.md` as thin entry points into the
+playbook. They route requests (interview practice in particular) to
+the owning agent and skill and repeat only the few rules that must
+never be improvised. The process itself stays in `agents/` and
+`skills/`.
+Alternatives considered: Keeping the playbook tool-neutral and relying
+on each session to find the right files (rejected: a session that
+never opened them invented its own interview process, see
+[observations.md](observations.md), 2026-10-14); copying the full
+mock-interviewing procedure into the skill (rejected: two copies would
+drift apart); a `UserPromptSubmit` hook that injects a reminder on
+interview keywords (held in reserve: it can't be skipped, but it fires
+on every mention of interviews, including questions about them).
+Reasoning: The README leaves *how* agents are run open, and these
+files don't change that. They are loaders for one tool, Claude Code,
+which is what the candidate actually uses, and they point back to the
+playbook rather than redefining it.
+Revisit trigger: A session in this repo still improvises a practice
+session (then add the hook), or the playbook is run from another tool
+that needs its own entry point.
+
 ## 2026-09-25 — Interview practice as a parallel track with a separate interviewer and evaluator
 
 Decision: Add interview practice as a parallel track (not a numbered

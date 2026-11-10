@@ -1270,3 +1270,30 @@ remain on the study list, and priorities point at real gaps. No bank
 scope versions change: key points still test the same ideas, but they
 are read differently. Scores from sessions evaluated before this date
 were marked under the older reading.
+
+## 2026-10-14 — Entry points so practice sessions load the playbook
+
+Triggered by: [observations.md](observations.md), "2026-10-14 — A
+training session ran outside the playbook and improvised its own
+process."
+Change made: A root [CLAUDE.md](../CLAUDE.md), loaded by every Claude
+Code session in this repo, says to find and follow the owning agent and
+skill rather than improvise, and routes every interview-practice
+request to the `/mock-interview` skill. It repeats the three rules that
+must hold for any session: bank questions only, no feedback until
+evaluation, and a session file written as the interview goes. The new
+[.claude/skills/mock-interview/SKILL.md](../.claude/skills/mock-interview/SKILL.md)
+loads [agents/interviewer-agent.md](../agents/interviewer-agent.md) and
+[skills/mock-interviewing.md](../skills/mock-interviewing.md), runs the
+procedure from step 0, and fits requests like "small" or "on topic X"
+into step 1, "Confirm the session". A request the procedure doesn't
+offer, such as feedback after every answer, is declined, not built ad
+hoc. No agent, skill or template content changes.
+Reasoning: The interviewer's rules were already clear. The failure was
+that the session never read them. Loading them is cheaper and more
+reliable than restating them, and the entry points stay thin so the
+playbook remains the single source.
+Expected effect: Practice requests in this repo, however they are
+phrased, start from the same procedure, and `/mock-interview` gives a
+fixed way to start one. Sessions run outside the repo (claude.ai, the
+mobile app) are not covered.
