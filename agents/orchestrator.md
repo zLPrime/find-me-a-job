@@ -24,6 +24,11 @@ to an earlier stage as new information arrives.
   progress agent runs after it, before anything else. Before a new
   mock interview is planned, check that the practice profile's change
   note cites the latest session.
+- When the candidate wants to explain a past project in terms of a
+  topic, run the experience framing track (see
+  [docs/workflow.md](../docs/workflow.md)) in order, and make sure no
+  framing question bank is built from a concept mapping the candidate
+  hasn't approved.
 
 ## Inputs
 
