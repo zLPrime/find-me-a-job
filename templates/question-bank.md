@@ -11,7 +11,9 @@ Status: active | retired
 Last updated: <date>
 Prepared by: interview-question-agent
 Internal only: practice material, never sent to anyone.
-Target: <link to the vacancy artifact, or the role type>
+Target: <link to the vacancy artifact, or the role type; for a framing
+  bank, the topic and project, with links to the topic map and that
+  project's concept mapping>
 Linked prep notes: <links to interview prep notes, if any>
 Interview language: <language the real interview is held in>
 Change note: <what was added or retired in this version, and why>
@@ -58,7 +60,13 @@ its follow-ups test, or to the key points, raises the scope version; see
     - Tests: <one line: what this follow-up checks>
     - K<n>: <key point this follow-up tests>
 - Out of scope: <optional — nearby topics this question does not test>
-- Grounded in: <profile fact, for experience-based questions only>
+- Grounded in: <profile fact, for experience-based questions only; in a
+  framing bank, the input/notes.md fact or the retrospective design>
+- Basis: <framing banks only — done | would have done | theory; see
+  skills/interview-question-design.md, "Framing banks">
+- Concept: <framing banks only — topic map concept ID>
+- Project: <framing banks only — the project this question is about,
+  as the candidate profile names it; "none" for theory questions>
 - Status: active | retired (<reason>)
 
 ## Open Questions

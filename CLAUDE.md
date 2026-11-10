@@ -36,3 +36,24 @@ These hold for every session, whatever was asked for:
 - The plan and transcript are written to the session file under
   `work/<candidate>/interviews/practice/sessions/` as the interview
   goes, not at the end.
+
+## Experience framing
+
+Any request to explain, frame, map or study a past project in terms of
+a topic — "frame my project in X", "how does my work map to X", "study
+X through my project", "build questions on X from my experience" —
+runs through the `/frame-experience` skill
+([.claude/skills/frame-experience/SKILL.md](.claude/skills/frame-experience/SKILL.md)),
+which follows the experience framing track in
+[docs/workflow.md](docs/workflow.md). The topic always comes from the
+candidate.
+
+These hold for every framing step:
+
+- Elicitation collects facts, not knowledge: no topic vocabulary, no
+  teaching, no scoring. Facts go to `input/notes.md` during the
+  session.
+- The concept mapping is approved by the candidate before anything
+  uses it, and its framing lines never claim more than the facts.
+- Teaching happens only in a retrospective design, anchored on a real
+  problem from the project, and the result is labeled hypothetical.

@@ -107,6 +107,45 @@ different set of follow-ups.
   be clearer or more concrete without changing its `Tests:` line or
   key points doesn't raise it, and neither does fixing a typo.
 
+## Framing banks
+
+A bank built for the experience framing track (see
+[docs/workflow.md](../docs/workflow.md), "Parallel track: experience
+framing") is an ordinary question bank with a few extra rules. There is
+one bank per topic and project, stored as
+`framing-<topic>-<project>.md`. Its target is that topic and project,
+and its sources are the [topic map](../templates/topic-map.md) and
+that project's **approved**
+[concept mapping](../templates/concept-mapping.md) — never a draft,
+and never another project's mapping.
+
+- **Every question names its project** in its `Project:` line, so a
+  question can still be traced after it's copied or reused.
+
+- **Topics are the map's concepts.** Each topic row cites its concept
+  ID as the source.
+- **Every question has a basis**, matching the concept's path:
+  - `done` — experience-based questions for `experience` concepts,
+    grounded in the facts the mapping cites. Key points combine the
+    concept with the project's specifics, and the framing line's
+    hedges (who did it, where, under what name) are part of what's
+    scored.
+  - `would have done` — scenario questions for `retrospective`
+    concepts, set in the anchor problem, grounded in the complete
+    [retrospective design](../templates/retrospective-design.md). One
+    required follow-up always asks why it wasn't done at the time, and
+    a key point scores keeping what was done apart from what would
+    have been done.
+  - `theory` — conceptual questions for `theory only` concepts. No
+    project grounding.
+- **A partial concept can get both** a `done` and a `would have done`
+  question.
+- Once questions exist, add their IDs to the concept mapping's summary
+  table, so every concept traces to its questions.
+
+The bank then runs through the normal practice track: mock interview,
+evaluation, practice profile.
+
 ## Limitations
 
 - Key points reflect common expert consensus, not one interviewer's

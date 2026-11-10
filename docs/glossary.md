@@ -104,6 +104,46 @@ surfaced in. Separate from the practice profile, which tracks scored
 performance against the question bank. See
 [templates/study-topics.md](../templates/study-topics.md).
 
+**Experience Framing**
+The parallel track that explains a real past project in terms of a
+topic the candidate names (a methodology, theory, architecture style,
+or technology): topic map, elicitation, concept mapping, retrospective
+design, and a framing question bank. See
+[docs/workflow.md](workflow.md).
+
+**Topic Map**
+The concepts of a candidate-named topic, each with evidence signals,
+counter-evidence, and extraction prompts that don't use the topic's
+vocabulary. See [templates/topic-map.md](../templates/topic-map.md).
+
+**Elicitation Session**
+A fact-gathering interview about a real project against a topic map.
+Nothing is scored or taught; facts go to `/input`. See
+[templates/elicitation-session.md](../templates/elicitation-session.md).
+
+**Concept Mapping**
+The candidate-approved judgment, kept per project, of how strongly that
+project shows each
+concept on a topic map (explicit, implicit, partial, absent,
+contradicted), with an honest framing line and a path per concept. See
+[templates/concept-mapping.md](../templates/concept-mapping.md).
+
+**Framing Line**
+One to three sentences the candidate can say in an interview that
+restate what the project did in the topic's terms, keeping every hedge
+the facts carry.
+
+**Retrospective Design**
+A hypothetical, clearly labeled working-through of how a concept the
+project didn't use could have solved a real problem from that project.
+The one place in practice where the topic is taught. See
+[templates/retrospective-design.md](../templates/retrospective-design.md).
+
+**Basis**
+In a framing question bank, what a question rests on: `done` (the
+project did it), `would have done` (a retrospective design), or
+`theory` (no project grounding).
+
 **Fabrication**
 Any invented fact not traceable to user-supplied source material. Strictly
 prohibited everywhere in this process. See

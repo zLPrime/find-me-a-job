@@ -34,7 +34,26 @@ work/
           <vacancy-or-role-type>.md
         sessions/
           <date>-<vacancy-or-role-type>.md
+    framing/
+      <topic>/
+        topic-map.md                 # shared by every project
+        <project>/
+          concept-mapping.md
+          elicitation/
+            <date>.md
+          retrospectives/
+            <date>-<concept-id>.md
 ```
+
+The `framing/` layout follows the experience framing track in
+[docs/workflow.md](../docs/workflow.md): one topic map per topic,
+shared by every project framed in it, and below it one folder per
+project holding that project's concept mapping, elicitation sessions,
+and retrospective designs. Framing two projects in the same topic
+never mixes their facts. Each project's framing question bank is a
+normal bank, stored as
+`interviews/practice/question-banks/framing-<topic>-<project>.md` so
+mock interviews find it.
 
 The `interviews/practice/` layout follows the interview practice track
 in [docs/workflow.md](../docs/workflow.md): one practice profile per
