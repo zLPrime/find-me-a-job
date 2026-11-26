@@ -85,7 +85,11 @@ journal/                     — observations, improvements, process decisions
 6. Practice for interviews with mock interviews that are evaluated and
    remembered across sessions — see "Parallel track: interview
    practice" in [docs/workflow.md](docs/workflow.md).
-7. When something goes wrong or looks off, record it in
+7. Explain a real past project in terms of a topic you name — a
+   methodology, theory, or technology — and turn it into interview
+   questions linked to that project — see "Parallel track: experience
+   framing" in [docs/workflow.md](docs/workflow.md).
+8. When something goes wrong or looks off, record it in
    [journal/observations.md](journal/observations.md) — that's how the
    playbook gets better.
 

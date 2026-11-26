@@ -34,6 +34,10 @@ with the key points a strong answer covers.
 - Record why each topic is in the bank (the requirement, profile fact,
   or prep-note signal it came from), so the bank can be checked against
   its sources.
+- Build framing banks for the experience framing track from an
+  approved concept mapping, giving every question its basis (`done`,
+  `would have done`, or `theory`), per the skill's "Framing banks"
+  section.
 
 ## Inputs
 
@@ -46,6 +50,10 @@ with the key points a strong answer covers.
 - The existing question bank for this target, if one exists.
 - The candidate's [practice profile](../templates/practice-profile.md),
   if one exists — to add depth where the candidate is weakest.
+- For a framing bank: the [topic map](../templates/topic-map.md), the
+  approved [concept mapping](../templates/concept-mapping.md), and the
+  complete [retrospective designs](../templates/retrospective-design.md)
+  it links.
 
 ## Outputs
 

@@ -24,6 +24,35 @@ Revisit trigger: <what would prompt reconsidering this decision>
 
 ## Entries
 
+## 2026-11-10 — Experience framing as a parallel track feeding interview practice
+
+Decision: Add an experience framing track for explaining a real past
+project in terms of a topic the candidate names. Four new agents, each
+with a skill and template: topic map, elicitation (fact-gathering
+interview), concept mapping (strength, framing line, path per
+concept), and retrospective design (teaching a concept the project
+didn't use, through a real problem from the project). The track ends
+in an ordinary question bank whose questions carry a basis (`done`,
+`would have done`, `theory`), so the existing practice track runs it
+unchanged. The playbook names no topics; the topic always comes from
+the candidate.
+Alternatives considered: Reusing the mock interviewer for elicitation
+(rejected: it tests knowledge against fixed key points, and elicitation
+needs open fact-gathering with no scoring); letting the elicitation
+agent map its own answers (rejected for the same reason the evaluator
+is separate from the interviewer — the asker over-reads the answers);
+skipping absent concepts (rejected: interviewers still ask about them,
+and a hindsight answer anchored on a real problem is honest and
+stronger than theory alone); allowing teaching in elicitation or mock
+interviews (rejected: it contaminates the facts and the scores, so
+teaching is confined to the retrospective step).
+Reasoning: Keeps facts flowing through `/input`, keeps the framing
+from upgrading experience (candidate approval of the mapping, hedged
+framing lines, hypothetical labels), and reuses the question bank and
+practice loop instead of building a second one.
+Revisit trigger: Elicitation proves too slow to reach coverage, or
+framing lines draw skeptical follow-ups in real interviews.
+
 ## 2026-10-14 — Tool-specific entry points: CLAUDE.md and a /mock-interview skill
 
 Decision: Add a root `CLAUDE.md` and a project skill

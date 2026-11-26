@@ -342,3 +342,85 @@ Two boundaries keep this track honest:
 Practice artifacts live under `work/<candidate>/interviews/practice/`,
 next to the real-interview prep notes — see
 [work/README.md](../work/README.md).
+
+## Parallel track: experience framing
+
+When the candidate wants to explain a real past project in terms of a
+topic — a methodology, a theory, an architecture style, a technology —
+this track turns the project's facts into the topic's language and
+ends in a question bank for the practice track. The topic always comes
+from the candidate. Like interview practice, everything here is
+internal only.
+
+```text
+Topic map ──► Elicitation ──► Concept mapping (approved by candidate)
+                  ▲                     │
+                  └─ needs more ◄───────┤ per concept, one path:
+                     evidence           ├─► experience
+                                        ├─► retrospective design
+                                        └─► theory only (+ study topic)
+                                                  │
+                                                  ▼
+                          Framing question bank ──► Interview practice track
+```
+
+1. **Map the topic.** The
+   [topic-map-agent](../agents/topic-map-agent.md) uses the
+   [topic-mapping](../skills/topic-mapping.md) skill to break the topic
+   into concepts, each with evidence signals, counter-evidence, and
+   plain-language extraction prompts that never use the topic's
+   vocabulary. The candidate confirms the concept list before
+   elicitation starts.
+2. **Elicit the facts.** The
+   [elicitation-agent](../agents/elicitation-agent.md) uses the
+   [experience-elicitation](../skills/experience-elicitation.md) skill
+   to interview the candidate about the project, aiming to cover as
+   many concepts as the project honestly allows. It collects facts, not
+   knowledge: no topic terms, no teaching, no scoring, and "we never
+   did that" is a full answer. Facts go to `input/notes.md` during the
+   session. It can take several sessions.
+3. **Map facts to concepts.** The
+   [concept-mapping-agent](../agents/concept-mapping-agent.md) uses the
+   [concept-mapping](../skills/concept-mapping.md) skill to give each
+   concept a strength (explicit, implicit, partial, absent,
+   contradicted) from the recorded facts, an honest framing line, and a
+   path. It is separate from elicitation so the person who asked the
+   questions doesn't also judge the answers. The candidate approves the
+   mapping; concepts with too little evidence go back to elicitation.
+4. **Work through what's absent.** For each concept on the
+   `retrospective` path, the
+   [retrospective-design-agent](../agents/retrospective-design-agent.md)
+   uses the [retrospective-design](../skills/retrospective-design.md)
+   skill to take a real problem from the project and work out with the
+   candidate how the concept could have solved it, introducing the
+   topic's terms as the candidate's reasoning reaches them. This is the
+   only teaching step. The result is marked hypothetical. Concepts with
+   no real problem to anchor them go to
+   [study topics](../templates/study-topics.md).
+5. **Build the framing question bank.** The
+   [interview-question-agent](../agents/interview-question-agent.md)
+   builds a question bank from the approved mapping, giving every
+   question a basis: `done`, `would have done`, or `theory`. See
+   [interview-question-design](../skills/interview-question-design.md),
+   "Framing banks."
+6. **Practice.** The bank runs through the interview practice track
+   above, unchanged.
+
+Three boundaries keep this track honest:
+
+- **Facts enter through `/input`.** Every fact elicitation or a
+  retrospective surfaces is recorded in `input/notes.md` first, per
+  [rules/factual-accuracy.md](../rules/factual-accuracy.md).
+- **Framing never upgrades.** A framing line restates what the project
+  did in the topic's terms; it never claims the project followed the
+  topic, or that the candidate did what the team did.
+- **Hypothetical stays labeled.** A retrospective design and its
+  `would have done` questions are never presented as experience.
+
+The topic map is shared by every project framed in the topic; the
+elicitation sessions, concept mapping, retrospective designs, and
+question bank belong to one project each. Framing artifacts live
+under `work/<candidate>/framing/<topic>/`, with a folder per project;
+each project's framing question bank lives with the other banks under
+`interviews/practice/question-banks/` — see
+[work/README.md](../work/README.md).
